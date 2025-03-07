@@ -1,2 +1,2 @@
-# vide-alz
+# vsde-alz
 VSDE - Azure Landing Zones
