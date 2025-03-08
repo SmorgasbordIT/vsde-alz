@@ -27,6 +27,36 @@ New-AzRoleAssignment -Scope '/' -RoleDefinitionName 'Owner' -ObjectId $azUser.Id
 
 # (optional) Assign Owner role at Tenant root scope ("/") as a User Access Administrator to service principal
 # (set $azSpnDisplayName to your service principal displayname)
-$azSpnDisplayName = "joda10-AZUKS_VSDE_ALZ-43889d90-311e-4e05-8197-96a36f8723af"
+$azAppRegName = New-AzADApplication -DisplayName "AZUK-VSDE-ALZ-AAR-GIT-02"
+#$azSpnDisplayName = "AZUK-VSDE-ALZ-AAR-GIT-02"
 $azSpn = (Get-AzADServicePrincipal -DisplayName $azSpnDisplayName).id
 New-AzRoleAssignment -Scope '/' -RoleDefinitionName 'Owner' -ObjectId $azSpn
+
+## Remove Role Assignment
+Get-AzRoleAssignment -Scope "/"
+
+# Find the object Id of the one you want to remove
+$azX = Get-AzRoleAssignment -Scope "/" -ObjectId "cf2d0d95-9cb6-46d3-8648-582aebf2c120"
+
+Remove-AzRoleAssignment -Scope "/" -ObjectId $azX.ObjectId -RoleDefinitionName "Owner"
+
+## Get the Service Principal details to store inside GitHub
+# Fill in the information with the Service Principal Name which was created and the Azure Subscription Name. 
+
+$ServicePrincipalName = "AZUK-VSDE-ALZ-AAR-GIT-01"
+$AzSubscriptionName = "Name_of_your_subscription"
+
+Connect-AzureAD
+
+$Subscription = (Get-AzSubscription -SubscriptionName $AzSubscriptionName)
+$ServicePrincipal = Get-AzADServicePrincipal -DisplayName $ServicePrincipalName
+$AzureADApplication = Get-AzureADApplication -SearchString $ServicePrincipalName
+
+$OutputObject = [PSCustomObject]@{
+    clientId = $ServicePrincipal.AppId
+    clientSecret = (New-AzureADApplicationPasswordCredential -ObjectId $AzureADApplication.ObjectId).Value
+    subscriptionId = $Subscription.Id
+    tenantId = $Subscription.TenantId
+}
+
+$OutputObject | ConvertTo-Json
