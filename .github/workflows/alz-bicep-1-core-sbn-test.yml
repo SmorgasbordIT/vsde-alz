@@ -25,6 +25,7 @@ env:
 jobs:
   ALZ_Bicep_1_Core:
     runs-on: ubuntu-latest
+    environment: SBN-ALZ-Prod
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
