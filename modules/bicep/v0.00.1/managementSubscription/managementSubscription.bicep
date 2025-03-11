@@ -17,18 +17,18 @@ param parConnectivityGroupId string = ''
 @sys.description('Provide a name for the alias. This name will also be the display name of the subscription.')
 @minLength(10)
 @maxLength(51)
-param parSnkSubsMgtAliasName string = toUpper('Management')
+param parSnkSubsMgtAliasName string = 'Management'
 
 /*
 @sys.description('Provide a name for the alias. This name will also be the display name of the subscription.')
 @minLength(10)
 @maxLength(51)
-param parSnkSubsIdenAliasName string = toUpper('Identity')
+param parSnkSubsIdenAliasName string = 'Identity'
 
 @sys.description('Provide a name for the alias. This name will also be the display name of the subscription.')
 @minLength(10)
 @maxLength(51)
-param parSnkSubsConnAliasName string = toUpper('Connectivity')
+param parSnkSubsConnAliasName string = 'Connectivity'
 */
 
 @allowed([
