@@ -56,3 +56,5 @@ jobs:
           inlineScript: |
             .\pipeline-scripts\Deploy-ALZManagementGroups.ps1 -TemplateParameterFile .\config\custom-parameters\managementGroups.parameters.all.bicepparam
           azPSVersion: "latest"
+
+          Test
