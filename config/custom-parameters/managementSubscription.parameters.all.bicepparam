@@ -1,4 +1,16 @@
-using '../../config/custom-modules/azManagementSubscription/managementSubscription.bicep'
+/* 
+  managementSubscription.parameters.all.bicepparam
+  Author: J Davis
+  Date: 2025-02-17
+  Version: 1.0
+  
+  This file contains the parameters for the managementSubscription.bicep file, and replaces the json version
+  used in the original ALZ-Bicep implementation. Commonly used parameters are read from the .env file 
+  which is parsed during pipeline deployment.
+
+*/
+
+using '../../modules/bicep/v0.00.1/managementSubscription/managementSubscription.bicep'
 
 param parSnkSubsMgtAliasName = 'Managemen1'
 

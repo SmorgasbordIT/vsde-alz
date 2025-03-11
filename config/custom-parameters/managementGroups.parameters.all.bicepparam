@@ -10,7 +10,7 @@
 
 */
 
-using '../../upstream-releases/v0.20.2/infra-as-code/bicep/modules/managementGroups/managementGroups.bicep'
+using '../../modules/bicep/v0.00.1/managementGroups/managementGroups.bicep'
 
 param parTopLevelManagementGroupPrefix = readEnvironmentVariable('TOP_LEVEL_MG_PREFIX','azuk-snk')
 

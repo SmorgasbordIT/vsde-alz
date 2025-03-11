@@ -57,3 +57,10 @@ jobs:
           inlineScript: |
             .\pipeline-scripts\Deploy-ALZManagementGroups.ps1 -TemplateParameterFile .\config\custom-parameters\managementGroups.parameters.all.bicepparam
           azPSVersion: "latest"
+
+      - name: Deploy Management Subscription for Platform
+        uses: azure/powershell@v1
+        with:
+          inlineScript: |
+            .\pipeline-scripts\Deploy-ALZManagementSubscription.ps1 -TemplateParameterFile .\config\custom-parameters\managementSubscription.parameters.all.bicepparam
+          azPSVersion: "latest"
