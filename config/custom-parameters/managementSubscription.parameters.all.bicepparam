@@ -15,7 +15,7 @@ using '../../modules/bicep/v0.00.1/managementSubscription/managementSubscription
 var varAzLocationAreviation = readEnvironmentVariable('TOP_LEVEL_MG_PREFIX','')
 var varAzEnvironmentHub     = readEnvironmentVariable('HUB_ENV','')
 
-param parSnkSubsMgtAliasName = '${varAzLocationAreviation}-${varAzEnvironmentHub}-Management-01'
+param parSnkSubsMgtAliasName = toUpper('${varAzLocationAreviation}-${varAzEnvironmentHub}-Management-01')
 
 /*
 param parSnkSubsIdenAliasName = '${varAzLocationAreviation}-${varAzEnvironmentHub}-Identity-01'
