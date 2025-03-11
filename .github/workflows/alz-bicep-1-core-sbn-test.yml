@@ -1,4 +1,4 @@
-name: ALZ-Bicep-1-Core
+name: ALZ-Bicep-1-Core-Test
 
 on:
   push:
