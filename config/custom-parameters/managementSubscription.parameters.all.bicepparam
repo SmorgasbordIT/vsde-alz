@@ -12,11 +12,15 @@
 
 using '../../modules/bicep/v0.00.1/managementSubscription/managementSubscription.bicep'
 
-param parSnkSubsMgtAliasName = 'Managemen1'
+var varAzLocationAreviation = readEnvironmentVariable('TOP_LEVEL_MG_PREFIX','')
+var varAzEnvironmentHub     = readEnvironmentVariable('HUB_ENV','')
 
-param parSnkSubsIdenAliasName = 'Identity1'
+param parSnkSubsMgtAliasName = '${varAzLocationAreviation}-${varAzEnvironmentHub}-Management-01'
 
-param parSnkSubsConnAliasName = 'Connectivity1'
+/*
+param parSnkSubsIdenAliasName = '${varAzLocationAreviation}-${varAzEnvironmentHub}-Identity-01'
+param parSnkSubsConnAliasName = '${varAzLocationAreviation}-${varAzEnvironmentHub}-Connectivity-01'
+*/
 
 param parSnkWorkload = 'Production'
 
@@ -25,6 +29,7 @@ var varManagementGroupId = readEnvironmentVariable('MANAGEMENT_GROUP_ID','')
 
 param parManagementGroupId = '/providers/Microsoft.Management/managementGroups/${varManagementGroupId}'
 
+/*
 // Read environment variables for Identity Group ID
 var varIdentityGroupId = readEnvironmentVariable('IDENTITY_GROUP_ID','')
 
@@ -34,6 +39,7 @@ param parIdentityGroupId = '/providers/Microsoft.Management/managementGroups/${v
 var varConnectivityGroupId = readEnvironmentVariable('CONNECTIVITY_GROUP_ID','')
 
 param parConnectivityGroupId = '/providers/Microsoft.Management/managementGroups/${varConnectivityGroupId}'
+*/
 
 // Read environment variables for Billing Scope
 var varBillingAccountName = readEnvironmentVariable('BILLING_ACCOUNT_NAME','')
