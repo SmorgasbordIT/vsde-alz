@@ -3,6 +3,9 @@ targetScope = 'managementGroup'
 metadata name = 'ALZ Bicep - Management Subscription module'
 metadata description = 'Module used to create the management subscriptions in management groups'
 
+@sys.description('Environment.')
+param varAzEnvironmentHub string = ''
+
 @sys.description('Management group Id for the subscription.')
 param parManagementGroupId string = ''
 
