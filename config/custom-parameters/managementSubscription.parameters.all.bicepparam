@@ -44,8 +44,8 @@ param parConnectivityGroupId = '/providers/Microsoft.Management/managementGroups
 */
 
 // Read environment variables for Billing Scope
-var varBillingAccountName = readEnvironmentVariable('BILLING_ACCOUNT_NAME','')
-var varBillingProfileName = readEnvironmentVariable('BILLING_PROFILE_NAME','')
-var varInvoiceSectionName = readEnvironmentVariable('INVOICE_SECTION_NAME','')
+var varBillingAccountName = readEnvironmentVariable('INFRA_BILLING_ACCOUNT_NAME','')
+var varBillingProfileName = readEnvironmentVariable('INFRA_02_BILLING_PROFILE_NAME','')
+var varInvoiceSectionName = readEnvironmentVariable('INFRA_OPEX_INVOICE_SECTION_NAME','')
 
 param parSnkBillingScope = '/providers/Microsoft.Billing/billingAccounts/${varBillingAccountName}/billingProfiles/${varBillingProfileName}/invoiceSections/${varInvoiceSectionName}'
