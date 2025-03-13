@@ -68,7 +68,7 @@ jobs:
         with:
           inlineScript: |
             $azDeploymentName = -join ('alz-ManagementSubscriptionDeployment-{0}' -f (Get-Date -Format 'yyyyMMddTHHMMssffffZ'))[0..63]
-            echo $($azDeploymentName)
+            echo $(azDeploymentName)
           azPSVersion: "latest"
 
       - name: Deploy Management Subscription for Platform
@@ -83,7 +83,7 @@ jobs:
         with:
           inlineScript: |
             azMgmtGrpAliasIdOut=$(az deployment mg show --management-group-id $TOP_LEVEL_MG_PREFIX \
-            --name $DEPLOYMENT_NAME \
+            --name $azDeploymentName \
             --query properties.outputs | jq -c 'to_entries[] | [.key, .value.value]')
             echo "$azMgmtGrpAliasIdOut" | while IFS=$'\n' read -r c; do
               outputname=$(echo "$c" | jq -r '.[0]')
