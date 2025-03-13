@@ -3,7 +3,7 @@ param (
     [String]$Location = "$($env:LOCATION)",
 
     [Parameter()]
-    [String]$TopLevelMGPrefix = $TOP_LEVEL_MG_PREFIX,
+    [String]$TopLevelMGPrefix = "$($env:TOP_LEVEL_MG_PREFIX)",
 
     [Parameter()]
     [String]$TemplateFile = "modules\bicep\$($env:MODULES_RELEASE_VERSION)\managementSubscription\managementSubscription.bicep",
