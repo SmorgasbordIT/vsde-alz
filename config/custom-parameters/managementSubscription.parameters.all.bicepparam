@@ -12,7 +12,7 @@
 
 using '../../modules/bicep/v0.00.1/managementSubscription/managementSubscription.bicep'
 
-var varAzEnvironmentHub = 'ENV_HUB'
+var varAzEnvironmentHub = readEnvironmentVariable('ENV_HUB','')
 
 var varAzLocationAreviation = readEnvironmentVariable('TOP_LEVEL_MG_PREFIX','')
 //var varAzEnvironmentHub     = readEnvironmentVariable('HUB_ENV','')
