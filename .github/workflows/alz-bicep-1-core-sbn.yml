@@ -21,6 +21,7 @@ permissions:
 env:
   ENV_FILE: ".env"
   ENV_HUB: ${{ vars.ENV_HUB }}
+  TOP_LEVEL_MG_PREFIX: ${{ vars.TOP_LEVEL_MG_PREFIX }}
   INFRA_BILLING_ACCOUNT_NAME: ${{ vars.INFRA_BILLING_ACCOUNT_NAME }}
   INFRA_02_BILLING_PROFILE_NAME: ${{ vars.INFRA_02_BILLING_PROFILE_NAME }}
   INFRA_OPEX_INVOICE_SECTION_NAME: ${{ vars.INFRA_OPEX_INVOICE_SECTION_NAME }}
@@ -73,7 +74,7 @@ jobs:
         uses: azure/cli@v2
         with:
           inlineScript: |
-            azMgmtGrpAliasIdOut=$(az deployment mg show --management-group-id $(MAN_GRP_ID) \
+            azMgmtGrpAliasIdOut=$(az deployment mg show --management-group-id $(TOP_LEVEL_MG_PREFIX) \
             --name $(DEPLOYMENT_NAME) \
             --query properties.outputs | jq -c 'to_entries[] | [.key, .value.value]')
             echo "$azMgmtGrpAliasIdOut" | while IFS=$'\n' read -r c; do
