@@ -74,7 +74,7 @@ jobs:
         uses: azure/cli@v2
         with:
           inlineScript: |
-            azMgmtGrpAliasIdOut=$(az deployment mg show --management-group-id $(TOP_LEVEL_MG_PREFIX) \
+            azMgmtGrpAliasIdOut=$(az deployment mg show --management-group-id $TOP_LEVEL_MG_PREFIX \
             --name $(DEPLOYMENT_NAME) \
             --query properties.outputs | jq -c 'to_entries[] | [.key, .value.value]')
             echo "$azMgmtGrpAliasIdOut" | while IFS=$'\n' read -r c; do

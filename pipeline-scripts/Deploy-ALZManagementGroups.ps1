@@ -18,7 +18,7 @@ param (
 # Parameters necessary for deployment
 If($NonRootParentManagementGroupId -eq '') {
   $inputObject = @{
-    DeploymentName        = -join ('alz-MGDeployment-{0}' -f (Get-Date -Format 'yyyyMMddTHHMMssffffZ')[0..63])
+    DeploymentName        = -join ('alz-MGDeployment-{0}' -f (Get-Date -Format 'yyyyMMddTHHMMssffffZ'))[0..63]
     Location              = $Location
     TemplateFile          = $TemplateFile + "managementGroups.bicep"
     TemplateParameterFile = $TemplateParameterFile
@@ -31,8 +31,7 @@ If($NonRootParentManagementGroupId -eq '') {
 If($NonRootParentManagementGroupId -ne '') {
   $inputObject = @{
     ManagementGroupId     = $NonRootParentManagementGroupId
-    DeploymentName        = -join ('alz-MGDeployment-{0}' -f (Get-Date -Format 'yyyyMMddTHHMMssffffZ')[0..63])
-    Location              = $Location
+    DeploymentName        = -join ('alz-MGDeployment-{0}' -f (Get-Date -Format 'yyyyMMddTHHMMssffffZ'))[0..63]
     TemplateFile          = $TemplateFile + "managementGroupsScopeEscape.bicep"
     TemplateParameterFile = $TemplateParameterFile
     WhatIf                = $WhatIfEnabled
