@@ -1,5 +1,8 @@
 param (
     [Parameter()]
+    [String]$azDeploymentName,
+
+    [Parameter()]
     [String]$Location = "$($env:LOCATION)",
 
     [Parameter()]
@@ -17,7 +20,7 @@ param (
 
 # Parameters necessary for deployment
 $inputObject = @{
-    DeploymentName        = -join ('alz-ManagementSubscriptionDeployment-{0}' -f (Get-Date -Format 'yyyyMMddTHHMMssffffZ'))[0..63]
+    DeploymentName        = $azDeploymentName
     Location              = $Location
     ManagementGroupId     = $TopLevelMGPrefix
     TemplateFile          = $TemplateFile
