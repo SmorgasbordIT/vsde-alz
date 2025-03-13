@@ -21,6 +21,9 @@ permissions:
 env:
   ENV_FILE: ".env"
   ENV_HUB: ${{ vars.ENV_HUB }}
+  BILLING_ACCOUNT_NAME: ${{ secrets.BILLING_ACCOUNT_NAME }}
+  BILLING_PROFILE_NAME: ${{ secrets.BILLING_PROFILE_NAME }}
+  INVOICE_SECTION_NAME: ${{ secrets.INVOICE_SECTION_NAME }}
   IS_PULL_REQUEST: "${{ github.event_name == 'pull_request' }}"
 
 jobs:

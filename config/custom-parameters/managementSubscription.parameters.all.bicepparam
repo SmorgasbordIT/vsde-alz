@@ -12,7 +12,7 @@
 
 using '../../modules/bicep/v0.00.1/managementSubscription/managementSubscription.bicep'
 
-param varAzEnvironmentHub = 'ENV_HUB'
+var varAzEnvironmentHub = 'ENV_HUB'
 
 var varAzLocationAreviation = readEnvironmentVariable('TOP_LEVEL_MG_PREFIX','')
 //var varAzEnvironmentHub     = readEnvironmentVariable('HUB_ENV','')
@@ -44,8 +44,8 @@ param parConnectivityGroupId = '/providers/Microsoft.Management/managementGroups
 */
 
 // Read environment variables for Billing Scope
-var varBillingAccountName = readEnvironmentVariable('BILLING_ACCOUNT_NAME','')
-var varBillingProfileName = readEnvironmentVariable('BILLING_PROFILE_NAME','')
-var varInvoiceSectionName = readEnvironmentVariable('INVOICE_SECTION_NAME','')
+var varBillingAccountName = 'BILLING_ACCOUNT_NAME'
+var varBillingProfileName = 'BILLING_PROFILE_NAME'
+var varInvoiceSectionName = 'INVOICE_SECTION_NAME'
 
 param parSnkBillingScope = '/providers/Microsoft.Billing/billingAccounts/${varBillingAccountName}/billingProfiles/${varBillingProfileName}/invoiceSections/${varInvoiceSectionName}'
