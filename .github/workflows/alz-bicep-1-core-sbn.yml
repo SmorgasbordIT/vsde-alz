@@ -68,3 +68,21 @@ jobs:
           inlineScript: |
             .\pipeline-scripts\Deploy-ALZManagementSubscription.ps1 -TemplateParameterFile .\config\custom-parameters\managementSubscription.parameters.all.bicepparam
           azPSVersion: "latest"
+
+      - name: Set Management Group Subscription Alias Id from Bicep output
+        uses: azure/powershell@v2
+        with:
+          inlineScript: |
+            azMgmtGrpAliasIdOut=$(az deployment mg show --management-group-id $(MAN_GRP_ID) \
+            --name $(DEPLOYMENT_NAME) \
+            --query properties.outputs | jq -c 'to_entries[] | [.key, .value.value]')
+            echo "$azMgmtGrpAliasIdOut" | while IFS=$'\n' read -r c; do
+              outputname=$(echo "$c" | jq -r '.[0]')
+              outputvalue=$(echo "$c" | jq -r '.[1]')
+            echo "##vso[task.setvariable variable=$outputname;]$outputvalue"
+            done
+          azPSVersion: "latest"
+
+      - name: Output Management Subscription Alias Id
+        run: |
+          echo $(outSnkSubsManagementAliasSubsId)
