@@ -56,11 +56,19 @@ jobs:
           subscription-id: ${{ secrets.VSDE_SUBSCRIPTION_ID }}
           enable-AzPSSession: true
 
-      - name: "Management Groups Deployment"
+      - name: Management Groups Deployment
         uses: azure/powershell@v2
         with:
           inlineScript: |
             .\pipeline-scripts\Deploy-ALZManagementGroups.ps1 -TemplateParameterFile .\config\custom-parameters\managementGroups.parameters.all.bicepparam
+          azPSVersion: "latest"
+
+      - name: Create Deployment Name for Management Subscription for Platform
+        uses: azure/powershell@v2
+        with:
+          inlineScript: |
+            $azDeploymentName = -join ('alz-ManagementSubscriptionDeployment-{0}' -f (Get-Date -Format 'yyyyMMddTHHMMssffffZ'))[0..63]
+            echo $($azDeploymentName)
           azPSVersion: "latest"
 
       - name: Deploy Management Subscription for Platform
@@ -75,7 +83,7 @@ jobs:
         with:
           inlineScript: |
             azMgmtGrpAliasIdOut=$(az deployment mg show --management-group-id $TOP_LEVEL_MG_PREFIX \
-            --name $(DEPLOYMENT_NAME) \
+            --name $DEPLOYMENT_NAME \
             --query properties.outputs | jq -c 'to_entries[] | [.key, .value.value]')
             echo "$azMgmtGrpAliasIdOut" | while IFS=$'\n' read -r c; do
               outputname=$(echo "$c" | jq -r '.[0]')
