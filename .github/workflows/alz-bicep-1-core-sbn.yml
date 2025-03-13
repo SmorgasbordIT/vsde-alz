@@ -37,7 +37,7 @@ jobs:
           fetch-depth: 0
 
       - name: "Remove Quotation Marks from Environment File"
-        uses: azure/powershell@v1
+        uses: azure/powershell@v5
         with:
           inlineScript: |
             Write-Host $ENV_FILE
@@ -56,14 +56,14 @@ jobs:
           enable-AzPSSession: true
 
       - name: "Management Groups Deployment"
-        uses: azure/powershell@v1
+        uses: azure/powershell@v5
         with:
           inlineScript: |
             .\pipeline-scripts\Deploy-ALZManagementGroups.ps1 -TemplateParameterFile .\config\custom-parameters\managementGroups.parameters.all.bicepparam
           azPSVersion: "latest"
 
       - name: Deploy Management Subscription for Platform
-        uses: azure/powershell@v1
+        uses: azure/powershell@v5
         with:
           inlineScript: |
             .\pipeline-scripts\Deploy-ALZManagementSubscription.ps1 -TemplateParameterFile .\config\custom-parameters\managementSubscription.parameters.all.bicepparam
