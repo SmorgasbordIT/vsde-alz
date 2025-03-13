@@ -21,9 +21,6 @@ permissions:
 env:
   ENV_FILE: ".env"
   ENV_HUB: ${{ vars.ENV_HUB }}
-  INFRA_BILLING_ACCOUNT_NAME: ${{ vars.INFRA_BILLING_ACCOUNT_NAME }}
-  INFRA_02_BILLING_PROFILE_NAME: ${{ vars.INFRA_02_BILLING_PROFILE_NAME }}
-  INFRA_OPEX_INVOICE_SECTION_NAME: ${{ vars.INFRA_OPEX_INVOICE_SECTION_NAME }}
   IS_PULL_REQUEST: "${{ github.event_name == 'pull_request' }}"
 
 jobs:
