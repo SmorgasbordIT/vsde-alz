@@ -65,12 +65,12 @@ jobs:
 
       - name: Set Deployment Variable for Param
         id: deployment-var
-        run: echo "AZ_SUB_DEPLOYMENT_NAME=green" >> "$GITHUB_OUTPUT"
+        run: echo "AZ_SUB_DEPLOYMENT_NAME=-join ('alz-PlatformSubscriptionsDeployment-{0}' -f (Get-Date -Format 'yyyyMMddTHHMMssffffZ'))[0..63]" >> "$GITHUB_OUTPUT"
 
       - name: Echo Deployment Variable which has been set for the Parameter
         env:
           AZ_SUB_DEPLOYMENT_NAME: ${{ steps.deployment-var.outputs.AZ_SUB_DEPLOYMENT_NAME }}
-        run: echo "The selected color is $AZ_SUB_DEPLOYMENT_NAME"
+        run: echo "Platform Subscriptions Deployment Name $AZ_SUB_DEPLOYMENT_NAME"
 
       - name: Deploy Management Subscription for Platform
         uses: azure/powershell@v2
