@@ -68,9 +68,9 @@ jobs:
         with:
           inlineScript: |
             $AZ_SUB_DEPLOYMENT_NAME=('alz-PlatformSubscriptionsDeployment-{0}' -f (Get-Date -Format 'yyyyMMddTHHMMssffffZ'))
-            Write-Host ##vso[task.setvariable variable=AZ_SUB_DEPLOYMENT_NAME]$AZ_SUB_DEPLOYMENT_NAME"
+            echo "Test12345=$AZ_SUB_DEPLOYMENT_NAME" >> $env:GITHUB_ENV
             Write-Host "This is the dployment name $AZ_SUB_DEPLOYMENT_NAME"
-            Write-Host "vso var $env:AZ_SUB_DEPLOYMENT_NAME"
+            Write-Host "vso var $env:Test12345"
             .\pipeline-scripts\Deploy-ALZManagementSubscription.ps1 -azDeploymentName $AZ_SUB_DEPLOYMENT_NAME -TemplateParameterFile .\config\custom-parameters\managementSubscription.parameters.all.bicepparam
           azPSVersion: "latest"
 
