@@ -64,7 +64,7 @@ jobs:
           azPSVersion: "latest"
 
       - name: Set Deployment Variable for Param
-        run: echo "AZ_SUB_DEPLOYMENT_NAME=-join ('alz-PlatformSubscriptionsDeployment-{0}' -f (Get-Date -Format 'yyyyMMddTHHMMssffffZ'))[0..63]" >> "$GITHUB_ENV"
+        run: echo "AZ_SUB_DEPLOYMENT_NAME=('alz-PlatformSubscriptionsDeployment-{0}' -f (Get-Date -Format 'yyyyMMddTHHMMssffffZ'))" >> "$GITHUB_ENV"
       - name: Echo Deployment Variable which has been set for the Parameter
         run: echo "Platform Subscriptions Deployment Name $AZ_SUB_DEPLOYMENT_NAME"
 
