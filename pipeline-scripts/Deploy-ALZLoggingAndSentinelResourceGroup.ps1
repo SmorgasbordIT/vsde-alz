@@ -1,6 +1,6 @@
 param (
   [Parameter()]
-  [String]$azManSubName = "$(env:MAN_SUB_NAME)",
+  [String]$azManSubName = "$($env:MAN_SUB_NAME)",
 
   [Parameter()]
   [String]$Location = "$($env:LOCATION)",
