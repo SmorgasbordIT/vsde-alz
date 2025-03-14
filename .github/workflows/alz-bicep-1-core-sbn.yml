@@ -62,12 +62,12 @@ jobs:
           inlineScript: |
             .\pipeline-scripts\Deploy-ALZManagementGroups.ps1 -TemplateParameterFile .\config\custom-parameters\managementGroups.parameters.all.bicepparam
           azPSVersion: "latest"
-          
+
       - name: Set Deployment Variable for Param
         id: deployment-var
-        run: echo "azDeploymentName = -join ('alz-ManagementSubscriptionDeployment-{0}' -f (Get-Date -Format 'yyyyMMddTHHMMssffffZ'))[0..63]" >> "$GITHUB_OUTPUT"
+        run: echo "azDeploymentName = green" >> "$GITHUB_OUTPUT"
 
-      - name: Echo Deployment Variable which has been set
+      - name: Echo Deployment Variable which has been set for the Parameter
         env:
           azDeploymentName: ${{ steps.deployment-var.outputs.azDeploymentName }}
         run: echo "$azDeploymentName"
