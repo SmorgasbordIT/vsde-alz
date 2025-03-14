@@ -62,13 +62,20 @@ jobs:
           inlineScript: |
             .\pipeline-scripts\Deploy-ALZManagementGroups.ps1 -TemplateParameterFile .\config\custom-parameters\managementGroups.parameters.all.bicepparam
           azPSVersion: "latest"
+          
+      - name: Set Deployment Variable for Param
+        id: deployment-var
+        run: echo "azDeploymentName = -join ('alz-ManagementSubscriptionDeployment-{0}' -f (Get-Date -Format 'yyyyMMddTHHMMssffffZ'))[0..63]" >> "$GITHUB_OUTPUT"
+
+      - name: Echo Deployment Variable which has been set
+        env:
+          azDeploymentName: ${{ steps.deployment-var.outputs.azDeploymentName }}
+        run: echo "$azDeploymentName"
 
       - name: Deploy Management Subscription for Platform
         uses: azure/powershell@v2
         with:
           inlineScript: |
-            $azDeploymentName = -join ('alz-ManagementSubscriptionDeployment-{0}' -f (Get-Date -Format 'yyyyMMddTHHMMssffffZ'))[0..63]
-            echo $(azDeploymentName)
             .\pipeline-scripts\Deploy-ALZManagementSubscription.ps1 -TemplateParameterFile .\config\custom-parameters\managementSubscription.parameters.all.bicepparam
           azPSVersion: "latest"
 
