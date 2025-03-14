@@ -77,7 +77,7 @@ jobs:
         with:
           inlineScript: |
             azMgmtGrpAliasIdOut=$(az deployment mg show --management-group-id $TOP_LEVEL_MG_PREFIX \
-            --name $azDeploymentName \
+            --name $AZ_SUB_DEPLOYMENT_NAME \
             --query properties.outputs | jq -c 'to_entries[] | [.key, .value.value]')
             echo "$azMgmtGrpAliasIdOut" | while IFS=$'\n' read -r c; do
               outputname=$(echo "$c" | jq -r '.[0]')
