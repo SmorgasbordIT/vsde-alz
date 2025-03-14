@@ -65,12 +65,12 @@ jobs:
 
       - name: Set Deployment Variable for Param
         id: deployment-var
-        run: echo "azDeploymentName = green" >> "$GITHUB_OUTPUT"
+        run: echo "SELECTED_COLOR=green" >> "$GITHUB_OUTPUT"
 
       - name: Echo Deployment Variable which has been set for the Parameter
         env:
-          azDeploymentName: ${{ steps.deployment-var.outputs.azDeploymentName }}
-        run: echo "$azDeploymentName"
+          azDeploymentName: ${{ steps.deployment-var.outputs.SELECTED_COLOR }}
+        run: echo "The selected color is $SELECTED_COLOR"
 
       - name: Deploy Management Subscription for Platform
         uses: azure/powershell@v2
