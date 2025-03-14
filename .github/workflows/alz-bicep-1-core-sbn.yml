@@ -76,6 +76,7 @@ jobs:
         uses: azure/cli@v2
         with:
           inlineScript: |
+            Write-Host "This is the dployment name $AZ_SUB_DEPLOYMENT_NAME"
             azMgmtGrpAliasIdOut=$(az deployment mg show --management-group-id $TOP_LEVEL_MG_PREFIX \
             --name $AZ_SUB_DEPLOYMENT_NAME \
             --query properties.outputs | jq -c 'to_entries[] | [.key, .value.value]')
