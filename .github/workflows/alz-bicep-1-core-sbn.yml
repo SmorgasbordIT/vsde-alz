@@ -75,7 +75,6 @@ jobs:
         uses: azure/cli@v2
         with:
           inlineScript: |
-            echo "This is the dployment name $AZ_SUB_DEPLOYMENT_NAME"
             azMgmtGrpAliasIdOut=$(az deployment mg show --management-group-id $TOP_LEVEL_MG_PREFIX \
             --name $AZ_SUB_DEPLOYMENT_NAME \
             --query properties.outputs | jq -c 'to_entries[] | [.key, .value.value]')
@@ -83,9 +82,10 @@ jobs:
               outputname=$(echo "$c" | jq -r '.[0]')
               outputvalue=$(echo "$c" | jq -r '.[1]')
             echo "##vso[task.setvariable variable=$outputname;]$outputvalue"
+            echo $outSnkSubsManagementAliasSubsId
             done
           azcliversion: "latest"
 
       - name: Output Management Subscription Alias Id
         run: |
-          echo "$(outSnkSubsManagementAliasSubsId)"
+          echo $outSnkSubsManagementAliasSubsId
