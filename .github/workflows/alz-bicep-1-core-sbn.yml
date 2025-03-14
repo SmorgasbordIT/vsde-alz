@@ -63,19 +63,13 @@ jobs:
             .\pipeline-scripts\Deploy-ALZManagementGroups.ps1 -TemplateParameterFile .\config\custom-parameters\managementGroups.parameters.all.bicepparam
           azPSVersion: "latest"
 
-      - name: Set Deployment Variable for Param
+      - name: Deploy Management Subscription for Platform
         uses: azure/powershell@v2
         with:
           inlineScript: |
             $AZ_SUB_DEPLOYMENT_NAME=('alz-PlatformSubscriptionsDeployment-{0}' -f (Get-Date -Format 'yyyyMMddTHHMMssffffZ'))
             Write-Host "##vso[task.setvariable variable=$azDeploymentName]$AZ_SUB_DEPLOYMENT_NAME"
-          azPSVersion: "latest"
-
-      - name: Deploy Management Subscription for Platform
-        uses: azure/powershell@v2
-        with:
-          inlineScript: |
-            Write-Host "This is the dployment name $(azDeploymentName)"
+            Write-Host "This is the dployment name $azDeploymentName"
             .\pipeline-scripts\Deploy-ALZManagementSubscription.ps1 -azDeploymentName $azDeploymentName -TemplateParameterFile .\config\custom-parameters\managementSubscription.parameters.all.bicepparam
           azPSVersion: "latest"
 
