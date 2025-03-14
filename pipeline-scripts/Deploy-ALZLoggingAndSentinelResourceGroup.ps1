@@ -1,5 +1,8 @@
 param (
   [Parameter()]
+  [String]$azManSubName = "$(env:MAN_SUB_NAME)",
+
+  [Parameter()]
   [String]$Location = "$($env:LOCATION)",
 
   [Parameter()]
@@ -14,6 +17,10 @@ param (
   [Parameter()]
   [Boolean]$WhatIfEnabled = [System.Convert]::ToBoolean($($env:IS_PULL_REQUEST))
 )
+
+# Get the Management Subscription Alias Id
+$azManSubAliasId = Get-AzSubscription -SubscriptionName $azManSubName
+$ManagementSubscriptionId = $azManSubAliasId.Id
 
 # Parameters necessary for deployment
 $inputObject = @{
