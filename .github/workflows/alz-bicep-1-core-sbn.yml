@@ -75,7 +75,7 @@ jobs:
         uses: azure/powershell@v2
         with:
           inlineScript: |
-            Write-Host "This is the dployment name $azDeploymentName"
+            Write-Host "This is the dployment name $(azDeploymentName)"
             .\pipeline-scripts\Deploy-ALZManagementSubscription.ps1 -azDeploymentName $azDeploymentName -TemplateParameterFile .\config\custom-parameters\managementSubscription.parameters.all.bicepparam
           azPSVersion: "latest"
 
