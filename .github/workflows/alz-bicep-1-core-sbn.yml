@@ -88,4 +88,4 @@ jobs:
 
       - name: Output Management Subscription Alias Id
         run: |
-          echo $(outSnkSubsManagementAliasSubsId)
+          echo $outSnkSubsManagementAliasSubsId
