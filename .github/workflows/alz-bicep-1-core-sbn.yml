@@ -68,6 +68,7 @@ jobs:
         with:
           inlineScript: |
             $AZ_SUB_DEPLOYMENT_NAME=('alz-PlatformSubscriptionsDeployment-{0}' -f (Get-Date -Format 'yyyyMMddTHHMMssffffZ'))
+            Write-Host "##vso[task.setvariable variable=$azDeploymentName]$AZ_SUB_DEPLOYMENT_NAME"
           azPSVersion: "latest"
 
       - name: Deploy Management Subscription for Platform

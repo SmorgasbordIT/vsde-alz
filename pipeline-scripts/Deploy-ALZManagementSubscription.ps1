@@ -1,6 +1,6 @@
 param (
     [Parameter()]
-    [String]$azDeploymentName = $AZ_SUB_DEPLOYMENT_NAME,
+    [String]$azDeploymentName,
 
     [Parameter()]
     [String]$Location = "$($env:LOCATION)",
