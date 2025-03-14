@@ -76,5 +76,5 @@ jobs:
         uses: azure/powershell@v2
         with:
           inlineScript: |
-            .\pipeline-scripts\Deploy-ALZLoggingAndSentinelResourceGroup.ps1
+            .\pipeline-scripts\Deploy-ALZLoggingAndSentinelResourceGroup.ps1 -TemplateParameterFile .\config\custom-parameters\resourceGroupLoggingAndSentinel.parameters.all.bicepparam
           azPSVersion: "latest"
