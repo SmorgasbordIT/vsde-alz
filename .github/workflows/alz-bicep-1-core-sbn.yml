@@ -69,7 +69,7 @@ jobs:
           inlineScript: |
             $azDeploymentName = -join ('alz-ManagementSubscriptionDeployment-{0}' -f (Get-Date -Format 'yyyyMMddTHHMMssffffZ'))[0..63]
             echo $(azDeploymentName)
-            .\pipeline-scripts\Deploy-ALZManagementSubscription.ps1 -azDeploymentName $azDeploymentName -TemplateParameterFile .\config\custom-parameters\managementSubscription.parameters.all.bicepparam
+            .\pipeline-scripts\Deploy-ALZManagementSubscription.ps1 -TemplateParameterFile .\config\custom-parameters\managementSubscription.parameters.all.bicepparam
           azPSVersion: "latest"
 
       - name: Set Management Group Subscription Alias Id from Bicep output
