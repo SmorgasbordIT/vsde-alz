@@ -67,9 +67,7 @@ jobs:
         uses: azure/powershell@v2
         with:
           inlineScript: |
-            $AZ_SUB_DEPLOYMENT_NAME=('alz-PlatformSubscriptionsDeployment-{0}' -f (Get-Date -Format 'yyyyMMddTHHMMssffffZ')) 
-            Write-Host $AZ_SUB_DEPLOYMENT_NAME
-            echo $AZ_SUB_DEPLOYMENT_NAME
+            $AZ_SUB_DEPLOYMENT_NAME=('alz-PlatformSubscriptionsDeployment-{0}' -f (Get-Date -Format 'yyyyMMddTHHMMssffffZ'))
           azPSVersion: "latest"
 
       - name: Deploy Management Subscription for Platform
