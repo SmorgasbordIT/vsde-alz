@@ -89,12 +89,5 @@ jobs:
         uses: azure/powershell@v2
         with:
           inlineScript: |
-            Write-Host $outSnkSubsManagementAliasSubsId
-            Write-Host $(outSnkSubsManagementAliasSubsId)
-            Write-Host " 1 $outSnkSubsManagementAliasSubsId"
-            Write-Host " 2 $(outSnkSubsManagementAliasSubsId)"
-            echo $outSnkSubsManagementAliasSubsId
-            echo $(outSnkSubsManagementAliasSubsId)
-            echo " 1 $outSnkSubsManagementAliasSubsId"
-            echo " 2 $(outSnkSubsManagementAliasSubsId)"
+            Write-Host "$outSnkSubsManagementAliasSubsId"
           azPSVersion: "latest"
