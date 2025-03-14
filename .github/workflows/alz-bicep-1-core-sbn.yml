@@ -96,5 +96,5 @@ jobs:
             echo $outSnkSubsManagementAliasSubsId
             echo $(outSnkSubsManagementAliasSubsId)
             echo " 1 $outSnkSubsManagementAliasSubsId"
-            echo " 2 $(outSnkSubsManagementAliasSubsId)""
+            echo " 2 $(outSnkSubsManagementAliasSubsId)"
           azPSVersion: "latest"
