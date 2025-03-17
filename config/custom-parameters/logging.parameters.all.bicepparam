@@ -2,10 +2,12 @@ using '../../upstream-releases/v0.21.0/infra-as-code/bicep/modules/logging/loggi
 
 // Read in common environment variables for module.
 
-param parLogAnalyticsWorkspaceName = readEnvironmentVariable('LOG_ANALYTICS_WORKSPACE_NAME','alz-log-analytics')
+var varAzUkSouthAbbrName = readEnvironmentVariable('ABBR_AZ_UKSOUTH','AZUKS')
+var varLogAnalyticsAbbrName = readEnvironmentVariable('LOG_ANALYTICS_WORKSPACE_NAME','AZUKS')
+
+param parLogAnalyticsWorkspaceName = '${varAzUkSouthAbbrName}-${varLogAnalyticsAbbrName}-MGT-01'
 param parLogAnalyticsWorkspaceLocation = readEnvironmentVariable('LOCATION','uksouth')
 
-var varAutomationAccountAbbrName = readEnvironmentVariable('ABBR_AZ_UKSOUTH','AZUKS')
 param parAutomationAccountLocation = readEnvironmentVariable('LOCATION','uksouth')
 
 // Need location formatted without spaces for private DNS zone names.
@@ -25,11 +27,11 @@ param parDataCollectionRuleChangeTrackingName= 'snk-ama-ct-dcr'
 
 param parDataCollectionRuleMDFCSQLName = 'snk-ama-mdfcsql-dcr'
 
-param parUserAssignedManagedIdentityName = 'snk-logging-mi'
+param parUserAssignedManagedIdentityName = toLower('${varAzUkSouthAbbrName}-snk-${varLogAnalyticsAbbrName}-mi-01')
 
 param parLogAnalyticsWorkspaceLinkAutomationAccount = true
 
-param parAutomationAccountName = '${varAutomationAccountAbbrName}-AAA-MGT-01'
+param parAutomationAccountName = '${varAzUkSouthAbbrName}-AAA-MGT-01'
 
 param parAutomationAccountUseManagedIdentity = true
 
