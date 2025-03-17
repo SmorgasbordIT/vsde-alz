@@ -31,6 +31,9 @@ param parSnkSubsIdenAliasName string = 'Identity'
 param parSnkSubsConnAliasName string = 'Connectivity'
 */
 
+@sys.description('Tags you would like to be applied to all subscriptions in this module.')
+param parTags object = {}
+
 @allowed([
   'Production'
   'DevTest'
@@ -47,9 +50,7 @@ resource resSnkSubsMgtAlias 'Microsoft.Subscription/aliases@2021-10-01' = {
   properties: {
       additionalProperties: {
         managementGroupId: parManagementGroupId
-        tags: {
-          Environment: 'Management'
-        }
+        tags: parTags
       }
     workload: parSnkWorkload
     displayName: parSnkSubsMgtAliasName
