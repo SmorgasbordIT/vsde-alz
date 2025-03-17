@@ -6,9 +6,6 @@ param (
   [String]$azLocation = "$($env:LOCATION)",
 
   [Parameter()]
-  [String]$azManagementSubscriptionId = "$($env:MANAGEMENT_SUBSCRIPTION_ID)",
-
-  [Parameter()]
   [String]$azTemplateFile = "upstream-releases\$($env:UPSTREAM_RELEASE_VERSION)\infra-as-code\bicep\modules\resourceGroup\resourceGroup.bicep",
 
   [Parameter()]
@@ -20,7 +17,7 @@ param (
 
 # Get the Management Subscription Alias Id
 $azManSubAliasId = Get-AzSubscription -SubscriptionName $azManSubName
-$ManagementSubscriptionId = $azManSubAliasId.Id
+$azManagementSubscriptionId = $azManSubAliasId.Id
 
 # Parameters necessary for deployment
 $inputObject = @{
@@ -32,6 +29,6 @@ $inputObject = @{
   Verbose               = $true
 }
 
-Select-AzSubscription -SubscriptionId $ManagementSubscriptionId
+Select-AzSubscription -SubscriptionId $azManagementSubscriptionId
 
 New-AzSubscriptionDeployment @inputObject

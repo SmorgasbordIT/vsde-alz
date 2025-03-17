@@ -33,6 +33,7 @@ env:
   CONNECTIVITY_GROUP_ID: ${{ vars.CONNECTIVITY_GROUP_ID }}
   AZ_SUB_DEPLOYMENT_NAME: ${{ vars.AZ_SUB_DEPLOYMENT_NAME }}
   MAN_SUB_NAME: ${{ vars.MAN_SUB_NAME }}
+  LOGGING_RESOURCE_GROUP: ${{ vars.LOGGING_RESOURCE_GROUP }}
   IS_PULL_REQUEST: "${{ github.event_name == 'pull_request' }}"
 
 jobs:

@@ -5,11 +5,12 @@ param parLocation = readEnvironmentVariable('LOCATION','uksouth')
 param parResourceGroupName = readEnvironmentVariable('LOGGING_RESOURCE_GROUP','rg-mgt-log')
 
 param parTags = {
+  Location: ('${parLocation}')
   Environment: 'Management'
   DeployedBy: 'Cloud Tech'
-  // 'Expiry Date': '2025-02-17'
-  // 'Business Unit': 'Tech'
-  // 'Owner': 'J Davis'
+  CreatedBy: 'jonathan.davis@spacenk.com'
+  SvcName: 'Infra'
+  SvcOwner: 'Infrastructure@spacenk.com'
 }
 
 param parTelemetryOptOut = false
