@@ -12,12 +12,6 @@
 
 using '../../modules/bicep/v0.00.1/managementSubscription/managementSubscription.bicep'
 
-param parTags = {
-  Environment: 'Management'
-  DeployedBy: 'Cloud Tech'
-  CostCode: 'INFRA_OPEX'
-}
-
 var varAzEnvironmentHub = readEnvironmentVariable('ENV_HUB','')
 
 var varAzLocationAreviation = readEnvironmentVariable('TOP_LEVEL_MG_PREFIX','')
