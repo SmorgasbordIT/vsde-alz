@@ -34,6 +34,7 @@ env:
   AZ_SUB_DEPLOYMENT_NAME: ${{ vars.AZ_SUB_DEPLOYMENT_NAME }}
   MAN_SUB_NAME: ${{ vars.MAN_SUB_NAME }}
   LOGGING_RESOURCE_GROUP: ${{ vars.LOGGING_RESOURCE_GROUP }}
+  ABBR_AZ_UKSOUTH: ${{ vars.ABBR_AZ_UKSOUTH }}
   IS_PULL_REQUEST: "${{ github.event_name == 'pull_request' }}"
 
 jobs:
@@ -84,4 +85,11 @@ jobs:
         with:
           inlineScript: |
             .\pipeline-scripts\Deploy-ALZLoggingAndSentinelResourceGroup.ps1 -azTemplateParameterFile .\config\custom-parameters\resourceGroupLoggingAndSentinel.parameters.all.bicepparam
+          azPSVersion: "latest"
+
+      - name: "Logging and Sentinel Deployment"
+        uses: azure/powershell@v2
+        with:
+          inlineScript: |
+            .\pipeline-scripts\Deploy-ALZLoggingAndSentinel.ps1 -azTemplateParameterFile .\config\custom-parameters\logging.parameters.all.bicepparam
           azPSVersion: "latest"
