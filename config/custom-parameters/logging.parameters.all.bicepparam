@@ -3,7 +3,7 @@ using '../../upstream-releases/v0.21.0/infra-as-code/bicep/modules/logging/loggi
 // Read in common environment variables for module.
 
 var varAzUkSouthAbbrName = readEnvironmentVariable('ABBR_AZ_UKSOUTH','AZUKS')
-var varLogAnalyticsAbbrName = readEnvironmentVariable('LOG_ANALYTICS_WORKSPACE_NAME','AZUKS')
+var varLogAnalyticsAbbrName = readEnvironmentVariable('LOG_ANALYTICS_ABBR_NAME','LAW')
 
 param parLogAnalyticsWorkspaceName = '${varAzUkSouthAbbrName}-${varLogAnalyticsAbbrName}-MGT-01'
 param parLogAnalyticsWorkspaceLocation = readEnvironmentVariable('LOCATION','uksouth')
