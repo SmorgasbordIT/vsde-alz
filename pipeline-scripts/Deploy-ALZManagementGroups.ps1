@@ -1,6 +1,6 @@
 param (
   [Parameter()]
-  [String]$azNonRootParentManagementGroupId = "$($env:NONROOTPARENTMANAGEMENTGROUPID)",
+  [String]$NonRootParentManagementGroupId = "$($env:NONROOTPARENTMANAGEMENTGROUPID)",
 
   [Parameter()]
   [String]$azLocation = "$($env:LOCATION)",
@@ -30,7 +30,7 @@ If($NonRootParentManagementGroupId -eq '') {
 }
 If($NonRootParentManagementGroupId -ne '') {
   $inputObject = @{
-    ManagementGroupId     = $azNonRootParentManagementGroupId
+    ManagementGroupId     = $NonRootParentManagementGroupId
     DeploymentName        = -join ('alz-MGDeployment-{0}' -f (Get-Date -Format 'yyyyMMddTHHMMssffffZ'))[0..63]
     TemplateFile          = $azTemplateFile + "managementGroupsScopeEscape.bicep"
     TemplateParameterFile = $azTemplateParameterFile
