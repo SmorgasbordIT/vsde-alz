@@ -9,7 +9,7 @@ param parTags = {
   Environment: 'Management'
   DeployedBy: 'Cloud Tech'
   CreatedBy: 'jonathan.davis@spacenk.com'
-  SvcName: 'Infra'
+  SvcName: 'Infrastructure'
   SvcOwner: 'Infrastructure@spacenk.com'
 }
 
