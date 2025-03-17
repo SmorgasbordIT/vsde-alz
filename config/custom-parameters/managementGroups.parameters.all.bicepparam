@@ -12,7 +12,7 @@
 
 using '../../modules/bicep/v0.00.1/managementGroups/managementGroups.bicep'
 
-param parTopLevelManagementGroupPrefix = readEnvironmentVariable('TOP_LEVEL_MG_PREFIX','azuk-snk')
+param parTopLevelManagementGroupPrefix = readEnvironmentVariable('azTOP_LEVEL_MG_PREFIX','azuk-snk')
 
 // Typically blank in default Alz-Bicep deployments
 param parTopLevelManagementGroupSuffix = ''
