@@ -62,19 +62,19 @@ jobs:
         uses: azure/powershell@v2
         with:
           inlineScript: |
-            .\pipeline-scripts\Deploy-ALZManagementGroups.ps1 -TemplateParameterFile .\config\custom-parameters\managementGroups.parameters.all.bicepparam
+            .\pipeline-scripts\Deploy-ALZManagementGroups.ps1 -azTemplateParameterFile .\config\custom-parameters\managementGroups.parameters.all.bicepparam
           azPSVersion: "latest"
 
       - name: Deploy Management Subscription for Platform
         uses: azure/powershell@v2
         with:
           inlineScript: |
-            .\pipeline-scripts\Deploy-ALZManagementSubscription.ps1 -TemplateParameterFile .\config\custom-parameters\managementSubscription.parameters.all.bicepparam
+            .\pipeline-scripts\Deploy-ALZManagementSubscription.ps1 -azTemplateParameterFile .\config\custom-parameters\managementSubscription.parameters.all.bicepparam
           azPSVersion: "latest"
 
       - name: "Logging and Sentinel Resource Group Deployment"
         uses: azure/powershell@v2
         with:
           inlineScript: |
-            .\pipeline-scripts\Deploy-ALZLoggingAndSentinelResourceGroup.ps1 -TemplateParameterFile .\config\custom-parameters\resourceGroupLoggingAndSentinel.parameters.all.bicepparam
+            .\pipeline-scripts\Deploy-ALZLoggingAndSentinelResourceGroup.ps1 -azTemplateParameterFile .\config\custom-parameters\resourceGroupLoggingAndSentinel.parameters.all.bicepparam
           azPSVersion: "latest"
