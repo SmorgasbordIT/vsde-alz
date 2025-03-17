@@ -50,11 +50,18 @@ resource resSnkSubsMgtAlias 'Microsoft.Subscription/aliases@2021-10-01' = {
   properties: {
       additionalProperties: {
         managementGroupId: parManagementGroupId
-        tags: parTags
       }
     workload: parSnkWorkload
     displayName: parSnkSubsMgtAliasName
     billingScope: parSnkBillingScope
+  }
+}
+
+resource applyTags 'Microsoft.Resources/tags@2024-11-01' = {
+  scope: resSnkSubsMgtAlias
+  name: 'default'
+  properties: {
+    tags: parTags
   }
 }
 
