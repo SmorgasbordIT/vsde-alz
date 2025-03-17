@@ -19,7 +19,7 @@ var varAzLocationAreviation = readEnvironmentVariable('TOP_LEVEL_MG_PREFIX','')
 
 param parSnkSubsMgtAliasName = toUpper('${varAzLocationAreviation}-${varAzEnvironmentHub}-Management-01')
 param parSnkSubsIdenAliasName = toUpper('${varAzLocationAreviation}-${varAzEnvironmentHub}-Identity-01')
-param parSnkSubsConnAliasName = toUpper('${varAzLocationAreviation}-${varAzEnvironmentHub}-Connectivity-01')
+//param parSnkSubsConnAliasName = toUpper('${varAzLocationAreviation}-${varAzEnvironmentHub}-Connectivity-01')
 
 param parSnkWorkload = 'Production'
 
@@ -34,9 +34,9 @@ var varIdentityGroupId = readEnvironmentVariable('IDENTITY_GROUP_ID','')
 param parIdentityGroupId = '/providers/Microsoft.Management/managementGroups/${varIdentityGroupId}'
 
 // Read environment variables for Connectivity Group ID
-var varConnectivityGroupId = readEnvironmentVariable('CONNECTIVITY_GROUP_ID','')
+//var varConnectivityGroupId = readEnvironmentVariable('CONNECTIVITY_GROUP_ID','')
 
-param parConnectivityGroupId = '/providers/Microsoft.Management/managementGroups/${varConnectivityGroupId}'
+//param parConnectivityGroupId = '/providers/Microsoft.Management/managementGroups/${varConnectivityGroupId}'
 
 // Read environment variables for Billing Scope
 var varBillingAccountName = readEnvironmentVariable('INFRA_BILLING_ACCOUNT_NAME','')
