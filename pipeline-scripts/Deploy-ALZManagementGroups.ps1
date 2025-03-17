@@ -1,15 +1,15 @@
 param (
   [Parameter()]
-  [String]$NonRootParentManagementGroupId = "$($env:NONROOTPARENTMANAGEMENTGROUPID)",
+  [String]$azNonRootParentManagementGroupId = "$($env:NONROOTPARENTMANAGEMENTGROUPID)",
 
   [Parameter()]
-  [String]$Location = "$($env:LOCATION)",
+  [String]$azLocation = "$($env:LOCATION)",
 
   [Parameter()]
-  [String]$TemplateFile = "modules\bicep\$($env:MODULES_RELEASE_VERSION)\managementGroups\",
+  [String]$azTemplateFile = "modules\bicep\$($env:MODULES_RELEASE_VERSION)\managementGroups\",
 
   [Parameter()]
-  [String]$TemplateParameterFile = "config\custom-parameters\managementGroups.parameters.all.bicepparam",
+  [String]$azTemplateParameterFile = "config\custom-parameters\managementGroups.parameters.all.bicepparam",
 
   [Parameter()]
   [Boolean]$WhatIfEnabled = [System.Convert]::ToBoolean($($env:IS_PULL_REQUEST))
@@ -19,9 +19,9 @@ param (
 If($NonRootParentManagementGroupId -eq '') {
   $inputObject = @{
     DeploymentName        = -join ('alz-MGDeployment-{0}' -f (Get-Date -Format 'yyyyMMddTHHMMssffffZ'))[0..63]
-    Location              = $Location
-    TemplateFile          = $TemplateFile + "managementGroups.bicep"
-    TemplateParameterFile = $TemplateParameterFile
+    Location              = $azLocation
+    TemplateFile          = $azTemplateFile + "managementGroups.bicep"
+    TemplateParameterFile = $azTemplateParameterFile
     WhatIf                = $WhatIfEnabled
     Verbose               = $true
   }
@@ -30,10 +30,10 @@ If($NonRootParentManagementGroupId -eq '') {
 }
 If($NonRootParentManagementGroupId -ne '') {
   $inputObject = @{
-    ManagementGroupId     = $NonRootParentManagementGroupId
+    ManagementGroupId     = $azNonRootParentManagementGroupId
     DeploymentName        = -join ('alz-MGDeployment-{0}' -f (Get-Date -Format 'yyyyMMddTHHMMssffffZ'))[0..63]
-    TemplateFile          = $TemplateFile + "managementGroupsScopeEscape.bicep"
-    TemplateParameterFile = $TemplateParameterFile
+    TemplateFile          = $azTemplateFile + "managementGroupsScopeEscape.bicep"
+    TemplateParameterFile = $azTemplateParameterFile
     WhatIf                = $WhatIfEnabled
     Verbose               = $true
   }

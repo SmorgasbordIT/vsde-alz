@@ -3,16 +3,16 @@ param (
     [String]$azDeploymentName = "$($env:AZ_SUB_DEPLOYMENT_NAME)",
 
     [Parameter()]
-    [String]$Location = "$($env:LOCATION)",
+    [String]$azLocation = "$($env:LOCATION)",
 
     [Parameter()]
-    [String]$TopLevelMGPrefix = "$($env:TOP_LEVEL_MG_PREFIX)",
+    [String]$azTopLevelMGPrefix = "$($env:TOP_LEVEL_MG_PREFIX)",
 
     [Parameter()]
-    [String]$TemplateFile = "modules\bicep\$($env:MODULES_RELEASE_VERSION)\managementSubscription\managementSubscription.bicep",
+    [String]$azTemplateFile = "modules\bicep\$($env:MODULES_RELEASE_VERSION)\managementSubscription\managementSubscription.bicep",
 
     [Parameter()]
-    [String]$TemplateParameterFile = "config\custom-parameters\managementSubscription.parameters.all.bicepparam",
+    [String]$azTemplateParameterFile = "config\custom-parameters\managementSubscription.parameters.all.bicepparam",
 
     [Parameter()]
     [Boolean]$WhatIfEnabled = [System.Convert]::ToBoolean($($env:IS_PULL_REQUEST))
@@ -21,10 +21,10 @@ param (
 # Parameters necessary for deployment
 $inputObject = @{
     DeploymentName        = $azDeploymentName
-    Location              = $Location
-    ManagementGroupId     = $TopLevelMGPrefix
-    TemplateFile          = $TemplateFile
-    TemplateParameterFile = $TemplateParameterFile
+    Location              = $azLocation
+    ManagementGroupId     = $azTopLevelMGPrefix
+    TemplateFile          = $azTemplateFile
+    TemplateParameterFile = $azTemplateParameterFile
     WhatIf                = $WhatIfEnabled
     Verbose               = $true   
 }

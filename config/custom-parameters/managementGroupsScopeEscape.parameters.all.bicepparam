@@ -12,9 +12,9 @@
 
 using '../../upstream-releases/v0.20.2/infra-as-code/bicep/modules/managementGroups/managementGroupsScopeEscape.bicep'
 
-param parTopLevelManagementGroupPrefix = readEnvironmentVariable('TOP_LEVEL_MG_PREFIX','azuk-sbn')
+param parTopLevelManagementGroupPrefix = readEnvironmentVariable('TOP_LEVEL_MG_PREFIX','azuk-snk')
 param parTopLevelManagementGroupSuffix = readEnvironmentVariable('TOP_LEVEL_MG_SUFFIX','')
-param parTopLevelManagementGroupDisplayName = readEnvironmentVariable('TOP_LEVEL_MG_DISPLAY_NAME','SBN IT')
+param parTopLevelManagementGroupDisplayName = readEnvironmentVariable('TOP_LEVEL_MG_DISPLAY_NAME','AZUK SNK')
 param parTopLevelManagementGroupParentId = ''
 param parLandingZoneMgAlzDefaultsEnable = true
 param parPlatformMgAlzDefaultsEnable = true

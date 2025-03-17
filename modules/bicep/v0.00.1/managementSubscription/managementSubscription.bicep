@@ -6,30 +6,26 @@ metadata description = 'Module used to create the management subscriptions in ma
 @sys.description('Management group Id for the subscription.')
 param parManagementGroupId string = ''
 
-/*
 @sys.description('Identity group Id for the subscription.')
 param parIdentityGroupId string = ''
 
 @sys.description('Connectivity group Id for the subscription.')
 param parConnectivityGroupId string = ''
-*/
 
 @sys.description('Provide a name for the alias. This name will also be the display name of the subscription.')
-@minLength(10)
+@minLength(8)
 @maxLength(51)
 param parSnkSubsMgtAliasName string = 'Management'
 
-/*
 @sys.description('Provide a name for the alias. This name will also be the display name of the subscription.')
-@minLength(10)
+@minLength(8)
 @maxLength(51)
 param parSnkSubsIdenAliasName string = 'Identity'
 
 @sys.description('Provide a name for the alias. This name will also be the display name of the subscription.')
-@minLength(10)
+@minLength(8)
 @maxLength(51)
 param parSnkSubsConnAliasName string = 'Connectivity'
-*/
 
 @allowed([
   'Production'
@@ -53,7 +49,7 @@ resource resSnkSubsMgtAlias 'Microsoft.Subscription/aliases@2021-10-01' = {
     billingScope: parSnkBillingScope
   }
 }
-/*
+
 resource resSnkSubsIdenAlias 'Microsoft.Subscription/aliases@2021-10-01' = {
   scope: tenant()
   name: parSnkSubsIdenAliasName
@@ -79,14 +75,13 @@ resource resSnkSubsConnAlias 'Microsoft.Subscription/aliases@2021-10-01' = {
     billingScope: parSnkBillingScope
   }
 }
-*/
+
 // Output Management Subscription Names
 output outSnkSubsManagementAliasName string = resSnkSubsMgtAlias.name
 
 // Output Management Subscription Id
 output outSnkSubsManagementAliasSubsId string = resSnkSubsMgtAlias.properties.subscriptionId
 
-/*
 // Output Identity Subscription Names
 output outSnkSubsIdentityAliasName string = resSnkSubsIdenAlias.name
 
@@ -98,4 +93,3 @@ output outSnkSubsConnectivityAliasName string = resSnkSubsConnAlias.name
 
 // Output Connectivity Subscription Id
 output outSnkSubsConnectivityAliasSubsId string = resSnkSubsConnAlias.properties.subscriptionId
-*/
