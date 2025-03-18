@@ -2,7 +2,9 @@ using '../../upstream-releases/v0.20.2/infra-as-code/bicep/modules/resourceGroup
 
 param parLocation = readEnvironmentVariable('LOCATION','uksouth')
 
-param parResourceGroupName = readEnvironmentVariable('LOGGING_RESOURCE_GROUP','rg-mgt-log')
+var varAzTopLevelMgPrefixName = readEnvironmentVariable('TOP_LEVEL_MG_PREFIX','azuk-snk')
+
+param parResourceGroupName = toUpper('${varAzTopLevelMgPrefixName}-rg-mgt-log')
 
 param parTags = {
   Location: ('${parLocation}')
