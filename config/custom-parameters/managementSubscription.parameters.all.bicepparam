@@ -19,7 +19,7 @@ var varAzLocationAreviation = readEnvironmentVariable('TOP_LEVEL_MG_PREFIX','')
 
 param parSnkSubsMgtAliasName = toUpper('${varAzLocationAreviation}-${varAzEnvironmentHub}-Management-01')
 param parSnkSubsIdenAliasName = toUpper('${varAzLocationAreviation}-${varAzEnvironmentHub}-Identity-01')
-//param parSnkSubsConnAliasName = toUpper('${varAzLocationAreviation}-${varAzEnvironmentHub}-Connectivity-01')
+param parSnkSubsConnAliasName = toUpper('${varAzLocationAreviation}-${varAzEnvironmentHub}-Connectivity-01')
 
 param parSnkWorkload = 'Production'
 
