@@ -81,7 +81,7 @@ jobs:
           azPSVersion: "latest"
 
       - name: "Logging and Sentinel Resource Group Deployment"
-        uses: azure/powershell@v1
+        uses: azure/powershell@v2
         with:
           inlineScript: |
             .\pipeline-scripts\Deploy-ALZLoggingAndSentinelResourceGroup.ps1 -azTemplateParameterFile .\config\custom-parameters\resourceGroupLoggingAndSentinel.parameters.all.bicepparam
