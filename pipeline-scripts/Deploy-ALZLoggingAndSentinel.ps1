@@ -3,7 +3,7 @@ param (
   [String]$azManSubName = "$($env:MAN_SUB_NAME)",
 
   [Parameter()]
-  [String]$azLoggingResourceGroup = "$($env:LOGGING_RESOURCE_GROUP)",
+  [String]$azUk = "$($env:AZUREUK)",
 
   [Parameter()]
   [String]$azTemplateFile = "upstream-releases\$($env:UPSTREAM_RELEASE_VERSION)\infra-as-code\bicep\modules\logging\logging.bicep",
@@ -14,6 +14,9 @@ param (
   [Parameter()]
   [Boolean]$WhatIfEnabled = [System.Convert]::ToBoolean($($env:IS_PULL_REQUEST))
 )
+
+# Create the Logging RG Name
+$azLoggingResourceGroup = ("{0}-RG-MGT-LOG" -f $azUk.ToUpper())
 
 # Get the Management Subscription Alias Id
 $azManSubAliasId = Get-AzSubscription -SubscriptionName $azManSubName

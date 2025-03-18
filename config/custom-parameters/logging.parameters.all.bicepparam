@@ -2,10 +2,10 @@ using '../../upstream-releases/v0.21.0/infra-as-code/bicep/modules/logging/loggi
 
 // Read in common environment variables for module.
 
-var varAzTopLevelMgPrefixName = readEnvironmentVariable('TOP_LEVEL_MG_PREFIX','azuk-snk')
+var varAzUkAbbrName = readEnvironmentVariable('AZUREUK','azuk')
 var varLogAnalyticsAbbrName = readEnvironmentVariable('LOG_ANALYTICS_ABBR_NAME','LAW')
 
-param parLogAnalyticsWorkspaceName = '${varAzTopLevelMgPrefixName}-${varLogAnalyticsAbbrName}-MGT-01'
+param parLogAnalyticsWorkspaceName = '${varAzUkAbbrName}-${varLogAnalyticsAbbrName}-MGT-01'
 param parLogAnalyticsWorkspaceLocation = readEnvironmentVariable('LOCATION','uksouth')
 
 param parAutomationAccountLocation = readEnvironmentVariable('LOCATION','uksouth')
@@ -27,11 +27,11 @@ param parDataCollectionRuleChangeTrackingName= 'snk-ama-ct-dcr'
 
 param parDataCollectionRuleMDFCSQLName = 'snk-ama-mdfcsql-dcr'
 
-param parUserAssignedManagedIdentityName = toLower('${varAzTopLevelMgPrefixName}-${varLogAnalyticsAbbrName}-mi-01')
+param parUserAssignedManagedIdentityName = toLower('${varAzUkAbbrName}-${varLogAnalyticsAbbrName}-mi-01')
 
 param parLogAnalyticsWorkspaceLinkAutomationAccount = true
 
-param parAutomationAccountName = toUpper('${varAzTopLevelMgPrefixName}-AAA-MGT-01')
+param parAutomationAccountName = toUpper('${varAzUkAbbrName}-AAA-MGT-01')
 
 param parAutomationAccountUseManagedIdentity = true
 
