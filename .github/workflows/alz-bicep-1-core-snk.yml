@@ -105,5 +105,5 @@ jobs:
         uses: azure/powershell@v2
         with:
           inlineScript: |
-            .\pipeline-scripts\Deploy-ALZMGDiagnosticSettings.ps1 -azTemplateParameterFile .\config\custom-parameters\customRoleDefinitions.parameters.all.bicepparam
+            .\pipeline-scripts\Deploy-ALZCustomRoleDefinitions.ps1 -azTemplateParameterFile .\config\custom-parameters\customRoleDefinitions.parameters.all.bicepparam
           azPSVersion: "latest"
