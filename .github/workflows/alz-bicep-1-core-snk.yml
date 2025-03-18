@@ -100,3 +100,10 @@ jobs:
           inlineScript: |
             .\pipeline-scripts\Deploy-ALZCustomPolicyDefinitions.ps1 -azTemplateParameterFile .\config\custom-parameters\customPolicyDefinitions.parameters.all.bicepparam
           azPSVersion: "latest"
+
+      - name: "Custom Role Definitions Deployment"
+        uses: azure/powershell@v2
+        with:
+          inlineScript: |
+            .\pipeline-scripts\Deploy-ALZMGDiagnosticSettings.ps1 -azTemplateParameterFile .\config\custom-parameters\customRoleDefinitions.parameters.all.bicepparam
+          azPSVersion: "latest"
