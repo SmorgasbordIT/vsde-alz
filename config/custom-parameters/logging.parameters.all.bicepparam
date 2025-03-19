@@ -5,7 +5,7 @@ using '../../upstream-releases/v0.21.0/infra-as-code/bicep/modules/logging/loggi
 var varAzUkAbbrName = readEnvironmentVariable('AZUREUK','azuk')
 var varLogAnalyticsAbbrName = readEnvironmentVariable('LOG_ANALYTICS_ABBR_NAME','LAW')
 
-param parLogAnalyticsWorkspaceName = '${varAzUkAbbrName}-${varLogAnalyticsAbbrName}-MGT-01'
+param parLogAnalyticsWorkspaceName = toUpper('${varAzUkAbbrName}-${varLogAnalyticsAbbrName}-MGT-01')
 param parLogAnalyticsWorkspaceLocation = readEnvironmentVariable('LOCATION','uksouth')
 
 param parAutomationAccountLocation = readEnvironmentVariable('LOCATION','uksouth')

@@ -9,6 +9,12 @@ param (
   [String]$azManSubName = "$($env:MAN_SUB_NAME)",
 
   [Parameter()]
+  [String]$azAzureUk = "$($env:AZUREUK)",
+
+  [Parameter()]
+  [String]$azLawAbbrName = "$($env:LOG_ANALYTICS_ABBR_NAME)",
+
+  [Parameter()]
   [String]$azTemplateFile = "upstream-releases\$($env:UPSTREAM_RELEASE_VERSION)\infra-as-code\bicep\orchestration\mgDiagSettingsAll\mgDiagSettingsAll.bicep",
 
   [Parameter()]
@@ -22,20 +28,18 @@ param (
 $azManSubAliasId = Get-AzSubscription -SubscriptionName $azManSubName
 $azManagementSubscriptionId = $azManSubAliasId.Id
 
-# Parameters necessary for deployment
-$inputObject = @{
-  DeploymentName        = 'alz-MGDiagnosticSettings-{0}' -f ( -join (Get-Date -Format 'yyyyMMddTHHMMssffffZ')[0..63])
-  Location              = $azLocation
-  ManagementGroupId     = $azTopLevelMGPrefix
-  TemplateFile          = $azTemplateFile
-  TemplateParameterFile = $azTemplateParameterFile
-  WhatIf                = $WhatIfEnabled
-  Verbose               = $true
-}
-
-# Registering 'Microsoft.Insights' resource provider on the Management subscription
+# Select the Management subscription
 Select-AzSubscription -SubscriptionId $azManagementSubscriptionId
 
+# Get the Log Analytics workspace Resource ID
+$azLawRgName = ("{0}-RG-MGT-LOG" -f $azAzureUk.ToUpper())
+$azLawName = ("{0}-{1}-MGT-01" -f $azAzureUk.ToUpper(),$azLawAbbrName.ToUpper())
+$azLaw = Get-AzOperationalInsightsWorkspace -ResourceGroupName $azLawRgName `
+                                            -Name $azLawName
+
+$azLawRedId = $azLaw.ResourceId
+
+# Registering 'Microsoft.Insights' resource provider on the Management subscription
 $azProviders = @('Microsoft.insights')
 
 Foreach ($azProvider in $azProviders ) {
@@ -57,6 +61,18 @@ Foreach ($azProvider in $azProviders ) {
       Write-Output "`n The '$azProvider' has not been registered successfully"
     }
   }
+}
+
+# Parameters necessary for deployment
+$inputObject = @{
+  DeploymentName          = 'alz-MGDiagnosticSettings-{0}' -f ( -join (Get-Date -Format 'yyyyMMddTHHMMssffffZ')[0..63])
+  Location                = $azLocation
+  ManagementGroupId       = $azTopLevelMGPrefix
+  TemplateFile            = $azTemplateFile
+  TemplateParameterFile   = $azTemplateParameterFile
+  parLogAnalyticsWorkspaceResourceId = $azLawRedId
+  WhatIf                  = $WhatIfEnabled
+  Verbose                 = $true
 }
 
 New-AzManagementGroupDeployment @inputObject
