@@ -9,7 +9,7 @@ param (
     [String]$azTopLevelMGPrefix = "$($env:TOP_LEVEL_MG_PREFIX)",
 
     [Parameter()]
-    [String]$azTemplateFile = "modules\bicep\$($env:MODULES_RELEASE_VERSION)\managementSubscription\managementSubscription.bicep",
+    [String]$azTemplateFile = "modules\bicep\$($env:MODULES_RELEASE_VERSION)\modules\managementSubscription\managementSubscription.bicep",
 
     [Parameter()]
     [String]$azTemplateParameterFile = "config\custom-parameters\managementSubscription.parameters.all.bicepparam",

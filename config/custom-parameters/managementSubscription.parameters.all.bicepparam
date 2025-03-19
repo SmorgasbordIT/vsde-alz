@@ -10,7 +10,7 @@
 
 */
 
-using '../../modules/bicep/v0.00.1/managementSubscription/managementSubscription.bicep'
+using '../../modules/bicep/v0.00.2/modules/managementSubscription/managementSubscription.bicep'
 
 var varAzEnvironmentHub = readEnvironmentVariable('ENV_HUB','')
 
