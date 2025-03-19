@@ -1,4 +1,4 @@
-using '../../modules/bicep/v0.00.2/orchestration/mgDiagSettingsAll/mgDiagSettingsAll.bicep'
+using '../../bicep/v0.00.2/orchestration/mgDiagSettingsAll/mgDiagSettingsAll.bicep'
 
 param parTopLevelManagementGroupPrefix = readEnvironmentVariable('TOP_LEVEL_MG_PREFIX','azuk-snk')
 /*

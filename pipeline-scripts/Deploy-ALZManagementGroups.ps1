@@ -6,7 +6,7 @@ param (
   [String]$azLocation = "$($env:LOCATION)",
 
   [Parameter()]
-  [String]$azTemplateFile = "modules\bicep\$($env:MODULES_RELEASE_VERSION)\modules\managementGroups\",
+  [String]$azTemplateFile = "bicep\$($env:MODULES_RELEASE_VERSION)\modules\managementGroups\",
 
   [Parameter()]
   [String]$azTemplateParameterFile = "config\custom-parameters\managementGroups.parameters.all.bicepparam",

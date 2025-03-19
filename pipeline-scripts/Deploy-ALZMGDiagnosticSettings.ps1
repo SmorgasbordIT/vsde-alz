@@ -15,7 +15,7 @@ param (
   [String]$azLawAbbrName = "$($env:LOG_ANALYTICS_ABBR_NAME)",
 
   [Parameter()]
-  [String]$azTemplateFile = "modules\bicep\$($env:MODULES_RELEASE_VERSION)\orchestration\mgDiagSettingsAll\mgDiagSettingsAll.bicep",
+  [String]$azTemplateFile = "bicep\$($env:MODULES_RELEASE_VERSION)\orchestration\mgDiagSettingsAll\mgDiagSettingsAll.bicep",
 
   [Parameter()]
   [String]$azTemplateParameterFile = "config\custom-parameters\mgDiagSettingsAll.parameters.all.bicepparam",
