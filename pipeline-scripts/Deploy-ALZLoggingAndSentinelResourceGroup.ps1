@@ -3,7 +3,7 @@ param (
   [String]$azManSubName = "$($env:MAN_SUB_NAME)",
 
   [Parameter()]
-  [String]$azLocation = "$($env:LOCATION)",
+  [String]$azLocation = "$($env:UKS_LOCATION)",
 
   [Parameter()]
   [String]$azTemplateFile = "upstream-releases\$($env:UPSTREAM_RELEASE_VERSION)\infra-as-code\bicep\modules\resourceGroup\resourceGroup.bicep",

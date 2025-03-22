@@ -6,9 +6,9 @@ var varAzUkAbbrName = readEnvironmentVariable('AZUREUK','azuk')
 var varLogAnalyticsAbbrName = readEnvironmentVariable('LOG_ANALYTICS_ABBR_NAME','LAW')
 
 param parLogAnalyticsWorkspaceName = toUpper('${varAzUkAbbrName}-${varLogAnalyticsAbbrName}-MGT-01')
-param parLogAnalyticsWorkspaceLocation = readEnvironmentVariable('LOCATION','uksouth')
+param parLogAnalyticsWorkspaceLocation = readEnvironmentVariable('UKS_LOCATION','uksouth')
 
-param parAutomationAccountLocation = readEnvironmentVariable('LOCATION','uksouth')
+param parAutomationAccountLocation = readEnvironmentVariable('UKS_LOCATION','uksouth')
 
 // Need location formatted without spaces for private DNS zone names.
 //var varLocationFormatted = toLower(replace(parLogAnalyticsWorkspaceLocation,' ', ''))

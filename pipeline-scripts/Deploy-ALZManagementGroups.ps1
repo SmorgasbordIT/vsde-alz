@@ -3,7 +3,7 @@ param (
   [String]$NonRootParentManagementGroupId = "$($env:NONROOTPARENTMANAGEMENTGROUPID)",
 
   [Parameter()]
-  [String]$azLocation = "$($env:LOCATION)",
+  [String]$azLocation = "$($env:UKS_LOCATION)",
 
   [Parameter()]
   [String]$azTemplateFile = "bicep\$($env:MODULES_RELEASE_VERSION)\modules\managementGroups\",

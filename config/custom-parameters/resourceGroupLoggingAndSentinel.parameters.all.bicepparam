@@ -1,6 +1,6 @@
 using '../../upstream-releases/v0.20.2/infra-as-code/bicep/modules/resourceGroup/resourceGroup.bicep'
 
-param parLocation = readEnvironmentVariable('LOCATION','uksouth')
+param parLocation = readEnvironmentVariable('UKS_LOCATION','uksouth')
 
 var varAzUkAbbrName = readEnvironmentVariable('AZUREUK','azuk')
 

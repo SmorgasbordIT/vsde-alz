@@ -1,6 +1,6 @@
 param (
   [Parameter()]
-  [String]$azLocation = "$($env:LOCATION)",
+  [String]$azLocation = "$($env:UKS_LOCATION)",
 
   [Parameter()]
   [String]$azTopLevelMGPrefix = "$($env:TOP_LEVEL_MG_PREFIX)",

@@ -14,11 +14,11 @@ using '../../bicep/v0.00.2/modules/managementSubscription/managementSubscription
 
 var varAzEnvironmentHub = readEnvironmentVariable('ENV_HUB','')
 
-var varAzLocationAreviation = readEnvironmentVariable('TOP_LEVEL_MG_PREFIX','')
+var varAzLocationAbbr = readEnvironmentVariable('TOP_LEVEL_MG_PREFIX','')
 
-param parSnkSubsMgtAliasName = toUpper('${varAzLocationAreviation}-${varAzEnvironmentHub}-Management-01')
-param parSnkSubsIdenAliasName = toUpper('${varAzLocationAreviation}-${varAzEnvironmentHub}-Identity-01')
-param parSnkSubsConnAliasName = toUpper('${varAzLocationAreviation}-${varAzEnvironmentHub}-Connectivity-01')
+param parSnkSubsMgtAliasName = toUpper('${varAzLocationAbbr}-${varAzEnvironmentHub}-Management-01')
+param parSnkSubsIdenAliasName = toUpper('${varAzLocationAbbr}-${varAzEnvironmentHub}-Identity-01')
+param parSnkSubsConnAliasName = toUpper('${varAzLocationAbbr}-${varAzEnvironmentHub}-Connectivity-01')
 
 param parSnkWorkload = 'Production'
 
