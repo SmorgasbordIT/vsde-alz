@@ -16,26 +16,38 @@ var varAzEnvironmentHub = readEnvironmentVariable('ENV_HUB','')
 
 var varAzLocationAbbr = readEnvironmentVariable('TOP_LEVEL_MG_PREFIX','')
 
-param parSnkSubsMgtAliasName = toUpper('${varAzLocationAbbr}-${varAzEnvironmentHub}-Management-01')
-param parSnkSubsIdenAliasName = toUpper('${varAzLocationAbbr}-${varAzEnvironmentHub}-Identity-01')
-param parSnkSubsConnAliasName = toUpper('${varAzLocationAbbr}-${varAzEnvironmentHub}-Connectivity-01')
+var varAzUk = readEnvironmentVariable('AZUREUK','')
+var varSnk  = readEnvironmentVariable('SPACENK_ABBR','')
+var varPlat = readEnvironmentVariable('PALTFORM_ABBR','')
+var varMgmt = readEnvironmentVariable('MAN_GRP_NAME','')
+var varId   = readEnvironmentVariable('ID_GRP_NAME','')
+var varConn = readEnvironmentVariable('CONN_GRP_NAME','')
 
 param parSnkWorkload = 'Production'
 
 // Read environment variables for Management Group ID
-var varManagementGroupId = readEnvironmentVariable('MANAGEMENT_GROUP_ID','')
+//var varManagementGroupId = readEnvironmentVariable('MANAGEMENT_GROUP_ID','')
+var varManagementGroupId = '${varAzUk}-${varSnk}-${varPlat}-${varMgmt}'
 
-param parManagementGroupId = '/providers/Microsoft.Management/managementGroups/${varManagementGroupId}'
+param parSnkSubsMgtAliasName  = toUpper('${varAzLocationAbbr}-${varAzEnvironmentHub}-${varMgmt}-01')
+
+param parManagementGroupId = toLower('/providers/Microsoft.Management/managementGroups/${varManagementGroupId}')
 
 // Read environment variables for Identity Group ID
-var varIdentityGroupId = readEnvironmentVariable('IDENTITY_GROUP_ID','')
+//var varIdentityGroupId = readEnvironmentVariable('IDENTITY_GROUP_ID','')
+var varIdentityGroupId = '${varAzUk}-${varSnk}-${varPlat}-${varId}'
 
-param parIdentityGroupId = '/providers/Microsoft.Management/managementGroups/${varIdentityGroupId}'
+param parSnkSubsIdenAliasName = toUpper('${varAzLocationAbbr}-${varAzEnvironmentHub}-${varId}-01')
+
+param parIdentityGroupId = toLower('/providers/Microsoft.Management/managementGroups/${varIdentityGroupId}')
 
 // Read environment variables for Connectivity Group ID
-var varConnectivityGroupId = readEnvironmentVariable('CONNECTIVITY_GROUP_ID','')
+//var varConnectivityGroupId = readEnvironmentVariable('CONNECTIVITY_GROUP_ID','')
+var varConnectivityGroupId = '${varAzUk}-${varSnk}-${varPlat}-${varConn}'
 
-param parConnectivityGroupId = '/providers/Microsoft.Management/managementGroups/${varConnectivityGroupId}'
+param parSnkSubsConnAliasName = toUpper('${varAzLocationAbbr}-${varAzEnvironmentHub}-${varConn}-01')
+
+param parConnectivityGroupId = toLower('/providers/Microsoft.Management/managementGroups/${varConnectivityGroupId}')
 
 // Read environment variables for Billing Scope
 var varBillingAccountName = readEnvironmentVariable('INFRA_BILLING_ACCOUNT_NAME','')

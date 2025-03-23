@@ -13,17 +13,17 @@ param parIdentityGroupId string = ''
 param parConnectivityGroupId string = ''
 
 @sys.description('Provide a name for the alias. This name will also be the display name of the subscription.')
-@minLength(8)
+@minLength(5)
 @maxLength(51)
 param parSnkSubsMgtAliasName string = 'Management'
 
 @sys.description('Provide a name for the alias. This name will also be the display name of the subscription.')
-@minLength(8)
+@minLength(5)
 @maxLength(51)
 param parSnkSubsIdenAliasName string = 'Identity'
 
 @sys.description('Provide a name for the alias. This name will also be the display name of the subscription.')
-@minLength(8)
+@minLength(5)
 @maxLength(51)
 param parSnkSubsConnAliasName string = 'Connectivity'
 
