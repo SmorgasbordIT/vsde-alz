@@ -1,4 +1,4 @@
-using '../../upstream-releases/v0.20.2/infra-as-code/bicep/modules/resourceGroup/resourceGroup.bicep'
+using '../../upstream-releases/v0.21.0/infra-as-code/bicep/modules/resourceGroup/resourceGroup.bicep'
 
 param parLocation = readEnvironmentVariable('UKS_LOCATION','uksouth')
 

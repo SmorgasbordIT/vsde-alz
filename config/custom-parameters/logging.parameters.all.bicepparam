@@ -3,6 +3,7 @@ using '../../upstream-releases/v0.21.0/infra-as-code/bicep/modules/logging/loggi
 // Read in common environment variables for module.
 
 var varAzUkAbbrName = readEnvironmentVariable('AZUREUK','azuk')
+var varSnk = readEnvironmentVariable('SPACENK_ABBR','snk')
 var varLogAnalyticsAbbrName = readEnvironmentVariable('LOG_ANALYTICS_ABBR_NAME','LAW')
 
 param parLogAnalyticsWorkspaceName = toUpper('${varAzUkAbbrName}-${varLogAnalyticsAbbrName}-MGT-01')
@@ -21,17 +22,18 @@ param parLogAnalyticsWorkspaceSolutions = [
   'SecurityInsights'
 ]
 
-param parDataCollectionRuleVMInsightsName = 'snk-ama-vmi-dcr'
+param parDataCollectionRuleVMInsightsName = toLower('${varSnk}-ama-vmi-dcr')
 
-param parDataCollectionRuleChangeTrackingName= 'snk-ama-ct-dcr'
+param parDataCollectionRuleChangeTrackingName= toLower('${varSnk}-ama-ct-dcr')
 
-param parDataCollectionRuleMDFCSQLName = 'snk-ama-mdfcsql-dcr'
+param parDataCollectionRuleMDFCSQLName = toLower('${varSnk}-ama-mdfcsql-dcr')
 
 param parUserAssignedManagedIdentityName = toLower('${varAzUkAbbrName}-${varLogAnalyticsAbbrName}-mi-01')
 
 param parLogAnalyticsWorkspaceLinkAutomationAccount = true
 
-param parAutomationAccountName = toUpper('${varAzUkAbbrName}-AAA-MGT-01')
+// Need location formatted without spaces for private DNS zone names.
+param parAutomationAccountName = toLower('${varAzUkAbbrName}-AAA-MGT-01')
 
 param parAutomationAccountUseManagedIdentity = true
 

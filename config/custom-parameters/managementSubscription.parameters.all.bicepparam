@@ -12,6 +12,7 @@
 
 using '../../bicep/v0.00.2/modules/managementSubscription/managementSubscription.bicep'
 
+// Read environment variables for naming convention
 var varAzEnvironmentHub = readEnvironmentVariable('ENV_HUB','')
 
 var varAzLocationAbbr = readEnvironmentVariable('TOP_LEVEL_MG_PREFIX','')
@@ -25,24 +26,21 @@ var varConn = readEnvironmentVariable('CONN_GRP_NAME','')
 
 param parSnkWorkload = 'Production'
 
-// Read environment variables for Management Group ID
-//var varManagementGroupId = readEnvironmentVariable('MANAGEMENT_GROUP_ID','')
+// Variables & Parameters for Management Group ID
 var varManagementGroupId = '${varAzUk}-${varSnk}-${varPlat}-${varMgmt}'
 
 param parSnkSubsMgtAliasName  = toUpper('${varAzLocationAbbr}-${varAzEnvironmentHub}-${varMgmt}-01')
 
 param parManagementGroupId = toLower('/providers/Microsoft.Management/managementGroups/${varManagementGroupId}')
 
-// Read environment variables for Identity Group ID
-//var varIdentityGroupId = readEnvironmentVariable('IDENTITY_GROUP_ID','')
+// Variables & Parameters for Identity Group ID
 var varIdentityGroupId = '${varAzUk}-${varSnk}-${varPlat}-${varId}'
 
 param parSnkSubsIdenAliasName = toUpper('${varAzLocationAbbr}-${varAzEnvironmentHub}-${varId}-01')
 
 param parIdentityGroupId = toLower('/providers/Microsoft.Management/managementGroups/${varIdentityGroupId}')
 
-// Read environment variables for Connectivity Group ID
-//var varConnectivityGroupId = readEnvironmentVariable('CONNECTIVITY_GROUP_ID','')
+// Variables & Parameters for Connectivity Group ID
 var varConnectivityGroupId = '${varAzUk}-${varSnk}-${varPlat}-${varConn}'
 
 param parSnkSubsConnAliasName = toUpper('${varAzLocationAbbr}-${varAzEnvironmentHub}-${varConn}-01')
