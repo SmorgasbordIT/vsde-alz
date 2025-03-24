@@ -19,7 +19,7 @@ var varAzLocationAbbr = readEnvironmentVariable('TOP_LEVEL_MG_PREFIX','')
 
 var varAzUk = readEnvironmentVariable('AZUREUK','')
 var varSnk  = readEnvironmentVariable('SPACENK_ABBR','')
-var varPlat = readEnvironmentVariable('PALTFORM_ABBR','')
+var varPlat = readEnvironmentVariable('PLATFORM_ABBR','')
 var varMgmt = readEnvironmentVariable('MAN_GRP_NAME','')
 var varId   = readEnvironmentVariable('ID_GRP_NAME','')
 var varConn = readEnvironmentVariable('CONN_GRP_NAME','')
