@@ -6,7 +6,7 @@ param (
   [String]$azTopLevelMGPrefix = "$($env:TOP_LEVEL_MG_PREFIX)",
 
   [Parameter()]
-  [String]$azAzureUk = "$($env:AZUREUK)",
+  [String]$azUk = "$($env:AZUREUK)",
 
   [Parameter()]
   [String]$azSnk = "$($env:SPACENK_ABBR)",
