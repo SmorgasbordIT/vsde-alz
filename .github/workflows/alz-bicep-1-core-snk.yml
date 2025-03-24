@@ -35,7 +35,6 @@ env:
   ID_GRP_NAME: ${{ vars.ID_GRP_NAME }}
   CONN_GRP_NAME: ${{ vars.CONN_GRP_NAME }}
   LOG_ANALYTICS_ABBR_NAME: ${{ vars.LOG_ANALYTICS_ABBR_NAME }}
-  CONN_SUB_NAME: ${{ vars.CONN_SUB_NAME }}
   IS_PULL_REQUEST: "${{ github.event_name == 'pull_request' }}"
 
 jobs:
