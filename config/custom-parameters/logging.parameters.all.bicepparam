@@ -1,4 +1,4 @@
-using '../../upstream-releases/v0.21.0/infra-as-code/bicep/modules/logging/logging.bicep'
+using '../../upstream-releases/v0.22.0/infra-as-code/bicep/modules/logging/logging.bicep'
 
 // Read in common environment variables for module.
 
@@ -29,6 +29,8 @@ param parDataCollectionRuleChangeTrackingName= toLower('${varSnk}-ama-ct-dcr')
 param parDataCollectionRuleMDFCSQLName = toLower('${varSnk}-ama-mdfcsql-dcr')
 
 param parUserAssignedManagedIdentityName = toLower('${varAzUkAbbrName}-${varLogAnalyticsAbbrName}-mi-01')
+
+param parAutomationAccountEnabled = true
 
 param parLogAnalyticsWorkspaceLinkAutomationAccount = true
 
