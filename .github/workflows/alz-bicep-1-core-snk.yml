@@ -6,11 +6,23 @@ on:
       - "main"
     paths:
       - "config/custom-parameters/managementGroups.parameters.all.bicepparam"
+      - "config/custom-parameters/managementSubscription.parameters.all.bicepparam"
+      - "config/custom-parameters/resourceGroupLoggingAndSentinel.parameters.all.bicepparam"
+      - "config/custom-parameters/logging.parameters.all.bicepparam"
+      - "config/custom-parameters/customPolicyDefinitions.parameters.all.bicepparam"
+      - "config/custom-parameters/customRoleDefinitions.parameters.all.bicepparam"
+      - "config/custom-parameters/mgDiagSettingsAll.parameters.all.bicepparam"
   pull_request:
     branches:
       - "main"
     paths:
       - "config/custom-parameters/managementGroups.parameters.all.bicepparam"
+      - "config/custom-parameters/managementSubscription.parameters.all.bicepparam"
+      - "config/custom-parameters/resourceGroupLoggingAndSentinel.parameters.all.bicepparam"
+      - "config/custom-parameters/logging.parameters.all.bicepparam"
+      - "config/custom-parameters/customPolicyDefinitions.parameters.all.bicepparam"
+      - "config/custom-parameters/customRoleDefinitions.parameters.all.bicepparam"
+      - "config/custom-parameters/mgDiagSettingsAll.parameters.all.bicepparam"
   workflow_dispatch:
 
 permissions:
@@ -70,48 +82,48 @@ jobs:
         uses: azure/powershell@v2
         with:
           inlineScript: |
-            .\pipeline-scripts\Deploy-ALZManagementGroups.ps1 -azTemplateParameterFile .\config\custom-parameters\managementGroups.parameters.all.bicepparam
+            .\pipeline-scripts\Deploy-ALZManagementGroups.ps1
           azPSVersion: "latest"
 
       - name: "Deploy Management Subscription for Platform"
         uses: azure/powershell@v2
         with:
           inlineScript: |
-            .\pipeline-scripts\Deploy-ALZManagementSubscription.ps1 -azTemplateParameterFile .\config\custom-parameters\managementSubscription.parameters.all.bicepparam
+            .\pipeline-scripts\Deploy-ALZManagementSubscription.ps1
           azPSVersion: "latest"
 
       - name: "Logging and Sentinel Resource Group Deployment"
         uses: azure/powershell@v2
         with:
           inlineScript: |
-            .\pipeline-scripts\Deploy-ALZLoggingAndSentinelResourceGroup.ps1 -azTemplateParameterFile .\config\custom-parameters\resourceGroupLoggingAndSentinel.parameters.all.bicepparam
+            .\pipeline-scripts\Deploy-ALZLoggingAndSentinelResourceGroup.ps1
           azPSVersion: "latest"
 
       - name: "Logging and Sentinel Deployment"
         uses: azure/powershell@v2
         with:
           inlineScript: |
-            .\pipeline-scripts\Deploy-ALZLoggingAndSentinel.ps1 -azTemplateParameterFile .\config\custom-parameters\logging.parameters.all.bicepparam
+            .\pipeline-scripts\Deploy-ALZLoggingAndSentinel.ps1
           azPSVersion: "latest"
 
       - name: "Custom Policy Definitions Deployment"
         uses: azure/powershell@v2
         with:
           inlineScript: |
-            .\pipeline-scripts\Deploy-ALZCustomPolicyDefinitions.ps1 -azTemplateParameterFile .\config\custom-parameters\customPolicyDefinitions.parameters.all.bicepparam
+            .\pipeline-scripts\Deploy-ALZCustomPolicyDefinitions.ps1
           azPSVersion: "latest"
 
       - name: "Custom Role Definitions Deployment"
         uses: azure/powershell@v2
         with:
           inlineScript: |
-            .\pipeline-scripts\Deploy-ALZCustomRoleDefinitions.ps1 -azTemplateParameterFile .\config\custom-parameters\customRoleDefinitions.parameters.all.bicepparam
+            .\pipeline-scripts\Deploy-ALZCustomRoleDefinitions.ps1
           azPSVersion: "latest"
 
       - name: "Custom Management Group Diagnostic Settings"
         uses: azure/powershell@v2
         with:
           inlineScript: |
-            .\pipeline-scripts\Deploy-ALZMGDiagnosticSettings.ps1 -azTemplateParameterFile .\config\custom-parameters\mgDiagSettingsAll.parameters.all.bicepparam
+            .\pipeline-scripts\Deploy-ALZMGDiagnosticSettings.ps1
           azPSVersion: "latest"
           
