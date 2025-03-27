@@ -14,6 +14,9 @@ param parTopLevelManagementGroupPrefix = readEnvironmentVariable('TOP_LEVEL_MG_P
 param parLogAnalyticsWorkSpaceAndAutomationAccountLocation = readEnvironmentVariable('UKS_LOCATION','uksouth')
 var varLocation = readEnvironmentVariable('UKS_LOCATION','uksouth')
 
+// Convert location to lowercase and remove spaces for resource naming.
+var varLocationFormatted = toLower(replace(varLocation, ' ', ''))
+
 var varAzUkAbbrName = readEnvironmentVariable('AZUREUK','azuk')
 var varLogAnalyticsAbbrName = readEnvironmentVariable('LOG_ANALYTICS_ABBR_NAME','LAW')
 var varLogAnalyticsWorkspaceName = toUpper('${varAzUkAbbrName}-${varLogAnalyticsAbbrName}-MGT-01')
@@ -54,7 +57,7 @@ param parDdosProtectionPlanId = ''
 
 param parPrivateDnsResourceGroupId = '/subscriptions/${parConnectivitySubscriptionId}/resourceGroups/${varConnectivityResourceGroupName}'
 
-param parPrivateDnsZonesLocation = varLocation
+param parPrivateDnsZonesLocation = varLocationFormatted
                                      
 param parPrivateDnsZonesNamesToAuditInCorp = []
 
