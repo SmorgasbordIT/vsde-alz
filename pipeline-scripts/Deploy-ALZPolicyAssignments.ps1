@@ -51,8 +51,8 @@ $inputObject = @{
   ManagementGroupId     = $azTopLevelMGPrefix
   TemplateFile          = $azTemplateFile
   TemplateParameterFile = $azTemplateParameterFile
-  varConnectivitySubscriptionId = $azConnectivitySubscriptionId
-  varLoggingSubscriptionId = $azManagementSubscriptionId
+  parConnectivitySubscriptionId = $azConnectivitySubscriptionId
+  parLoggingSubscriptionId = $azManagementSubscriptionId
   WhatIf                = $WhatIfEnabled
   Verbose               = $true
 }
