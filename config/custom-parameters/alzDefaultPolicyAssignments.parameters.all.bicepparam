@@ -19,13 +19,13 @@ var varLogAnalyticsAbbrName = readEnvironmentVariable('LOG_ANALYTICS_ABBR_NAME',
 var varLogAnalyticsWorkspaceName = toUpper('${varAzUkAbbrName}-${varLogAnalyticsAbbrName}-MGT-01')
 
 // Read environment variables for subscription IDs and resource group names
-var varConnectivitySubscriptionId = ''
+param parConnectivitySubscriptionId = ''
 var varConnectivityResourceGroupName = toUpper('${varAzUkAbbrName}-rg-con-net-01')
-var varLoggingSubscriptionId = ''
+param parLoggingSubscriptionId = ''
 var varLoggingResourceGroupName = toUpper('${varAzUkAbbrName}-rg-mgt-log-01')
 
 // Use the logging subscription ID if it is set, otherwise use the connectivity subscription ID ("Platform only" scenario)
-var varLoggingSubId = !empty(varLoggingSubscriptionId) ? varLoggingSubscriptionId : varConnectivitySubscriptionId
+var varLoggingSubId = !empty(parLoggingSubscriptionId) ? parLoggingSubscriptionId : parConnectivitySubscriptionId
 
 // This is typcally blank in default Alz-Bicep implementation.
 param parTopLevelManagementGroupSuffix = ''

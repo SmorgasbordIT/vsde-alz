@@ -46,7 +46,7 @@ $azLawName = ("{0}-{1}-MGT-01" -f $azUk.ToUpper(),$azLawAbbrName.ToUpper())
 $azLaw = Get-AzOperationalInsightsWorkspace -ResourceGroupName $azLawRgName `
                                             -Name $azLawName
 
-$azLawRedId = $azLaw.ResourceId
+$azLawResId = $azLaw.ResourceId
 
 # Registering 'Microsoft.Insights' resource provider on the Management subscription
 $azProviders = @('Microsoft.insights')
@@ -79,7 +79,7 @@ $inputObject = @{
   ManagementGroupId       = $azTopLevelMGPrefix
   TemplateFile            = $azTemplateFile
   TemplateParameterFile   = $azTemplateParameterFile
-  parLogAnalyticsWorkspaceResourceId = $azLawRedId
+  parLogAnalyticsWorkspaceResourceId = $azLawResId
   WhatIf                  = $WhatIfEnabled
   Verbose                 = $true
 }

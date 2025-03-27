@@ -19,6 +19,12 @@ param parLandingZoneChildrenMgAlzDefaultsEnable bool = true
 @description('Assign policies to Confidential Corp and Online groups under Landing Zones.')
 param parLandingZoneMgConfidentialEnable bool = false
 
+@description('Management Group Sub ID.')
+param parLoggingSubscriptionId string
+
+@description('Connectivity Group Sub ID.')
+param parConnectivitySubscriptionId string
+
 @description('Location of Log Analytics Workspace & Automation Account.')
 param parLogAnalyticsWorkSpaceAndAutomationAccountLocation string = 'eastus'
 
