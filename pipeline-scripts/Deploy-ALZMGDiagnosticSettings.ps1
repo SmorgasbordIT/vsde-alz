@@ -41,7 +41,7 @@ $azManagementSubscriptionId = $azManSubAliasId.Id
 Select-AzSubscription -SubscriptionId $azManagementSubscriptionId
 
 # Get the Log Analytics workspace Resource ID
-$azLawRgName = ("{0}-RG-MGT-LOG" -f $azUk.ToUpper())
+$azLawRgName = ("{0}-RG-MGT-LOG-01" -f $azUk.ToUpper())
 $azLawName = ("{0}-{1}-MGT-01" -f $azUk.ToUpper(),$azLawAbbrName.ToUpper())
 $azLaw = Get-AzOperationalInsightsWorkspace -ResourceGroupName $azLawRgName `
                                             -Name $azLawName
