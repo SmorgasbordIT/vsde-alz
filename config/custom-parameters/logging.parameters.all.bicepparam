@@ -22,20 +22,20 @@ param parLogAnalyticsWorkspaceSolutions = [
   'SecurityInsights'
 ]
 
-param parDataCollectionRuleVMInsightsName = toLower('${varSnk}-ama-vmi-dcr')
+param parDataCollectionRuleVMInsightsName = toLower('${varAzUkAbbrName}-dcr-ama-vmi-01')
 
-param parDataCollectionRuleChangeTrackingName= toLower('${varSnk}-ama-ct-dcr')
+param parDataCollectionRuleChangeTrackingName= toLower('${varAzUkAbbrName}-dcr-ama-ct-01')
 
-param parDataCollectionRuleMDFCSQLName = toLower('${varSnk}-ama-mdfcsql-dcr')
+param parDataCollectionRuleMDFCSQLName = toLower('${varAzUkAbbrName}-dcr-ama-mdfcsql-01')
 
-param parUserAssignedManagedIdentityName = toLower('${varAzUkAbbrName}-${varLogAnalyticsAbbrName}-mi-01')
+param parUserAssignedManagedIdentityName = toLower('${varAzUkAbbrName}-umi-mgt-${varLogAnalyticsAbbrName}-01')
 
 param parAutomationAccountEnabled = true
 
 param parLogAnalyticsWorkspaceLinkAutomationAccount = true
 
 // Need location formatted without spaces for private DNS zone names.
-param parAutomationAccountName = toLower('${varAzUkAbbrName}-AAA-MGT-01')
+param parAutomationAccountName = toLower('${varAzUkAbbrName}-AAA-MGT-${varLogAnalyticsAbbrName}-01')
 
 param parAutomationAccountUseManagedIdentity = true
 

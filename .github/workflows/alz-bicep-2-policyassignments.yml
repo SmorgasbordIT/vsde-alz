@@ -5,12 +5,12 @@ on:
     branches:
       - "main"
     paths:
-      - "config/custom-parameters/alzDefaultPolicyAssignments.parameters.all.json"
+      - "config/custom-parameters/alzDefaultPolicyAssignments.parameters.all.bicepparam"
   pull_request:
     branches:
       - "main"
     paths:
-      - "config/custom-parameters/alzDefaultPolicyAssignments.parameters.all.json"
+      - "config/custom-parameters/alzDefaultPolicyAssignments.parameters.all.bicepparam"
   workflow_dispatch:
 
 permissions:
@@ -20,11 +20,20 @@ permissions:
 
 env:
   ENV_FILE: ".env"
+  UKS_LOCATION: ${{ vars.UKS_LOCATION }}
+  ENV_HUB: ${{ vars.ENV_HUB }}
+  TOP_LEVEL_MG_PREFIX: ${{ vars.TOP_LEVEL_MG_PREFIX }}
+  AZUREUK: ${{ vars.AZUREUK }}
+  SPACENK_ABBR: ${{ vars.SPACENK_ABBR }}
+  CONN_GRP_NAME: ${{ vars.CONN_GRP_NAME }}
+  MAN_GRP_NAME: ${{ vars.MAN_GRP_NAME }}
+  LOG_ANALYTICS_ABBR_NAME: ${{ vars.LOG_ANALYTICS_ABBR_NAME }}
   IS_PULL_REQUEST: "${{ github.event_name == 'pull_request' }}"
 
 jobs:
   ALZ_Bicep_2_PolicyAssignments:
     runs-on: ubuntu-latest
+    environment: SBN-ALZ-Prod
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
@@ -32,7 +41,7 @@ jobs:
           fetch-depth: 0
 
       - name: "Remove Quotation Marks from Environment File"
-        uses: azure/powershell@v1
+        uses: azure/powershell@v2
         with:
           inlineScript: |
             Write-Host $ENV_FILE
@@ -47,19 +56,19 @@ jobs:
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ env.MANAGEMENT_SUBSCRIPTION_ID }}
+          subscription-id: ${{ secrets.VSDE_SUBSCRIPTION_ID }}
           enable-AzPSSession: true
 
       # Example: Modify Deploy-ALZRoleAssignments.ps1 with applicable pararameter file and uncomment lines below to enable Role Assignments Deployment.
       # - name: "Role Assignments Deployment"
-      #   uses: azure/powershell@v1
+      #   uses: azure/powershell@v2
       #   with:
       #     inlineScript: |
       #       .\pipeline-scripts\Deploy-ALZRoleAssignments.ps1
       #     azPSVersion: "latest"
 
       - name: "Built-in and Custom Policy Assignments Deployment"
-        uses: azure/powershell@v1
+        uses: azure/powershell@v2
         with:
           inlineScript: |
             .\pipeline-scripts\Deploy-ALZPolicyAssignments.ps1

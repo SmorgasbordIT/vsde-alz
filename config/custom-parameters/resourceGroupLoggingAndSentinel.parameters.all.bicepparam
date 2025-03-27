@@ -4,7 +4,7 @@ param parLocation = readEnvironmentVariable('UKS_LOCATION','uksouth')
 
 var varAzUkAbbrName = readEnvironmentVariable('AZUREUK','azuk')
 
-param parResourceGroupName = toUpper('${varAzUkAbbrName}-rg-mgt-log')
+param parResourceGroupName = toUpper('${varAzUkAbbrName}-rg-mgt-log-01')
 
 param parTags = {
   Location: ('${parLocation}')
