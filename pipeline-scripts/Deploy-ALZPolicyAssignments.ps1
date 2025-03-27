@@ -30,19 +30,19 @@ param (
   [Boolean]$WhatIfEnabled = [System.Convert]::ToBoolean($($env:IS_PULL_REQUEST))
 )
 
-# Create the Azure Connectivity Subscription name
-$azConnSubName = ('{0}-{1}-{2}-{3}-01' -f $azUk.ToUpper(),$azSnk.ToUpper(),$azEnvHub.ToUpper(),$azConn.ToUpper())
-
-# Get the Connectivity Subscription Alias Id
-$azConnSubAliasId = Get-AzSubscription -SubscriptionName $azConnSubName
-$azConnectivitySubscriptionId = $azConnSubAliasId.Id
-
 # Create the Azure Management Subscription name
 $azManSubName = ('{0}-{1}-{2}-{3}-01' -f $azUk.ToUpper(),$azSnk.ToUpper(),$azEnvHub.ToUpper(),$azMgmt.ToUpper())
 
 # Get the Management Subscription Alias Id
 $azManSubAliasId = Get-AzSubscription -SubscriptionName $azManSubName
 $azManagementSubscriptionId = $azManSubAliasId.Id
+
+# Create the Azure Connectivity Subscription name
+$azConnSubName = ('{0}-{1}-{2}-{3}-01' -f $azUk.ToUpper(),$azSnk.ToUpper(),$azEnvHub.ToUpper(),$azConn.ToUpper())
+
+# Get the Connectivity Subscription Alias Id
+$azConnSubAliasId = Get-AzSubscription -SubscriptionName $azConnSubName
+$azConnectivitySubscriptionId = $azConnSubAliasId.Id
 
 # Parameters necessary for deployment
 $inputObject = @{
@@ -56,5 +56,7 @@ $inputObject = @{
   WhatIf                = $WhatIfEnabled
   Verbose               = $true
 }
+
+Select-AzSubscription -SubscriptionId $azConnectivitySubscriptionId
 
 New-AzManagementGroupDeployment @inputObject
