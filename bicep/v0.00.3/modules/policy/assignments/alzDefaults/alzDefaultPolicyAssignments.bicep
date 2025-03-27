@@ -118,49 +118,49 @@ var varModDepNames = {
   modPolAssiIntRootAuditTrustedLaunch: take('${varDeploymentNameWrappers.basePrefix}-auditTrustLaunch-intRoot-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
   modPolAssiIntRootDenyClassicRes: take('${varDeploymentNameWrappers.basePrefix}-denyClassicRes-intRoot-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
   modPolAssiIntRootDenyUnmanagedDisks: take('${varDeploymentNameWrappers.basePrefix}-denyUnmgdDisks-intRoot-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
-  modPolAssiPlatformDeployVmArcTrack: take('${varDeploymentNameWrappers.basePrefix}-deployVmArcTrack-platform-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
-  modPolAssiPlatformDeployVmChangeTrack: take('${varDeploymentNameWrappers.basePrefix}-deployVmChgTrack-platform-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
-  modPolAssiPlatformDeployVmssChangeTrack: take('${varDeploymentNameWrappers.basePrefix}-deployVmssChgTrack-platform-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
-  modPolAssiPlatformDeployVmArcMonitor: take('${varDeploymentNameWrappers.basePrefix}-deployVmArcMon-platform-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
-  modPolAssiPlatformDeployVmMonitor: take('${varDeploymentNameWrappers.basePrefix}-deployVmMon-platform-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
-  modPolAssiPlatformDeployVmssMonitor: take('${varDeploymentNameWrappers.basePrefix}-deployVmssMon-platform-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
-  modPolAssiPlatformDeployMdfcDefSqlAma: take('${varDeploymentNameWrappers.basePrefix}-deployMdfcDefSqlAma-platform-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
-  modPolAssiPlatformDenyDeleteUAMIAMA: take('${varDeploymentNameWrappers.basePrefix}-denyDelUamiAma-platform-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
-  modPolAssiPlatformEnforceSubnetPrivate: take('${varDeploymentNameWrappers.basePrefix}-enforceSubnetPriv-platform-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
-  modPolAssiPlatformEnforceGrKeyVault: take('${varDeploymentNameWrappers.basePrefix}-enforceGrKeyVault-platform-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
-  modPolAssiPlatformEnforceAsr: take('${varDeploymentNameWrappers.basePrefix}-enforceAsr-platform-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
-  modPolAssiPlatformEnforceAumCheckUpdates: take('${varDeploymentNameWrappers.basePrefix}-enforceAumChkUpd-platform-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
+  modPolAssiPlatformDeployVmArcTrack: take('${varDeploymentNameWrappers.basePrefix}-deployVmArcTrack-plat-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
+  modPolAssiPlatformDeployVmChangeTrack: take('${varDeploymentNameWrappers.basePrefix}-deployVmChgTrack-plat-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
+  modPolAssiPlatformDeployVmssChangeTrack: take('${varDeploymentNameWrappers.basePrefix}-deployVmssChgTrack-plat-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
+  modPolAssiPlatformDeployVmArcMonitor: take('${varDeploymentNameWrappers.basePrefix}-deployVmArcMon-plat-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
+  modPolAssiPlatformDeployVmMonitor: take('${varDeploymentNameWrappers.basePrefix}-deployVmMon-plat-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
+  modPolAssiPlatformDeployVmssMonitor: take('${varDeploymentNameWrappers.basePrefix}-deployVmssMon-plat-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
+  modPolAssiPlatformDeployMdfcDefSqlAma: take('${varDeploymentNameWrappers.basePrefix}-deployMdfcDefSqlAma-plat-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
+  modPolAssiPlatformDenyDeleteUAMIAMA: take('${varDeploymentNameWrappers.basePrefix}-denyDelUamiAma-plat-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
+  modPolAssiPlatformEnforceSubnetPrivate: take('${varDeploymentNameWrappers.basePrefix}-enforceSubnetPriv-plat-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
+  modPolAssiPlatformEnforceGrKeyVault: take('${varDeploymentNameWrappers.basePrefix}-enforceGrKeyVault-plat-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
+  modPolAssiPlatformEnforceAsr: take('${varDeploymentNameWrappers.basePrefix}-enforceAsr-plat-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
+  modPolAssiPlatformEnforceAumCheckUpdates: take('${varDeploymentNameWrappers.basePrefix}-enforceAumChkUpd-plat-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
   modPolAssiConnEnableDdosVnet: take('${varDeploymentNameWrappers.basePrefix}-enableDdosVnet-conn-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
   modPolAssiIdentDenyPublicIp: take('${varDeploymentNameWrappers.basePrefix}-denyPublicIp-ident-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
   modPolAssiIdentDenyMgmtPortsFromInternet: take('${varDeploymentNameWrappers.basePrefix}-denyMgmtPortsInet-ident-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
   modPolAssiIdentDenySubnetWithoutNsg: take('${varDeploymentNameWrappers.basePrefix}-denySubnetNoNsg-ident-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
   modPolAssiIdentDeployVmBackup: take('${varDeploymentNameWrappers.basePrefix}-deployVmBackup-ident-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
   modPolAssiMgmtDeployLogAnalytics: take('${varDeploymentNameWrappers.basePrefix}-deployLogAnalytics-mgmt-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
-  modPolAssiLzsDenyIpForwarding: take('${varDeploymentNameWrappers.basePrefix}-denyIpForward-lz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
-  modPolAssiLzsDenyMgmtPortsFromInternet: take('${varDeploymentNameWrappers.basePrefix}-denyMgmtPortsInet-lz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
-  modPolAssiLzsDenySubnetWithoutNsg: take('${varDeploymentNameWrappers.basePrefix}-denySubnetNoNsg-lz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
-  modPolAssiLzsDeployVmBackup: take('${varDeploymentNameWrappers.basePrefix}-deployVmBackup-lz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
-  modPolAssiLzsEnableDdosVnet: take('${varDeploymentNameWrappers.basePrefix}-enableDdosVnet-lz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
-  modPolAssiLzsDenyStorageHttp: take('${varDeploymentNameWrappers.basePrefix}-denyStorageHttp-lz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
-  modPolAssiLzsDenyPrivEscalationAks: take('${varDeploymentNameWrappers.basePrefix}-denyPrivEscAks-lz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
-  modPolAssiLzsDenyPrivContainersAks: take('${varDeploymentNameWrappers.basePrefix}-denyPrivConAks-lz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
-  modPolAssiLzsEnforceAksHttps: take('${varDeploymentNameWrappers.basePrefix}-enforceAksHttps-lz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
-  modPolAssiLzsEnforceTlsSsl: take('${varDeploymentNameWrappers.basePrefix}-enforceTlsSsl-lz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
-  modPolAssiLzsDeployAzSqlDbAuditing: take('${varDeploymentNameWrappers.basePrefix}-deployAzSqlDbAudit-lz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
-  modPolAssiLzsDeploySqlThreat: take('${varDeploymentNameWrappers.basePrefix}-deploySqlThreat-lz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
-  modPolAssiLzsDeploySqlTde: take('${varDeploymentNameWrappers.basePrefix}-deploySqlTde-lz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
-  modPolAssiLzsDeployVmArcTrack: take('${varDeploymentNameWrappers.basePrefix}-deployVmArcTrack-lz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
-  modPolAssiLzsDeployVmChangeTrack: take('${varDeploymentNameWrappers.basePrefix}-deployVmChgTrack-lz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
-  modPolAssiLzsDeployVmssChangeTrack: take('${varDeploymentNameWrappers.basePrefix}-deployVmssChgTrack-lz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
-  modPolAssiLzsDeployVmArcMonitor: take('${varDeploymentNameWrappers.basePrefix}-deployVmArcMon-lz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
-  modPolAssiLzsDeployVmMonitor: take('${varDeploymentNameWrappers.basePrefix}-deployVmMon-lz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
-  modPolAssiLzsDeployVmssMonitor: take('${varDeploymentNameWrappers.basePrefix}-deployVmssMon-lz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
-  modPolAssiLzsDeployMdfcDefSqlAma: take('${varDeploymentNameWrappers.basePrefix}-deployMdfcDefSqlAma-lz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
-  modPolAssiLzsEnforceSubnetPrivate: take('${varDeploymentNameWrappers.basePrefix}-enforceSubnetPriv-lz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
-  modPolAssiLzsEnforceGrKeyVault: take('${varDeploymentNameWrappers.basePrefix}-enforceGrKeyVault-lz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
-  modPolAssiLzsEnforceAsr: take('${varDeploymentNameWrappers.basePrefix}-enforceAsr-lz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
-  modPolAssiLzsAumCheckUpdates: take('${varDeploymentNameWrappers.basePrefix}-aumChkUpd-lz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
-  modPolAssiLzsAuditAppGwWaf: take('${varDeploymentNameWrappers.basePrefix}-auditAppGwWaf-lz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
+  modPolAssiLzsDenyIpForwarding: take('${varDeploymentNameWrappers.basePrefix}-denyIpForward-alz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
+  modPolAssiLzsDenyMgmtPortsFromInternet: take('${varDeploymentNameWrappers.basePrefix}-denyMgmtPortsInet-alz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
+  modPolAssiLzsDenySubnetWithoutNsg: take('${varDeploymentNameWrappers.basePrefix}-denySubnetNoNsg-alz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
+  modPolAssiLzsDeployVmBackup: take('${varDeploymentNameWrappers.basePrefix}-deployVmBackup-alz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
+  modPolAssiLzsEnableDdosVnet: take('${varDeploymentNameWrappers.basePrefix}-enableDdosVnet-alz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
+  modPolAssiLzsDenyStorageHttp: take('${varDeploymentNameWrappers.basePrefix}-denyStorageHttp-alz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
+  modPolAssiLzsDenyPrivEscalationAks: take('${varDeploymentNameWrappers.basePrefix}-denyPrivEscAks-alz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
+  modPolAssiLzsDenyPrivContainersAks: take('${varDeploymentNameWrappers.basePrefix}-denyPrivConAks-alz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
+  modPolAssiLzsEnforceAksHttps: take('${varDeploymentNameWrappers.basePrefix}-enforceAksHttps-alz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
+  modPolAssiLzsEnforceTlsSsl: take('${varDeploymentNameWrappers.basePrefix}-enforceTlsSsl-alz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
+  modPolAssiLzsDeployAzSqlDbAuditing: take('${varDeploymentNameWrappers.basePrefix}-deployAzSqlDbAudit-alz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
+  modPolAssiLzsDeploySqlThreat: take('${varDeploymentNameWrappers.basePrefix}-deploySqlThreat-alz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
+  modPolAssiLzsDeploySqlTde: take('${varDeploymentNameWrappers.basePrefix}-deploySqlTde-alz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
+  modPolAssiLzsDeployVmArcTrack: take('${varDeploymentNameWrappers.basePrefix}-deployVmArcTrack-alz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
+  modPolAssiLzsDeployVmChangeTrack: take('${varDeploymentNameWrappers.basePrefix}-deployVmChgTrack-alz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
+  modPolAssiLzsDeployVmssChangeTrack: take('${varDeploymentNameWrappers.basePrefix}-deployVmssChgTrack-alz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
+  modPolAssiLzsDeployVmArcMonitor: take('${varDeploymentNameWrappers.basePrefix}-deployVmArcMon-alz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
+  modPolAssiLzsDeployVmMonitor: take('${varDeploymentNameWrappers.basePrefix}-deployVmMon-alz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
+  modPolAssiLzsDeployVmssMonitor: take('${varDeploymentNameWrappers.basePrefix}-deployVmssMon-alz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
+  modPolAssiLzsDeployMdfcDefSqlAma: take('${varDeploymentNameWrappers.basePrefix}-deployMdfcDefSqlAma-alz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
+  modPolAssiLzsEnforceSubnetPrivate: take('${varDeploymentNameWrappers.basePrefix}-enforceSubnetPriv-alz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
+  modPolAssiLzsEnforceGrKeyVault: take('${varDeploymentNameWrappers.basePrefix}-enforceGrKeyVault-alz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
+  modPolAssiLzsEnforceAsr: take('${varDeploymentNameWrappers.basePrefix}-enforceAsr-alz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
+  modPolAssiLzsAumCheckUpdates: take('${varDeploymentNameWrappers.basePrefix}-aumChkUpd-alz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
+  modPolAssiLzsAuditAppGwWaf: take('${varDeploymentNameWrappers.basePrefix}-auditAppGwWaf-alz-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
   modPolAssiLzsCorpDenyPublicEndpoints: take('${varDeploymentNameWrappers.basePrefix}-denyPubEnd-corp-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
   modPolAssiLzsConfidentialCorpDenyPublicEndpoints: take('${varDeploymentNameWrappers.basePrefix}-denyPubEnd-confCorp-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
   modPolAssiLzsCorpDeployPrivateDnsZones: take('${varDeploymentNameWrappers.basePrefix}-deployPrivDns-corp-${varDeploymentNameWrappers.baseSuffixTenantAndManagementGroup}', 64)
@@ -450,17 +450,17 @@ var varRbacRoleDefinitionIds = {
 // Management Groups Variables - Used For Policy Assignments
 var varManagementGroupIds = {
   intRoot: '${parTopLevelManagementGroupPrefix}${parTopLevelManagementGroupSuffix}'
-  platform: '${parTopLevelManagementGroupPrefix}-platform${parTopLevelManagementGroupSuffix}'
-  platformManagement: parPlatformMgAlzDefaultsEnable ? '${parTopLevelManagementGroupPrefix}-platform-management${parTopLevelManagementGroupSuffix}' : '${parTopLevelManagementGroupPrefix}-platform${parTopLevelManagementGroupSuffix}'
-  platformConnectivity: parPlatformMgAlzDefaultsEnable ? '${parTopLevelManagementGroupPrefix}-platform-connectivity${parTopLevelManagementGroupSuffix}' : '${parTopLevelManagementGroupPrefix}-platform${parTopLevelManagementGroupSuffix}'
-  platformIdentity: parPlatformMgAlzDefaultsEnable ? '${parTopLevelManagementGroupPrefix}-platform-identity${parTopLevelManagementGroupSuffix}' : '${parTopLevelManagementGroupPrefix}-platform${parTopLevelManagementGroupSuffix}'
-  landingZones: '${parTopLevelManagementGroupPrefix}-landingzones${parTopLevelManagementGroupSuffix}'
-  landingZonesCorp: '${parTopLevelManagementGroupPrefix}-landingzones-corp${parTopLevelManagementGroupSuffix}'
-  landingZonesOnline: '${parTopLevelManagementGroupPrefix}-landingzones-online${parTopLevelManagementGroupSuffix}'
-  landingZonesConfidentialCorp: '${parTopLevelManagementGroupPrefix}-landingzones-confidential-corp${parTopLevelManagementGroupSuffix}'
-  landingZonesConfidentialOnline: '${parTopLevelManagementGroupPrefix}-landingzones-confidential-online${parTopLevelManagementGroupSuffix}'
-  decommissioned: '${parTopLevelManagementGroupPrefix}-decommissioned${parTopLevelManagementGroupSuffix}'
-  sandbox: '${parTopLevelManagementGroupPrefix}-sandbox${parTopLevelManagementGroupSuffix}'
+  platform: '${parTopLevelManagementGroupPrefix}-plat${parTopLevelManagementGroupSuffix}'
+  platformManagement: parPlatformMgAlzDefaultsEnable ? '${parTopLevelManagementGroupPrefix}-plat-management${parTopLevelManagementGroupSuffix}' : '${parTopLevelManagementGroupPrefix}-plat${parTopLevelManagementGroupSuffix}'
+  platformConnectivity: parPlatformMgAlzDefaultsEnable ? '${parTopLevelManagementGroupPrefix}-plat-connectivity${parTopLevelManagementGroupSuffix}' : '${parTopLevelManagementGroupPrefix}-plat${parTopLevelManagementGroupSuffix}'
+  platformIdentity: parPlatformMgAlzDefaultsEnable ? '${parTopLevelManagementGroupPrefix}-plat-identity${parTopLevelManagementGroupSuffix}' : '${parTopLevelManagementGroupPrefix}-plat${parTopLevelManagementGroupSuffix}'
+  landingZones: '${parTopLevelManagementGroupPrefix}-alz${parTopLevelManagementGroupSuffix}'
+  landingZonesCorp: '${parTopLevelManagementGroupPrefix}-alz-corp${parTopLevelManagementGroupSuffix}'
+  landingZonesOnline: '${parTopLevelManagementGroupPrefix}-alz-online${parTopLevelManagementGroupSuffix}'
+  landingZonesConfidentialCorp: '${parTopLevelManagementGroupPrefix}-alz-confidential-corp${parTopLevelManagementGroupSuffix}'
+  landingZonesConfidentialOnline: '${parTopLevelManagementGroupPrefix}-alz-confidential-online${parTopLevelManagementGroupSuffix}'
+  decommissioned: '${parTopLevelManagementGroupPrefix}-decomm${parTopLevelManagementGroupSuffix}'
+  sandbox: '${parTopLevelManagementGroupPrefix}-snd${parTopLevelManagementGroupSuffix}'
 }
 
 var varCorpManagementGroupIds = [

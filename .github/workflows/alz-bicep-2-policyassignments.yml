@@ -23,6 +23,8 @@ env:
   UKS_LOCATION: ${{ vars.UKS_LOCATION }}
   ENV_HUB: ${{ vars.ENV_HUB }}
   TOP_LEVEL_MG_PREFIX: ${{ vars.TOP_LEVEL_MG_PREFIX }}
+  UPSTREAM_RELEASE_VERSION: ${{ vars.UPSTREAM_RELEASE_VERSION }}
+  MODULES_RELEASE_VERSION: ${{ vars.MODULES_RELEASE_VERSION }}
   AZUREUK: ${{ vars.AZUREUK }}
   SPACENK_ABBR: ${{ vars.SPACENK_ABBR }}
   CONN_GRP_NAME: ${{ vars.CONN_GRP_NAME }}
@@ -71,5 +73,5 @@ jobs:
         uses: azure/powershell@v2
         with:
           inlineScript: |
-            .\pipeline-scripts\Deploy-ALZPolicyAssignments.ps1
+            .\pipeline-scripts/Deploy-ALZPolicyAssignments.ps1
           azPSVersion: "latest"
