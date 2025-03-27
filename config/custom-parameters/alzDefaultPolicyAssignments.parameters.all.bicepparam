@@ -38,13 +38,13 @@ param parLogAnalyticsWorkspaceLogRetentionInDays = '365'
 
 param parLogAnalyticsWorkspaceResourceCategory = 'allLogs'
 
-param parDataCollectionRuleVMInsightsResourceId = '/subscriptions/${varLoggingSubscriptionId}/resourceGroups/${varLoggingResourceGroupName}/providers/Microsoft.Insights/dataCollectionRules/${varAzUkAbbrName}-dcr-ama-vmi-01'
+param parDataCollectionRuleVMInsightsResourceId = '/subscriptions/${parLoggingSubscriptionId}/resourceGroups/${varLoggingResourceGroupName}/providers/Microsoft.Insights/dataCollectionRules/${varAzUkAbbrName}-dcr-ama-vmi-01'
 
-param parDataCollectionRuleChangeTrackingResourceId = '/subscriptions/${varLoggingSubscriptionId}/resourceGroups/${varLoggingResourceGroupName}/providers/Microsoft.Insights/dataCollectionRules/${varAzUkAbbrName}-dcr-ama-ct-01'
+param parDataCollectionRuleChangeTrackingResourceId = '/subscriptions/${parLoggingSubscriptionId}/resourceGroups/${varLoggingResourceGroupName}/providers/Microsoft.Insights/dataCollectionRules/${varAzUkAbbrName}-dcr-ama-ct-01'
 
-param parDataCollectionRuleMDFCSQLResourceId = '/subscriptions/${varLoggingSubscriptionId}/resourceGroups/${varLoggingResourceGroupName}/providers/Microsoft.Insights/dataCollectionRules/${varAzUkAbbrName}-dcr-ama-mdfcsql-01'
+param parDataCollectionRuleMDFCSQLResourceId = '/subscriptions/${parLoggingSubscriptionId}/resourceGroups/${varLoggingResourceGroupName}/providers/Microsoft.Insights/dataCollectionRules/${varAzUkAbbrName}-dcr-ama-mdfcsql-01'
 
-param parUserAssignedManagedIdentityResourceId = '/subscriptions/${varLoggingSubscriptionId}/resourcegroups/${varLoggingResourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/${varAzUkAbbrName}-umi-mgt-${varLogAnalyticsAbbrName}-01'
+param parUserAssignedManagedIdentityResourceId = '/subscriptions/${parLoggingSubscriptionId}/resourcegroups/${varLoggingResourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/${varAzUkAbbrName}-umi-mgt-${varLogAnalyticsAbbrName}-01'
 
 param parAutomationAccountName = toLower('${varAzUkAbbrName}-AAA-MGT-${varLogAnalyticsAbbrName}-01')
 
@@ -52,7 +52,7 @@ param parMsDefenderForCloudEmailSecurityContact = 'infrastructure@spacenk.com'
 
 param parDdosProtectionPlanId = ''
 
-param parPrivateDnsResourceGroupId = '/subscriptions/${varConnectivitySubscriptionId}/resourceGroups/${varConnectivityResourceGroupName}'
+param parPrivateDnsResourceGroupId = '/subscriptions/${parConnectivitySubscriptionId}/resourceGroups/${varConnectivityResourceGroupName}'
 
 param parPrivateDnsZonesLocation = varLocation
                                      
