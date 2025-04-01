@@ -38,7 +38,7 @@ On either the [Policy](https://www.azadvertizer.net/azpolicyadvertizer_all.html#
 
 AzAdvertizer also updates once per day!
 
-![AzAdvertizer ALZ Integration Slide](./media/alzPolicyAzAdvertizer.png)
+<img src="./media/alzPolicyAzAdvertizer.png" width="600">
 
 ## What policy definitions are assigned within the Azure landing zones (Custom & Built-in)?
 
