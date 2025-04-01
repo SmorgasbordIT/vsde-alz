@@ -104,7 +104,7 @@ This management group contains all the platform child management groups, like ma
 <tr></tr>
 <tr><td>
 
-![image](./media/azuk-snk-platform.jpg)
+<img src="./media/azuk-snk-platform.jpg" width="400">
 
 </td><td>
 
@@ -140,7 +140,7 @@ This management group contains a dedicated subscription for connectivity. This s
 <tr></tr>
 <tr><td>
 
-![image](./media/azuk-snk-conn.jpg)
+<img src="./media/azuk-snk-conn.jpg" width="400">
 
 </td><td>
 
@@ -166,7 +166,7 @@ This management group contains a dedicated subscription for management, monitori
 <tr></tr>
 <tr><td>
 
-![image](./media/azuk-snk-mgmt.jpg)
+<img src="./media/azuk-snk-mgmt.jpg" width="400">
 
 </td><td>
 
@@ -192,7 +192,7 @@ This management group contains a dedicated subscription for identity. This subsc
 <tr></tr>
 <tr><td>
 
-![image](./media/azuk-snk-id.jpg)
+<img src="./media/azuk-snk-id.jpg" width="350">
 
 </td><td>
 
@@ -221,7 +221,7 @@ This is the parent management group for all the landing zone child management gr
 <tr></tr>
 <tr><td>
 
-![image](./media/azuk-snk-alz.jpg)
+<img src="./media/azuk-snk-alz.jpg" width="450">
 
 </td><td>
 
@@ -281,7 +281,7 @@ This management group is for corporate landing zones. This group is for workload
 <tr></tr>
 <tr><td>
 
-![image](./media/azuk-snk-corp.jpg)
+<img src="./media/azuk-snk-corp.jpg" width="350">
 
 </td><td>
 
@@ -310,7 +310,7 @@ This management group is for online landing zones. This group is for workloads t
 <tr></tr>
 <tr><td>
 
-![image](./media/azuk-snk-online.jpg)
+<img src="./media/azuk-snk-online.jpg" width="250">
 
 </td><td>
 
@@ -329,7 +329,7 @@ This management group is for landing zones that are being cancelled. Cancelled l
 <tr></tr>
 <tr><td>
 
-![image](./media/azuk-snk-decomm.jpg)
+<img src="./media/azuk-snk-decomm.jpg" width="500">
 
 </td><td>
 
@@ -352,7 +352,7 @@ This management group is for subscriptions that will only be used for testing an
 <tr></tr>
 <tr><td>
 
-![image](./media/azuk-snk-snd.jpg)
+<img src="./media/azuk-snk-snd.jpg" width="450">
 
 </td><td>
 
