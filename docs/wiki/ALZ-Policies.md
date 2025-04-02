@@ -53,7 +53,7 @@ The subsequent sections will provide a summary of policy sets and policy set def
 
 > **NOTE**: Although the below sections will define which policy definitions/sets are applied at specific scopes, please remember that policy will inherit within your management group hierarchy.
 
-> <a href=./media/AZUK_SNK_ALZ_Policy_Assignments_v2.0.xlsx><img src=./media/ef73.jpg width=64 height=64 align=center></a> For convenience, an Excel version of the below information is available [here](./media/AZUK_SNK_ALZ_Policy_Assignments_v2.0.xlsx) or click the icon.
+> <a href=./media/AZUK_SNK_ALZ_Policy_Assignments_v2.1.xlsx><img src=./media/ef73.jpg width=64 height=64 align=center></a> For convenience, an Excel version of the below information is available [here](./media/AZUK_SNK_ALZ_Policy_Assignments_v2.1.xlsx) or click the icon.
 
 ### AZUK-SNK (Intermediate Root)
 
