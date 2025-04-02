@@ -67,6 +67,8 @@ param parVmBackupExclusionTagName = ''
 
 param parVmBackupExclusionTagValue = []
 
-param parExcludedPolicyAssignments = []
+param parExcludedPolicyAssignments = [
+  'Enable-DDoS-VNET'
+]
 
 param parTelemetryOptOut = false

@@ -263,7 +263,7 @@ var varPolicyAssignmentDenyPublicIP = {
   libDefinition: loadJsonContent('../../../../../../upstream-releases/v0.22.0/infra-as-code/bicep/modules/policy/assignments/lib/policy_assignments/policy_assignment_es_deny_public_ip.tmpl.json')
 }
 
-var varPolicyAssignmentEnforceAumCheckUpdates= {
+var varPolicyAssignmentEnforceAumCheckUpdates = {
   definitionId: '${varTopLevelManagementGroupResourceId}/providers/Microsoft.Authorization/policySetDefinitions/Deploy-AUM-CheckUpdates'
   libDefinition: loadJsonContent('../../../../../../upstream-releases/v0.22.0/infra-as-code/bicep/modules/policy/assignments/lib/policy_assignments/policy_assignment_es_enforce_aum_checkupdates.tmpl.json')
 }
