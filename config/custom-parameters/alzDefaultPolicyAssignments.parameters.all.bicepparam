@@ -1,4 +1,4 @@
-using '../../bicep/v0.00.3/modules/policy/assignments/alzDefaults/alzDefaultPolicyAssignments.bicep'
+using '../../bicep/v0.00.4/modules/policy/assignments/alzDefaults/alzDefaultPolicyAssignments.bicep'
 
 // Default is true, set to false in "Platform only" subscription scenario.
 param parPlatformMgAlzDefaultsEnable = true
