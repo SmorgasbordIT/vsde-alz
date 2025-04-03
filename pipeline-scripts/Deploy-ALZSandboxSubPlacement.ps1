@@ -7,7 +7,7 @@ param (
     [String]$azTopLevelMGPrefix = "$($env:TOP_LEVEL_MG_PREFIX)",
 
     [Parameter()]
-    [String]$azTemplateFile = "bicep\$($env:MODULES_RELEASE_VERSION)\modules\managementSubscription\sandboxSubPlacement.bicep",
+    [String]$azTemplateFile = "bicep\$($env:MODULES_RELEASE_VERSION)\modules\sandboxSubPlacement\sandboxSubPlacement.bicep",
 
     [Parameter()]
     [String]$azTemplateParameterFile = "config\custom-parameters\sandboxSubPlacement.parameters.all.bicepparam",
