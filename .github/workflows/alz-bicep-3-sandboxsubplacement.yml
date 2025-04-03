@@ -73,6 +73,6 @@ jobs:
         uses: azure/powershell@v2
         with:
           inlineScript: |
-            .\pipeline-scripts\Deploy-ALZSandboxResourceGroup.ps1
+            .\pipeline-scripts\Deploy-ALZSandboxResourceGroups.ps1
           azPSVersion: "latest"
           
