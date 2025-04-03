@@ -24,10 +24,10 @@ param (
   [Boolean]$WhatIfEnabled = [System.Convert]::ToBoolean($($env:IS_PULL_REQUEST))
 )
 
-# Create the Azure Management Subscription name
+# Create the Azure Sandbox Subscription name
 $azSndSubName = ('{0}-{1}-{2}-{3}-01' -f $azUk.ToUpper(),$azSnk.ToUpper(),$azInfra.ToUpper(),$azSndGrpName.ToUpper())
 
-# Get the Management Subscription Alias Id
+# Get the Sandbox Subscription Alias Id
 $azSndSubAliasId = Get-AzSubscription -SubscriptionName $azSndSubName
 $azSandboxSubscriptionId = $azSndSubAliasId.Id
 

@@ -28,4 +28,3 @@ $inputObject = @{
 }
 
 New-AzManagementGroupDeployment @inputObject
-
