@@ -19,7 +19,7 @@ var varSnd   = readEnvironmentVariable('ENV_SANDBOX','')
 var varSndx  = readEnvironmentVariable('SND_GRP_NAME','')
 var varInfra = readEnvironmentVariable('INFRA_ABBR','')
 
-param parSnkWorkload = 'DevTest'
+param parSnkWorkload = 'Production'
 
 // Variables & Parameters for Sandbox Group ID
 var varSandboxGroupId = '${varAzUk}-${varSnk}-${varSnd}'

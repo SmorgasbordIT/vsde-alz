@@ -16,7 +16,7 @@ param parSnkSubsSndAliasName string = 'Sandbox'
   'DevTest'
 ])
 @sys.description('Provide a name for the workload. The workload type of the subscription.')
-param parSnkWorkload string = 'DevTest'
+param parSnkWorkload string = 'Production'
 
 @sys.description('Provide the full resource ID of billing scope to use for subscription creation.')
 param parSnkBillingScope string = ''
