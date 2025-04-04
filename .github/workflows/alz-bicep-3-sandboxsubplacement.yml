@@ -26,6 +26,9 @@ env:
   TOP_LEVEL_MG_PREFIX: ${{ vars.TOP_LEVEL_MG_PREFIX }}
   UPSTREAM_RELEASE_VERSION: ${{ vars.UPSTREAM_RELEASE_VERSION }}
   MODULES_RELEASE_VERSION: ${{ vars.MODULES_RELEASE_VERSION }}
+  INFRA_BILLING_ACCOUNT_NAME: ${{ vars.INFRA_BILLING_ACCOUNT_NAME }}
+  INFRA_01_BILLING_PROFILE_NAME: ${{ vars.INFRA_01_BILLING_PROFILE_NAME }}
+  INFRA_CAPEX_INVOICE_SECTION_NAME: ${{ vars.INFRA_CAPEX_INVOICE_SECTION_NAME }}
   AZUREUK: ${{ vars.AZUREUK }}
   SPACENK_ABBR: ${{ vars.SPACENK_ABBR }}
   ENV_SANDBOX: ${{ vars.ENV_SANDBOX }}
@@ -38,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: SBN-ALZ-Prod
     steps:
-      - name: Checkout Repo
+      - name: "Checkout Repo"
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -51,10 +54,10 @@ jobs:
             (Get-Content -Path $env:ENV_FILE -Encoding UTF8) | ForEach-Object {$_ -replace '"',''} | Out-File -FilePath $env:ENV_FILE -Encoding UTF8
           azPSVersion: "latest"
 
-      - name: Import Environment Variables from File
+      - name: "Import Environment Variables from File"
         run: cat ${{ env.ENV_FILE }} >> $GITHUB_ENV
 
-      - name: OIDC Login to Tenant
+      - name: "OIDC Login to Tenant"
         uses: azure/login@v2
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
