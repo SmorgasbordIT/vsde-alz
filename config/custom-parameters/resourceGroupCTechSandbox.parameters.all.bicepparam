@@ -4,11 +4,12 @@ param parLocation = readEnvironmentVariable('UKS_LOCATION','uksouth')
 
 var varAzUkAbbrName = readEnvironmentVariable('AZUREUK','azuk')
 var varAzUks = readEnvironmentVariable('AZ_UKSOUTH','')
-var varSnd = readEnvironmentVariable('ENV_SANDBOX','')
+var varSnd   = readEnvironmentVariable('ENV_SANDBOX','')
+var varCTech = readEnvironmentVariable('CTECH_ABBR','')
 
-var varRgNameInfra01 = '${varAzUkAbbrName}${varAzUks}-RG-${varSnd}-LOwen-01'
-var varRgNameInfra02 = '${varAzUkAbbrName}${varAzUks}-RG-${varSnd}-Dli-01'
-var varRgNameInfra03 = '${varAzUkAbbrName}${varAzUks}-RG-${varSnd}-TPile-01'
+var varRgNameInfra01 = '${varAzUkAbbrName}${varAzUks}-RG-${varSnd}-${varCTech}-LOwen-01'
+var varRgNameInfra02 = '${varAzUkAbbrName}${varAzUks}-RG-${varSnd}-${varCTech}-Dli-01'
+var varRgNameInfra03 = '${varAzUkAbbrName}${varAzUks}-RG-${varSnd}-${varCTech}-TPile-01'
 
 param parResourceGroupNames = [
   {

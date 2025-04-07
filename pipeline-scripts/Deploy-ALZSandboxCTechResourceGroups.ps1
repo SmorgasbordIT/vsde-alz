@@ -6,7 +6,7 @@ param (
   [String]$azSnk = "$($env:SPACENK_ABBR)",
 
   [Parameter()]
-  [String]$azInfra = "$($env:INFRA_ABBR)",
+  [String]$azCTech = "$($env:CTECH_ABBR)",
 
   [Parameter()]
   [String]$azSndGrpName = "$($env:SND_GRP_NAME)",
@@ -25,7 +25,7 @@ param (
 )
 
 # Create the Azure Sandbox Subscription name
-$azSndSubName = ('{0}-{1}-{2}-{3}-01' -f $azUk.ToUpper(),$azSnk.ToUpper(),$azInfra.ToUpper(),$azSndGrpName.ToUpper())
+$azSndSubName = ('{0}-{1}-{2}-{3}-01' -f $azUk.ToUpper(),$azSnk.ToUpper(),$azCTech.ToUpper(),$azSndGrpName.ToUpper())
 
 # Get the Sandbox Subscription Alias Id
 $azSndSubAliasId = Get-AzSubscription -SubscriptionName $azSndSubName
