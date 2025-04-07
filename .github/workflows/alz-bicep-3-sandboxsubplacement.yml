@@ -6,13 +6,13 @@ on:
       - "main"
     paths:
       - "config/custom-parameters/sandboxSubPlacement.parameters.all.bicepparam"
-      - "config/custom-parameters/resourceGroupSandbox.parameters.all.bicepparam"
+      - "config/custom-parameters/resourceGroupInfraSandbox.parameters.all.bicepparam"
   pull_request:
     branches:
       - "main"
     paths:
       - "config/custom-parameters/sandboxSubPlacement.parameters.all.bicepparam"
-      - "config/custom-parameters/resourceGroupSandbox.parameters.all.bicepparam"
+      - "config/custom-parameters/resourceGroupInfraSandbox.parameters.all.bicepparam"
   workflow_dispatch:
 
 permissions:
