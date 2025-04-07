@@ -15,7 +15,7 @@ param (
   [String]$azLocation = "$($env:UKS_LOCATION)",
 
   [Parameter()]
-  [String]$azTemplateFile = "upstream-releases\$($env:UPSTREAM_RELEASE_VERSION)\infra-as-code\bicep\modules\resourceGroup\resourceGroup.bicep",
+  [String]$azTemplateFile = "bicep\$($env:MODULES_RELEASE_VERSION)\modules\multipleResourceGroups\multipleResourceGroups.bicep",
 
   [Parameter()]
   [String]$azTemplateParameterFile = "config\custom-parameters\resourceGroupSandbox.parameters.all.bicepparam",
