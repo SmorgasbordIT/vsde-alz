@@ -3,39 +3,45 @@ targetScope = 'managementGroup'
 metadata name = 'ALZ Bicep - Management Subscription module'
 metadata description = 'Module used to create the sandbox subscriptions in management groups'
 
+@sys.description('Azure Region where Resource Group will be created.')
+param parLocation string
+
 @sys.description('Sandbox group Id for the subscription.')
-param parSandboxGroupId string = ''
+param parManagementGroupId string = ''
 
 @sys.description('Provide a name for the alias. This name will also be the display name of the subscription.')
 @minLength(5)
 @maxLength(51)
-param parSnkSubsSndAliasName string = 'Sandbox'
+param parSubscriptionAliasName string = 'Sandbox'
+
+@sys.description('List of Subscription variables')
+param parSubscriptions array = []
 
 @allowed([
   'Production'
   'DevTest'
 ])
 @sys.description('Provide a name for the workload. The workload type of the subscription.')
-param parSnkWorkload string = 'Production'
+param parWorkload string = 'Production'
 
-@sys.description('Provide the full resource ID of billing scope to use for subscription creation.')
-param parSnkBillingScope string = ''
+@sys.description('Tags you would like to be applied to all resources in this module.')
+param parTags object = {}
 
-resource resSnkSubsSndAlias 'Microsoft.Subscription/aliases@2021-10-01' = {
-  scope: tenant()
-  name: parSnkSubsSndAliasName
-  properties: {
-      additionalProperties: {
-        managementGroupId: parSandboxGroupId
-      }
-    workload: parSnkWorkload
-    displayName: parSnkSubsSndAliasName
-    billingScope: parSnkBillingScope
+@sys.description('Set Parameter to true to Opt-out of deployment telemetry.')
+param parTelemetryOptOut bool = false
+
+module modSubscriptions '../subscriptions/subscriptions.bicep' = [for subscription in parSubscriptions: {
+  name: 'deploy-${subscription.SubscriptionAliasName}'
+  params: {
+    parLocation: parLocation
+    parManagementGroupId: parManagementGroupId
+    parSubscriptionAliasName: subscription.SubscriptionAliasName
+    parWorkload: parWorkload
+    parDisplayName: subscription.SubscriptionAliasName
+    parBillingScope: subscription.BillingScope
+    parTags: parTags
   }
-}
+}]
 
 // Output Management Subscription Names
-output outSnkSubsSandboxAliasName string = resSnkSubsSndAlias.name
-
-// Output Management Subscription Id
-output outSnkSubsSandboxAliasSubsId string = resSnkSubsSndAlias.properties.subscriptionId
+output outSnkSubsSandboxAliasName array = [for subscription in parSubscriptions: subscription.SubscriptionAliasName]

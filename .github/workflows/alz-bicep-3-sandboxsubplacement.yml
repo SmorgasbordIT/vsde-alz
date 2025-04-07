@@ -7,12 +7,20 @@ on:
     paths:
       - "config/custom-parameters/sandboxSubPlacement.parameters.all.bicepparam"
       - "config/custom-parameters/resourceGroupInfraSandbox.parameters.all.bicepparam"
+      - "config/custom-parameters/resourceGroupEngSandbox.parameters.all.bicepparam"
+      - "config/custom-parameters/resourceGroupCTechSandbox.parameters.all.bicepparam"
+      - "config/custom-parameters/resourceGroupSTechSandbox.parameters.all.bicepparam"
+      - "config/custom-parameters/resourceGroupDataSandbox.parameters.all.bicepparam"
   pull_request:
     branches:
       - "main"
     paths:
       - "config/custom-parameters/sandboxSubPlacement.parameters.all.bicepparam"
       - "config/custom-parameters/resourceGroupInfraSandbox.parameters.all.bicepparam"
+      - "config/custom-parameters/resourceGroupEngSandbox.parameters.all.bicepparam"
+      - "config/custom-parameters/resourceGroupCTechSandbox.parameters.all.bicepparam"
+      - "config/custom-parameters/resourceGroupSTechSandbox.parameters.all.bicepparam"
+      - "config/custom-parameters/resourceGroupDataSandbox.parameters.all.bicepparam"
   workflow_dispatch:
 
 permissions:
@@ -29,12 +37,18 @@ env:
   INFRA_BILLING_ACCOUNT_NAME: ${{ vars.INFRA_BILLING_ACCOUNT_NAME }}
   INFRA_01_BILLING_PROFILE_NAME: ${{ vars.INFRA_01_BILLING_PROFILE_NAME }}
   INFRA_CAPEX_INVOICE_SECTION_NAME: ${{ vars.INFRA_CAPEX_INVOICE_SECTION_NAME }}
+  ENG_01_BILLING_PROFILE_NAME: ${{ vars.ENG_01_BILLING_PROFILE_NAME }}
+  ENG_CAPEX_INVOICE_SECTION_NAME: ${{ vars.ENG_CAPEX_INVOICE_SECTION_NAME }}
   AZUREUK: ${{ vars.AZUREUK }}
   AZ_UKSOUTH: ${{ vars.AZ_UKSOUTH }}
   SPACENK_ABBR: ${{ vars.SPACENK_ABBR }}
   ENV_SANDBOX: ${{ vars.ENV_SANDBOX }}
   SND_GRP_NAME: ${{ vars.SND_GRP_NAME }}
   INFRA_ABBR: ${{ vars.INFRA_ABBR }}
+  ENG_ABBR: ${{ vars.ENG_ABBR }}
+  CTECH_ABBR: ${{ vars.CTECH_ABBR }}
+  STECH_ABBR: ${{ vars.STECH_ABBR }}
+  DATA_ABBR: ${{ vars.DATA_ABBR }}
   IS_PULL_REQUEST: "${{ github.event_name == 'pull_request' }}"
 
 jobs:
