@@ -94,13 +94,13 @@ jobs:
             .\pipeline-scripts\Deploy-ALZSandboxInfraResourceGroups.ps1
           azPSVersion: "latest"
 
-#      - name: "Sandbox Eng Resource Groups Deployment"
-#        uses: azure/powershell@v2
-#        with:
-#          inlineScript: |
-#            .\pipeline-scripts\Deploy-ALZSandboxEngResourceGroups.ps1
-#          azPSVersion: "latest"
-#
+      - name: "Sandbox Eng Resource Groups Deployment"
+        uses: azure/powershell@v2
+        with:
+          inlineScript: |
+            .\pipeline-scripts\Deploy-ALZSandboxEngResourceGroups.ps1
+          azPSVersion: "latest"
+
 #      - name: "Sandbox Cust Tech Resource Groups Deployment"
 #        uses: azure/powershell@v2
 #        with:
