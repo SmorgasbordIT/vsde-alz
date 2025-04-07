@@ -73,10 +73,37 @@ jobs:
             .\pipeline-scripts\Deploy-ALZSandboxSubPlacement.ps1
           azPSVersion: "latest"
 
-      - name: "Sandbox Resource Groups Deployment"
+      - name: "Sandbox Infra Resource Groups Deployment"
         uses: azure/powershell@v2
         with:
           inlineScript: |
-            .\pipeline-scripts\Deploy-ALZSandboxResourceGroups.ps1
+            .\pipeline-scripts\Deploy-ALZSandboxInfraResourceGroups.ps1
           azPSVersion: "latest"
-          
+
+#      - name: "Sandbox Eng Resource Groups Deployment"
+#        uses: azure/powershell@v2
+#        with:
+#          inlineScript: |
+#            .\pipeline-scripts\Deploy-ALZSandboxEngResourceGroups.ps1
+#          azPSVersion: "latest"
+#
+#      - name: "Sandbox Cust Tech Resource Groups Deployment"
+#        uses: azure/powershell@v2
+#        with:
+#          inlineScript: |
+#            .\pipeline-scripts\Deploy-ALZSandboxCTechResourceGroups.ps1
+#          azPSVersion: "latest"
+#
+#      - name: "Sandbox Supp Tech Resource Groups Deployment"
+#        uses: azure/powershell@v2
+#        with:
+#          inlineScript: |
+#            .\pipeline-scripts\Deploy-ALZSandboxSTechResourceGroups.ps1
+#          azPSVersion: "latest"
+#
+#      - name: "Sandbox Data Resource Groups Deployment"
+#        uses: azure/powershell@v2
+#        with:
+#          inlineScript: |
+#            .\pipeline-scripts\Deploy-ALZSandboxDataResourceGroups.ps1
+#          azPSVersion: "latest"

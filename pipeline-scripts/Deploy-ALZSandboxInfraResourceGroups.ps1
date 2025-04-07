@@ -18,7 +18,7 @@ param (
   [String]$azTemplateFile = "bicep\$($env:MODULES_RELEASE_VERSION)\modules\multipleResourceGroups\multipleResourceGroups.bicep",
 
   [Parameter()]
-  [String]$azTemplateParameterFile = "config\custom-parameters\resourceGroupSandbox.parameters.all.bicepparam",
+  [String]$azTemplateParameterFile = "config\custom-parameters\resourceGroupInfraSandbox.parameters.all.bicepparam",
 
   [Parameter()]
   [Boolean]$WhatIfEnabled = [System.Convert]::ToBoolean($($env:IS_PULL_REQUEST))
