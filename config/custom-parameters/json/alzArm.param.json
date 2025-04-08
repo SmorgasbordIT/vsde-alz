@@ -82,21 +82,27 @@
     },
     "ALZMonitorResourceGroupTags": {
       "value": {
-        "Project": "amba-monitoring"
+        "Project": "amba-monitoring",
+        "Location": "uksouth",
+        "Environment": "Management",
+        "DeployedBy": "Cloud Tech",
+        "CreatedBy": "jonathan.davis@spacenk.com",
+        "SvcName": "Infrastructure",
+        "SvcOwner": "azuk-snk-amba@spacenk.com"
       }
     },
     "ALZMonitorDisableTagName": {
       "value": "MonitorDisable"
     },
     "ALZMonitorDisableTagValues": {
-      "value": {
-        "Location": "uksouth",
-        "Environment": "Management",
-        "DeployedBy": "Cloud Tech",
-        "CreatedBy": "jonathan.davis@spacenk.com",
-        "SvcName": "Infrastructure",
-        "SvcOwner": "Infrastructure@spacenk.com"
-      }
+      "value": [
+        "true",
+        "Test",
+        "Sandbox",
+        "Development",
+        "Staging",
+        "Production"
+      ]
     },
     "ALZMonitorActionGroupEmail": {
       "value": [

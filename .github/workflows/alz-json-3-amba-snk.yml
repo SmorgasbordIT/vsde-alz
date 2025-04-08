@@ -41,7 +41,7 @@ jobs:
           subscription-id: ${{ secrets.VSDE_SUBSCRIPTION_ID }}
           enable-AzPSSession: true
 
-      - name: "Az PWSH Deploy AMBA ARM Template"
+      - name: "Az Deploy AMBA ARM Template"
         uses: azure/powershell@v2
         with:
           inlineScript: |
