@@ -1,0 +1,49 @@
+name: Deploy AMBA
+
+on:
+  push:
+    branches:
+      - "main"
+    paths:
+      - "config/custom-parameters/json/alzArm.param.json"
+  pull_request:
+    branches:
+      - "main"
+    paths:
+      - "config/custom-parameters/json/alzArm.param.json"
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
+
+env:
+  UKS_LOCATION: ${{ vars.UKS_LOCATION }}
+  TOP_LEVEL_MG_PREFIX: ${{ vars.TOP_LEVEL_MG_PREFIX }}
+  IS_PULL_REQUEST: "${{ github.event_name == 'pull_request' }}"
+
+jobs:
+  ALZ_3_Deploy_AMBA:
+    runs-on: ubuntu-latest
+    environment: SBN-ALZ-Prod
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: OIDC Login to Tenant
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.VSDE_SUBSCRIPTION_ID }}
+          enable-AzPSSession: true
+
+      - name: "Az PWSH Deploy AMBA ARM Template"
+        uses: azure/powershell@v2
+        with:
+          inlineScript: |
+             .\pipeline-scripts\Deploy-ALZAMBA.ps1
+          azPSVersion: "latest"
