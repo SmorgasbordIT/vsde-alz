@@ -1,4 +1,4 @@
-name: ALZ-Bicep-3-Sandbox-Subscription-Placement
+name: ALZ-Bicep-4-Sandbox-Subscription-Placement
 
 on:
   push:
@@ -52,7 +52,7 @@ env:
   IS_PULL_REQUEST: "${{ github.event_name == 'pull_request' }}"
 
 jobs:
-  ALZ_Bicep_3_Sandbox_Subscription_Placement:
+  ALZ_Bicep_4_Sandbox_Subscription_Placement:
     runs-on: ubuntu-latest
     environment: SBN-ALZ-Prod
     steps:
