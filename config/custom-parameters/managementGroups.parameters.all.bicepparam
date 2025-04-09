@@ -40,4 +40,4 @@ param parLandingZoneMgChildren = {}
 // Use to specify custom management group names under Platform mg.
 param parPlatformMgChildren = {}
 
-param parTelemetryOptOut = false
+param parTelemetryOptOut = true

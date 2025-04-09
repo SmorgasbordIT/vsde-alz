@@ -54,7 +54,7 @@ param parUseSentinelClassicPricingTiers = false
 
 param parLogAnalyticsLinkedServiceAutomationAccountName = 'Automation'
 
-param parTelemetryOptOut = false
+param parTelemetryOptOut = true
 
 param parGlobalResourceLock = {
   kind: 'None'

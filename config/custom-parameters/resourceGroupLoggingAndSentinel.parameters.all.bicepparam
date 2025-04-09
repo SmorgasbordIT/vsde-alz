@@ -15,7 +15,7 @@ param parTags = {
   SvcOwner: 'Infrastructure@spacenk.com'
 }
 
-param parTelemetryOptOut = false
+param parTelemetryOptOut = true
 
 param parResourceLockConfig = {
   kind: 'None'

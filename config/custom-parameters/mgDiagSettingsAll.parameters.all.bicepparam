@@ -32,4 +32,4 @@ param parLandingZoneMgChildren = []
 
 param parPlatformMgChildren = []
 
-param parTelemetryOptOut = false
+param parTelemetryOptOut = true

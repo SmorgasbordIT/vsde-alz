@@ -71,4 +71,4 @@ param parExcludedPolicyAssignments = [
   'Enable-DDoS-VNET'
 ]
 
-param parTelemetryOptOut = false
+param parTelemetryOptOut = true

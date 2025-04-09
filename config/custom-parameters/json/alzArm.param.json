@@ -60,7 +60,7 @@
       "value": "Yes"
     },
     "telemetryOptOut": {
-      "value": "No"
+      "value": "Yes"
     },
     "bringYourOwnUserAssignedManagedIdentity": {
       "value": "No"
