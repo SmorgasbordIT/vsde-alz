@@ -3,6 +3,9 @@ param (
   [String]$azUk = "$($env:AZUREUK)",
 
   [Parameter()]
+  [String]$azUkSouth = "$($env:AZ_UKSOUTH)",
+
+  [Parameter()]
   [String]$azSnk = "$($env:SPACENK_ABBR)",
 
   [Parameter()]
@@ -25,7 +28,7 @@ param (
 $azManSubName = ('{0}-{1}-{2}-{3}-01' -f $azUk.ToUpper(),$azSnk.ToUpper(),$azEnvHub.ToUpper(),$azMgmt.ToUpper())
 
 # Create the Logging RG Name
-$azLoggingResourceGroup = ("{0}-RG-MGT-LOG-01" -f $azUk.ToUpper())
+$azLoggingResourceGroup = ("{0}{1}-RG-MGT-LOG-01" -f $azUk.ToUpper(),$azUkSouth.ToUpper())
 
 # Get the Management Subscription Alias Id
 $azManSubAliasId = Get-AzSubscription -SubscriptionName $azManSubName
