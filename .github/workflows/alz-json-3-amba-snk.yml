@@ -21,6 +21,10 @@ permissions:
 env:
   UKS_LOCATION: ${{ vars.UKS_LOCATION }}
   TOP_LEVEL_MG_PREFIX: ${{ vars.TOP_LEVEL_MG_PREFIX }}
+  AZUREUK: ${{ vars.AZUREUK }}
+  SPACENK_ABBR: ${{ vars.SPACENK_ABBR }}
+  ENV_HUB: ${{ vars.ENV_HUB }}
+  MAN_GRP_NAME: ${{ vars.MAN_GRP_NAME }}
   IS_PULL_REQUEST: "${{ github.event_name == 'pull_request' }}"
 
 jobs:

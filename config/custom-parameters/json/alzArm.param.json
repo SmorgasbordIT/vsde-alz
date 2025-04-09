@@ -72,10 +72,10 @@
       "value": "azuk-umi-mgt-amba-01"
     },
     "managementSubscriptionId": {
-      "value": "b0017132-8f81-459f-aead-3171c449866f"
+      "value": ""
     },
     "ALZMonitorResourceGroupName": {
-      "value": "AZUK-RG-MGT-AMBA-MON-01"
+      "value": "AZUKS-RG-MGT-AMBA-MON-01"
     },
     "ALZMonitorResourceGroupLocation": {
       "value": "uksouth"

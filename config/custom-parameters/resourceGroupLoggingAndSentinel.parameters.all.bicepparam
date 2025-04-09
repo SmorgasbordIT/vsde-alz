@@ -3,8 +3,9 @@ using '../../upstream-releases/v0.22.0/infra-as-code/bicep/modules/resourceGroup
 param parLocation = readEnvironmentVariable('UKS_LOCATION','uksouth')
 
 var varAzUkAbbrName = readEnvironmentVariable('AZUREUK','azuk')
+var varAzUkSouth = readEnvironmentVariable('AZ_UKSOUTH','')
 
-param parResourceGroupName = toUpper('${varAzUkAbbrName}-rg-mgt-log-01')
+param parResourceGroupName = toUpper('${varAzUkAbbrName}${varAzUkSouth}-rg-mgt-log-01')
 
 param parTags = {
   Location: ('${parLocation}')
