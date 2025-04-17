@@ -7,9 +7,13 @@ var varAzUks = readEnvironmentVariable('AZ_UKSOUTH','')
 var varSnd   = readEnvironmentVariable('ENV_SANDBOX','')
 var varEng   = readEnvironmentVariable('ENG_ABBR','')
 
-var varRgNameInfra01 = '${varAzUkAbbrName}${varAzUks}-RG-${varSnd}-${varEng}-JMoore-01'
+var varRgNameInfra01 = '${varAzUkAbbrName}${varAzUks}-RG-${varSnd}-${varEng}-JM-01'
 var varRgNameInfra02 = '${varAzUkAbbrName}${varAzUks}-RG-${varSnd}-${varEng}-AGrobier-01'
 var varRgNameInfra03 = '${varAzUkAbbrName}${varAzUks}-RG-${varSnd}-${varEng}-PByrne-01'
+var varRgNameInfra04 = '${varAzUkAbbrName}${varAzUks}-RG-${varSnd}-${varEng}-MSmołka-01'
+var varRgNameInfra05 = '${varAzUkAbbrName}${varAzUks}-RG-${varSnd}-${varEng}-MLauHingYim-01'
+var varRgNameInfra06 = '${varAzUkAbbrName}${varAzUks}-RG-${varSnd}-${varEng}-IKorchev-01'
+var varRgNameInfra07 = '${varAzUkAbbrName}${varAzUks}-RG-${varSnd}-${varEng}-JBurridge-01'
 
 param parResourceGroupNames = [
   {
@@ -20,6 +24,18 @@ param parResourceGroupNames = [
   }
   {
     name: varRgNameInfra03
+  }
+  {
+    name: varRgNameInfra04
+  }
+  {
+    name: varRgNameInfra05
+  }
+  {
+    name: varRgNameInfra06
+  }
+  {
+    name: varRgNameInfra07
   }
 ]
 
