@@ -18,14 +18,15 @@ var varLocation = readEnvironmentVariable('UKS_LOCATION','uksouth')
 var varLocationFormatted = toLower(replace(varLocation, ' ', ''))
 
 var varAzUkAbbrName = readEnvironmentVariable('AZUREUK','azuk')
+var varAzUkSouth = readEnvironmentVariable('AZ_UKSOUTH','')
 var varLogAnalyticsAbbrName = readEnvironmentVariable('LOG_ANALYTICS_ABBR_NAME','LAW')
-var varLogAnalyticsWorkspaceName = toUpper('${varAzUkAbbrName}-${varLogAnalyticsAbbrName}-MGT-01')
+var varLogAnalyticsWorkspaceName = toUpper('${varAzUkAbbrName}${varAzUkSouth}-${varLogAnalyticsAbbrName}-MGT-01')
 
 // Read environment variables for subscription IDs and resource group names
 param parConnectivitySubscriptionId = ''
-var varConnectivityResourceGroupName = toUpper('${varAzUkAbbrName}-rg-con-net-01')
+var varConnectivityResourceGroupName = toUpper('${varAzUkAbbrName}${varAzUkSouth}-rg-con-net-01')
 param parLoggingSubscriptionId = ''
-var varLoggingResourceGroupName = toUpper('${varAzUkAbbrName}-rg-mgt-log-01')
+var varLoggingResourceGroupName = toUpper('${varAzUkAbbrName}${varAzUkSouth}-rg-mgt-log-01')
 
 // Use the logging subscription ID if it is set, otherwise use the connectivity subscription ID ("Platform only" scenario)
 var varLoggingSubId = !empty(parLoggingSubscriptionId) ? parLoggingSubscriptionId : parConnectivitySubscriptionId
@@ -41,15 +42,15 @@ param parLogAnalyticsWorkspaceLogRetentionInDays = '365'
 
 param parLogAnalyticsWorkspaceResourceCategory = 'allLogs'
 
-param parDataCollectionRuleVMInsightsResourceId = '/subscriptions/${parLoggingSubscriptionId}/resourceGroups/${varLoggingResourceGroupName}/providers/Microsoft.Insights/dataCollectionRules/${varAzUkAbbrName}-dcr-ama-vmi-01'
+param parDataCollectionRuleVMInsightsResourceId = '/subscriptions/${parLoggingSubscriptionId}/resourceGroups/${varLoggingResourceGroupName}/providers/Microsoft.Insights/dataCollectionRules/${varAzUkAbbrName}${varAzUkSouth}-dcr-ama-vmi-01'
 
-param parDataCollectionRuleChangeTrackingResourceId = '/subscriptions/${parLoggingSubscriptionId}/resourceGroups/${varLoggingResourceGroupName}/providers/Microsoft.Insights/dataCollectionRules/${varAzUkAbbrName}-dcr-ama-ct-01'
+param parDataCollectionRuleChangeTrackingResourceId = '/subscriptions/${parLoggingSubscriptionId}/resourceGroups/${varLoggingResourceGroupName}/providers/Microsoft.Insights/dataCollectionRules/${varAzUkAbbrName}${varAzUkSouth}-dcr-ama-ct-01'
 
-param parDataCollectionRuleMDFCSQLResourceId = '/subscriptions/${parLoggingSubscriptionId}/resourceGroups/${varLoggingResourceGroupName}/providers/Microsoft.Insights/dataCollectionRules/${varAzUkAbbrName}-dcr-ama-mdfcsql-01'
+param parDataCollectionRuleMDFCSQLResourceId = '/subscriptions/${parLoggingSubscriptionId}/resourceGroups/${varLoggingResourceGroupName}/providers/Microsoft.Insights/dataCollectionRules/${varAzUkAbbrName}${varAzUkSouth}-dcr-ama-mdfcsql-01'
 
-param parUserAssignedManagedIdentityResourceId = '/subscriptions/${parLoggingSubscriptionId}/resourcegroups/${varLoggingResourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/${varAzUkAbbrName}-umi-mgt-${varLogAnalyticsAbbrName}-01'
+param parUserAssignedManagedIdentityResourceId = '/subscriptions/${parLoggingSubscriptionId}/resourcegroups/${varLoggingResourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/${varAzUkAbbrName}${varAzUkSouth}-umi-mgt-${varLogAnalyticsAbbrName}-01'
 
-param parAutomationAccountName = toLower('${varAzUkAbbrName}-AAA-MGT-${varLogAnalyticsAbbrName}-01')
+param parAutomationAccountName = toLower('${varAzUkAbbrName}${varAzUkSouth}-AAA-MGT-${varLogAnalyticsAbbrName}-01')
 
 param parMsDefenderForCloudEmailSecurityContact = 'infrastructure@spacenk.com'
 
