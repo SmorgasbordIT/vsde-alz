@@ -1,4 +1,4 @@
-name: Deploy AMBA
+name: ALZ-Json-3-Deploy-AMBA
 
 on:
   push:
@@ -28,7 +28,7 @@ env:
   IS_PULL_REQUEST: "${{ github.event_name == 'pull_request' }}"
 
 jobs:
-  ALZ_3_Deploy_AMBA:
+  ALZ_Json_3_Deploy_AMBA:
     runs-on: ubuntu-latest
     environment: SBN-ALZ-Prod
     steps:
