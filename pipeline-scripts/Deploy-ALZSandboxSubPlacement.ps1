@@ -19,7 +19,7 @@ param (
     [Boolean]$WhatIfEnabled = [System.Convert]::ToBoolean($($env:IS_PULL_REQUEST))
 )
 
-$azMgSandbox = ('/providers/Microsoft.Management/managementGroups/{0}-{1}' -f $azTopLevelMGPrefix.ToLower(),$azSnk.ToLower())
+$azMgSandbox = ('{0}-{1}' -f $azTopLevelMGPrefix.ToLower(),$azSnk.ToLower())
 
 # Parameters necessary for deployment
 $inputObject = @{
