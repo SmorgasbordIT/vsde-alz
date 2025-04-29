@@ -7,7 +7,7 @@ param (
     [String]$azTopLevelMGPrefix = "$($env:TOP_LEVEL_MG_PREFIX)",
 
     [Parameter()]
-    [String]$azSnk = "$($env:ENV_SANDBOX)",
+    [String]$azSnd = "$($env:ENV_SANDBOX)",
 
     [Parameter()]
     [String]$azTemplateFile = "bicep\$($env:MODULES_RELEASE_VERSION)\modules\sandboxSubPlacement\sandboxSubPlacement.bicep",
@@ -19,7 +19,8 @@ param (
     [Boolean]$WhatIfEnabled = [System.Convert]::ToBoolean($($env:IS_PULL_REQUEST))
 )
 
-$azMgSandbox = ('{0}-{1}' -f $azTopLevelMGPrefix.ToLower(),$azSnk.ToLower())
+# Create the Sandbox Management Group ID
+$azMgSandbox = ('{0}-{1}' -f $azTopLevelMGPrefix.ToLower(),$azSnd.ToLower())
 
 # Parameters necessary for deployment
 $inputObject = @{

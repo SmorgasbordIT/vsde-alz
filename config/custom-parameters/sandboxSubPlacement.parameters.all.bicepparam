@@ -38,12 +38,12 @@ var varInvoiceSectionNameEng01 = readEnvironmentVariable('ENG_CAPEX_INVOICE_SECT
 
 /*
 // Read environment variables for Billing Scope Cust_Tech_01
-var varBillingProfileNameCTech01 = readEnvironmentVariable('CTECH_01_BILLING_PROFILE_NAME','')
-var varInvoiceSectionNameCTech01 = readEnvironmentVariable('CTECH_CAPEX_INVOICE_SECTION_NAME','')
+var varBillingProfileNameCTech01 = readEnvironmentVariable('CUST_TECH_01_BILLING_PROFILE_NAME','')
+var varInvoiceSectionNameCTech01 = readEnvironmentVariable('CUST_CAPEX_INVOICE_SECTION_NAME','')
 
 // Read environment variables for Billing Scope Supp_Tech_01
-var varBillingProfileNameSTech01 = readEnvironmentVariable('STECH_01_BILLING_PROFILE_NAME','')
-var varInvoiceSectionNameSTech01 = readEnvironmentVariable('STECH_CAPEX_INVOICE_SECTION_NAME','')
+var varBillingProfileNameSTech01 = readEnvironmentVariable('SUPP_TECH_01_BILLING_PROFILE_NAME','')
+var varInvoiceSectionNameSTech01 = readEnvironmentVariable('SUPP_CAPEX_INVOICE_SECTION_NAME','')
 
 // Read environment variables for Billing Scope Data_01
 var varBillingProfileNameData01 = readEnvironmentVariable('DATA_01_BILLING_PROFILE_NAME','')
