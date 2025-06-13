@@ -54,6 +54,9 @@ var varPlatformMgChildrenAlzDefault = {
   management: {
     displayName: 'Management'
   }
+  shared: {
+    displayName: 'Shared'
+  }
 }
 
 // Landing Zones & Child Management Groups

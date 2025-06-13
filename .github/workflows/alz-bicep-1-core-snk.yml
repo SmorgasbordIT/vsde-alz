@@ -47,6 +47,7 @@ env:
   MAN_GRP_NAME: ${{ vars.MAN_GRP_NAME }}
   ID_GRP_NAME: ${{ vars.ID_GRP_NAME }}
   CONN_GRP_NAME: ${{ vars.CONN_GRP_NAME }}
+  SHARED_GRP_NAME: ${{ vars.SHARED_GRP_NAME }}
   LOG_ANALYTICS_ABBR_NAME: ${{ vars.LOG_ANALYTICS_ABBR_NAME }}
   IS_PULL_REQUEST: "${{ github.event_name == 'pull_request' }}"
 
