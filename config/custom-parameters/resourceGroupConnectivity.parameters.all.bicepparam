@@ -1,11 +1,25 @@
-using '../../upstream-releases/v0.22.0/infra-as-code/bicep/modules/resourceGroup/resourceGroup.bicep'
+using '../../bicep/v0.00.4/modules/multipleResourceGroups/multipleResourceGroups.bicep'
 
 param parLocation = readEnvironmentVariable('UKS_LOCATION','uksouth')
 
 var varAzUkAbbrName = readEnvironmentVariable('AZUREUK','azuk')
 var varAzUkSouth = readEnvironmentVariable('AZ_UKSOUTH','')
 
-param parResourceGroupName = toUpper('${varAzUkAbbrName}${varAzUkSouth}-rg-conn-vnet-01')
+var varRgNameNetworkt01 = toUpper('${varAzUkAbbrName}${varAzUkSouth}-rg-conn-netword-01')
+var varRgNameSecuriyt01 = toUpper('${varAzUkAbbrName}${varAzUkSouth}-rg-conn-security-01')
+var varRgNameDns01      = toUpper('${varAzUkAbbrName}${varAzUkSouth}-rg-conn-dns-01')
+
+param parResourceGroupNames = [
+  {
+    name: varRgNameNetworkt01
+  }
+  {
+    name: varRgNameSecuriyt01
+  }
+  {
+    name: varRgNameDns01
+  }
+]
 
 param parTags = {
   Location: ('${parLocation}')

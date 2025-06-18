@@ -15,7 +15,7 @@ param (
   [String]$azLocation = "$($env:UKS_LOCATION)",
 
   [Parameter()]
-  [String]$azTemplateFile = "upstream-releases\$($env:UPSTREAM_RELEASE_VERSION)\infra-as-code\bicep\modules\resourceGroup\resourceGroup.bicep",
+  [String]$azTemplateFile = "upstream-releases\$($env:MODULES_RELEASE_VERSION)\modules\multipleResourceGroups\multipleResourceGroups.bicep",
 
   [Parameter()]
   [String]$azTemplateParameterFile = "config\custom-parameters\resourceGroupConnectivity.parameters.all.bicepparam",
@@ -43,4 +43,12 @@ $inputObject = @{
 
 Select-AzSubscription -SubscriptionId $azConnectivitySubscriptionId
 
-New-AzSubscriptionDeployment @inputObject
+# Execute deployment
+If($WhatIfEnabled) {
+  $azDeploymentOutput = New-AzSubscriptionDeployment @inputObject -WhatIf
+}Else{
+  $azDeploymentOutput = New-AzSubscriptionDeployment @inputObject
+}
+
+# Output to GitHub Actions log
+$azDeploymentOutput.Properties.Outputs.outSubscriptionDetails.value | ConvertTo-Json -Depth 5
