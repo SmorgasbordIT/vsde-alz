@@ -1,15 +1,19 @@
 using '../../upstream-releases/v0.22.0/infra-as-code/bicep/modules/resourceGroup/resourceGroup.bicep'
 
-param parLocation = readEnvironmentVariable('LOCATION','centralus')
+param parLocation = readEnvironmentVariable('UKS_LOCATION','uksouth')
 
-param parResourceGroupName = readEnvironmentVariable('CONNECTIVITY_RESOURCE_GROUP','rg-lab-connectivity')
+var varAzUkAbbrName = readEnvironmentVariable('AZUREUK','azuk')
+var varAzUkSouth = readEnvironmentVariable('AZ_UKSOUTH','')
+
+param parResourceGroupName = toUpper('${varAzUkAbbrName}${varAzUkSouth}-rg-conn-vnet-01')
 
 param parTags = {
-  Environment: 'Management'
-  DeployedBy: ''
-  // 'Expiry Date': '2024-04-30'
-  // 'Business Unit': 'Cloud Enablement'
-  // Owner: 'Joe Thompson'
+  Location: ('${parLocation}')
+  Environment: 'Connectivity'
+  DeployedBy: 'Cloud Tech'
+  CreatedBy: 'jonathan.davis@spacenk.com'
+  SvcName: 'Infrastructure'
+  SvcOwner: 'Infrastructure@spacenk.com'
 }
 
 param parTelemetryOptOut = false

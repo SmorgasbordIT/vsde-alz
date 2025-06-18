@@ -28,12 +28,21 @@ permissions:
 
 env:
   ENV_FILE: ".env"
+  UKS_LOCATION: ${{ vars.UKS_LOCATION }}
+  ENV_HUB: ${{ vars.ENV_HUB }}
+  UPSTREAM_RELEASE_VERSION: ${{ vars.UPSTREAM_RELEASE_VERSION }}
+  MODULES_RELEASE_VERSION: ${{ vars.MODULES_RELEASE_VERSION }}
+  AZUREUK: ${{ vars.AZUREUK }}
+  AZ_UKSOUTH: ${{ vars.AZ_UKSOUTH }}
+  SPACENK_ABBR: ${{ vars.SPACENK_ABBR }}
+  CONN_GRP_NAME: ${{ vars.CONN_GRP_NAME }}
   WHAT_IF_ENABLED: ${{ github.event.inputs.what_if_enabled }}
   IS_PULL_REQUEST: "${{ github.event_name == 'pull_request' }}"
 
 jobs:
   ALZ_Bicep_4a_HubSpoke:
     runs-on: ubuntu-latest
+    environment: SBN-ALZ-Prod
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
