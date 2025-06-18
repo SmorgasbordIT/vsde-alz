@@ -24,6 +24,12 @@ on:
       - "config/custom-parameters/customRoleDefinitions.parameters.all.bicepparam"
       - "config/custom-parameters/mgDiagSettingsAll.parameters.all.bicepparam"
   workflow_dispatch:
+    inputs:
+      what_if_enabled:
+        description: 'Enable What-If analysis?'
+        required: false
+        default: 'false'
+        type: boolean
 
 permissions:
   id-token: write
@@ -47,8 +53,9 @@ env:
   MAN_GRP_NAME: ${{ vars.MAN_GRP_NAME }}
   ID_GRP_NAME: ${{ vars.ID_GRP_NAME }}
   CONN_GRP_NAME: ${{ vars.CONN_GRP_NAME }}
-  SHARED_GRP_NAME: ${{ vars.SHARED_GRP_NAME }}
+  SHR_GRP_NAME: ${{ vars.SHR_GRP_NAME }}
   LOG_ANALYTICS_ABBR_NAME: ${{ vars.LOG_ANALYTICS_ABBR_NAME }}
+  WHAT_IF_ENABLED: ${{ github.event.inputs.what_if_enabled }}
   IS_PULL_REQUEST: "${{ github.event_name == 'pull_request' }}"
 
 jobs:

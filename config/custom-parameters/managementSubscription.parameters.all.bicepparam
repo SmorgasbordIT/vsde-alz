@@ -23,6 +23,7 @@ var varPlat = readEnvironmentVariable('PLATFORM_ABBR','')
 var varMgmt = readEnvironmentVariable('MAN_GRP_NAME','')
 var varId   = readEnvironmentVariable('ID_GRP_NAME','')
 var varConn = readEnvironmentVariable('CONN_GRP_NAME','')
+var varShr  = readEnvironmentVariable('SHR_GRP_NAME','')
 
 param parSnkWorkload = 'Production'
 
@@ -46,6 +47,13 @@ var varConnectivityGroupId = '${varAzUk}-${varSnk}-${varPlat}-${varConn}'
 param parSnkSubsConnAliasName = toUpper('${varAzLocationAbbr}-${varAzEnvironmentHub}-${varConn}-01')
 
 param parConnectivityGroupId = toLower('/providers/Microsoft.Management/managementGroups/${varConnectivityGroupId}')
+
+// Variables & Parameters for Shared Services Group ID
+var varSharedGroupId = '${varAzUk}-${varSnk}-${varPlat}-${varShr}'
+
+param parSnkSubsShrAliasName = toUpper('${varAzLocationAbbr}-${varAzEnvironmentHub}-${varShr}-01')
+
+param parSharedGroupId = toLower('/providers/Microsoft.Management/managementGroups/${varSharedGroupId}')
 
 // Read environment variables for Billing Scope
 var varBillingAccountName = readEnvironmentVariable('INFRA_BILLING_ACCOUNT_NAME','')

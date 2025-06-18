@@ -12,6 +12,9 @@ param parIdentityGroupId string = ''
 @sys.description('Connectivity group Id for the subscription.')
 param parConnectivityGroupId string = ''
 
+@sys.description('Shared Services group Id for the subscription.')
+param parSharedGroupId string = ''
+
 @sys.description('Provide a name for the alias. This name will also be the display name of the subscription.')
 @minLength(5)
 @maxLength(51)
@@ -26,6 +29,11 @@ param parSnkSubsIdenAliasName string = 'Identity'
 @minLength(5)
 @maxLength(51)
 param parSnkSubsConnAliasName string = 'Connectivity'
+
+@sys.description('Provide a name for the alias. This name will also be the display name of the subscription.')
+@minLength(5)
+@maxLength(51)
+param parSnkSubsShrAliasName string = 'Shared'
 
 @allowed([
   'Production'
@@ -76,6 +84,19 @@ resource resSnkSubsConnAlias 'Microsoft.Subscription/aliases@2021-10-01' = {
   }
 }
 
+resource resSnkSubsShrAlias 'Microsoft.Subscription/aliases@2021-10-01' = {
+  scope: tenant()
+  name: parSnkSubsShrAliasName
+  properties: {
+      additionalProperties: {
+        managementGroupId: parSharedGroupId
+      }
+    workload: parSnkWorkload
+    displayName: parSnkSubsShrAliasName
+    billingScope: parSnkBillingScope
+  }
+}
+
 // Output Management Subscription Names
 output outSnkSubsManagementAliasName string = resSnkSubsMgtAlias.name
 
@@ -93,3 +114,9 @@ output outSnkSubsConnectivityAliasName string = resSnkSubsConnAlias.name
 
 // Output Connectivity Subscription Id
 output outSnkSubsConnectivityAliasSubsId string = resSnkSubsConnAlias.properties.subscriptionId
+
+// Output Shared Subscription Names
+output outSnkSubsSharedAliasName string = resSnkSubsShrAlias.name
+
+// Output Shared Subscription Id
+output outSnkSubsSharedAliasSubsId string = resSnkSubsShrAlias.properties.subscriptionId

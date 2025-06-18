@@ -22,6 +22,12 @@ on:
       - "config/custom-parameters/resourceGroupSTechSandbox.parameters.all.bicepparam"
       - "config/custom-parameters/resourceGroupDataSandbox.parameters.all.bicepparam"
   workflow_dispatch:
+    inputs:
+      what_if_enabled:
+        description: 'Enable What-If analysis?'
+        required: false
+        default: 'false'
+        type: boolean
 
 permissions:
   id-token: write
@@ -49,6 +55,7 @@ env:
   CTECH_ABBR: ${{ vars.CTECH_ABBR }}
   STECH_ABBR: ${{ vars.STECH_ABBR }}
   DATA_ABBR: ${{ vars.DATA_ABBR }}
+  WHAT_IF_ENABLED: ${{ github.event.inputs.what_if_enabled }}
   IS_PULL_REQUEST: "${{ github.event_name == 'pull_request' }}"
 
 jobs:
