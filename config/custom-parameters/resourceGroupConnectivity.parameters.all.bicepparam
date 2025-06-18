@@ -5,7 +5,7 @@ param parLocation = readEnvironmentVariable('UKS_LOCATION','uksouth')
 var varAzUkAbbrName = readEnvironmentVariable('AZUREUK','azuk')
 var varAzUkSouth = readEnvironmentVariable('AZ_UKSOUTH','')
 
-var varRgNameNetworkt01 = toUpper('${varAzUkAbbrName}${varAzUkSouth}-rg-conn-netword-01')
+var varRgNameNetworkt01 = toUpper('${varAzUkAbbrName}${varAzUkSouth}-rg-conn-network-01')
 var varRgNameSecuriyt01 = toUpper('${varAzUkAbbrName}${varAzUkSouth}-rg-conn-security-01')
 var varRgNameDns01      = toUpper('${varAzUkAbbrName}${varAzUkSouth}-rg-conn-dns-01')
 
