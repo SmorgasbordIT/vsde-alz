@@ -50,7 +50,7 @@ jobs:
           fetch-depth: 0
 
       - name: "Remove Quotation Marks from Environment File"
-        uses: azure/powershell@v1
+        uses: azure/powershell@v2
         with:
           inlineScript: |
             Write-Host $ENV_FILE
@@ -69,7 +69,7 @@ jobs:
           enable-AzPSSession: true
 
       - name: "Connectivity Resource Group Deployment"
-        uses: azure/powershell@v1
+        uses: azure/powershell@v2
         with:
           inlineScript: |
             .\pipeline-scripts\Deploy-ALZConnectivityResourceGroup.ps1
