@@ -51,4 +51,6 @@ If($WhatIfEnabled) {
 }
 
 # Output to GitHub Actions log
-$azDeploymentOutput.Properties.Outputs.outSubscriptionDetails.value | ConvertTo-Json -Depth 5
+$azDeploymentOutput.Properties.Outputs.outSubscriptionDetails.value `
+| ForEach-Object { $_.Name } `
+| ConvertTo-Json -Depth 5
