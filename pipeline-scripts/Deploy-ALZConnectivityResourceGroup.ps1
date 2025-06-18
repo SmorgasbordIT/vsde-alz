@@ -15,10 +15,10 @@ param (
   [String]$azLocation = "$($env:UKS_LOCATION)",
 
   [Parameter()]
-  [String]$TemplateFile = "upstream-releases\$($env:UPSTREAM_RELEASE_VERSION)\infra-as-code\bicep\modules\resourceGroup\resourceGroup.bicep",
+  [String]$azTemplateFile = "upstream-releases\$($env:UPSTREAM_RELEASE_VERSION)\infra-as-code\bicep\modules\resourceGroup\resourceGroup.bicep",
 
   [Parameter()]
-  [String]$TemplateParameterFile = "config\custom-parameters\resourceGroupConnectivity.parameters.all.bicepparam",
+  [String]$azTemplateParameterFile = "config\custom-parameters\resourceGroupConnectivity.parameters.all.bicepparam",
 
   [Parameter()]
   [Boolean]$WhatIfEnabled = [System.Convert]::ToBoolean($($env:IS_PULL_REQUEST))
