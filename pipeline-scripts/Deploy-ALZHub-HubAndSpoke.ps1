@@ -46,6 +46,8 @@ $inputObject = @{
 
 Select-AzSubscription -SubscriptionId $azConnectivitySubscriptionId
 
+Write-Host "WhatIfEnabled: $WhatIfEnabled"
+
 # Execute deployment
 If($WhatIfEnabled) {
   $azDeploymentOutput = New-AzResourceGroupDeployment @inputObject -WhatIf

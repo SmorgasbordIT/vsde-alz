@@ -43,7 +43,7 @@ $inputObject = @{
 
 Select-AzSubscription -SubscriptionId $azConnectivitySubscriptionId
 
-Write-Host "WhatIfEnabled: $WhatIfEnabled"
+Write-Output "WhatIfEnabled: $WhatIfEnabled"
 
 # Execute deployment
 If($WhatIfEnabled) {
