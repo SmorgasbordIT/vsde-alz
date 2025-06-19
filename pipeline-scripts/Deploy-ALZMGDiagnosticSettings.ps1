@@ -30,7 +30,7 @@ param (
   [String]$azTemplateParameterFile = "config\custom-parameters\mgDiagSettingsAll.parameters.all.bicepparam",
 
   [Parameter()]
-  [Boolean]$WhatIfEnabled = [System.Convert]::ToBoolean($($env:IS_PULL_REQUEST))
+  [Boolean]$WhatIfEnabled = [System.Convert]::ToBoolean($env:WHAT_IF_ENABLED)
 )
 
 # Create the Azure Management Subscription name

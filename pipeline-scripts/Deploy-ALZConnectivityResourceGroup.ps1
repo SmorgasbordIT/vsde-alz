@@ -21,7 +21,7 @@ param (
   [String]$azTemplateParameterFile = "config\custom-parameters\resourceGroupConnectivity.parameters.all.bicepparam",
 
   [Parameter()]
-  [Boolean]$WhatIfEnabled = [System.Convert]::ToBoolean($($env:IS_PULL_REQUEST))
+  [Boolean]$WhatIfEnabled = [System.Convert]::ToBoolean($env:WHAT_IF_ENABLED)
 )
 
 # Create the Azure Connectivity Subscription name
@@ -42,6 +42,8 @@ $inputObject = @{
 }
 
 Select-AzSubscription -SubscriptionId $azConnectivitySubscriptionId
+
+Write-Host "WhatIfEnabled: $WhatIfEnabled"
 
 # Execute deployment
 If($WhatIfEnabled) {

@@ -16,7 +16,7 @@ param (
     [String]$azTemplateParameterFile = "config\custom-parameters\sandboxSubPlacement.parameters.all.bicepparam",
 
     [Parameter()]
-    [Boolean]$WhatIfEnabled = [System.Convert]::ToBoolean($($env:IS_PULL_REQUEST))
+    [Boolean]$WhatIfEnabled = [System.Convert]::ToBoolean($env:WHAT_IF_ENABLED)
 )
 
 # Create the Sandbox Management Group ID
