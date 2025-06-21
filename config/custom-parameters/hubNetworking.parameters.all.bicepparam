@@ -26,7 +26,6 @@ var varAzBastionName     = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnviron
 var varAzBstSnetNsgName  = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnvironmentHub}-snet-bst-nsg-01')
 var varAzFirewallName    = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnvironmentHub}-afw-01')
 var varAzHubRtName       = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnvironmentHub}-rt-afw-01')
-var varAzHubRouteName    = toLower('${varAzEnvironmentHub}-udr-default-azfw')
 var varHubVpnGwName      = toLower('${varAzEnvironmentHub}-vpngw-01')
 var varHubErGwName       = toLower('${varAzEnvironmentHub}-ergw-01')
 
@@ -123,7 +122,6 @@ param parAzFirewallDnsServers = []
 
 // Routing table parameters.
 param parHubRouteTableName = varAzHubRtName
-param parHubRouteName = varAzHubRouteName
 param parDisableBgpRoutePropagation = false
 
 // Azure Backup Location Code for Private DNS Zone - Geo-Code

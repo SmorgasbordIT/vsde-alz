@@ -245,9 +245,6 @@ param parAzureFirewallLock lockType = {
 @sys.description('Name of Route table to create for the default route of Hub.')
 param parHubRouteTableName string = '${parCompanyPrefix}-hub-routetable'
 
-@sys.description('Defines a User Defined Route (UDR) to override Azure default routing or to add custom routes to a subnet route table.')
-param parHubRouteName string = 'udr-default-azfw'
-
 @sys.description('Switch to enable/disable BGP Propagation on route table.')
 param parDisableBgpRoutePropagation bool = false
 
@@ -1068,7 +1065,7 @@ resource resHubRouteTable 'Microsoft.Network/routeTables@2024-05-01' = if (parAz
   properties: {
     routes: [
       {
-        name: parHubRouteName
+        name: 'hub-udr-default-azfw'
         properties: {
           addressPrefix: '0.0.0.0/0'
           nextHopType: 'VirtualAppliance'
