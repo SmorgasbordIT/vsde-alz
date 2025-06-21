@@ -27,6 +27,13 @@ param (
   [Boolean]$WhatIfEnabled = [System.Convert]::ToBoolean($env:WHAT_IF_ENABLED)
 )
 
+# Azure Backup Location Code - Geo-Code mapping: https://learn.microsoft.com/en-us/azure/backup/scripts/geo-code-list
+If($azLocation -eq "uksouth") {
+  $varGeoCode = "UKS"
+}Else{
+  $varGeoCode = "UKW"
+}
+
 # Create the Azure Connectivity Subscription name
 $azConnSubName = ('{0}-{1}-{2}-{3}-01' -f $azUk.ToUpper(),$azSnk.ToUpper(),$azEnvHub.ToUpper(),$azConn.ToUpper())
 
@@ -38,6 +45,7 @@ $azConnectivitySubscriptionId = $azConnSubAliasId.Id
 $inputObject = @{
   DeploymentName        = -join ('alz-Hub-and-SpokeDeploy-{0}' -f (Get-Date -Format 'yyyyMMddTHHMMssffffZ'))[0..63]
   ResourceGroupName     = $azConnectivityResourceGroup
+  parGeoCode            = $varGeoCode
   TemplateFile          = $azTemplateFile
   TemplateParameterFile = $azTemplateParameterFile
   WhatIf                = $WhatIfEnabled
@@ -46,7 +54,7 @@ $inputObject = @{
 
 Select-AzSubscription -SubscriptionId $azConnectivitySubscriptionId
 
-Write-Host "WhatIfEnabled: $WhatIfEnabled"
+Write-Output "WhatIfEnabled: $WhatIfEnabled"
 
 # Execute deployment
 If($WhatIfEnabled) {

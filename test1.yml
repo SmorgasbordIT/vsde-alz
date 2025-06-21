@@ -1,86 +1,72 @@
-name: ALZ-Bicep-2-PolicyAssignments
+name: ALZ-Bicep-4A-HubSpoke-Lunavi
 
-on:
-  push:
-    branches:
+trigger:
+# YAML PR triggers are supported only in GitHub and Bitbucket Cloud.
+# If you use Azure Repos Git, you can configure a branch policy for build validation to trigger your build pipeline for validation.
+# https://learn.microsoft.com/en-us/azure/devops/repos/git/branch-policies#build-validation
+  branches:
+    include:
       - "main"
-    paths:
-      - "config/custom-parameters/alzDefaultPolicyAssignments.parameters.all.bicepparam"
-  pull_request:
-    branches:
+  paths:
+    include:
+      - "config/custom-parameters/resourceGroupConnectivity.parameters.all.bicepparam"
+      - "config/custom-parameters/hubNetworking.parameters.all.bicepparam"
+pr:
+  branches:
+    include:
       - "main"
-    paths:
-      - "config/custom-parameters/alzDefaultPolicyAssignments.parameters.all.bicepparam"
-  workflow_dispatch:
-    inputs:
-      what_if_enabled:
-        description: 'Enable What-If analysis?'
-        required: false
-        default: 'false'
-        type: boolean
+  paths:
+    include:
+      - "config/custom-parameters/resourceGroupConnectivity.parameters.all.bicepparam"
+      - "config/custom-parameters/hubNetworking.parameters.all.bicepparam"
 
-permissions:
-  id-token: write
-  contents: read
-  pull-requests: write
-
-env:
+variables:
   ENV_FILE: ".env"
-  UKS_LOCATION: ${{ vars.UKS_LOCATION }}
-  ENV_HUB: ${{ vars.ENV_HUB }}
-  TOP_LEVEL_MG_PREFIX: ${{ vars.TOP_LEVEL_MG_PREFIX }}
-  UPSTREAM_RELEASE_VERSION: ${{ vars.UPSTREAM_RELEASE_VERSION }}
-  MODULES_RELEASE_VERSION: ${{ vars.MODULES_RELEASE_VERSION }}
-  AZUREUK: ${{ vars.AZUREUK }}
-  AZ_UKSOUTH: ${{ vars.AZ_UKSOUTH }}
-  SPACENK_ABBR: ${{ vars.SPACENK_ABBR }}
-  CONN_GRP_NAME: ${{ vars.CONN_GRP_NAME }}
-  MAN_GRP_NAME: ${{ vars.MAN_GRP_NAME }}
-  LOG_ANALYTICS_ABBR_NAME: ${{ vars.LOG_ANALYTICS_ABBR_NAME }}
-  WHAT_IF_ENABLED: ${{ github.event.inputs.what_if_enabled }}
-  IS_PULL_REQUEST: "${{ github.event_name == 'pull_request' }}"
+  SERVICE_CONNECTION_NAME: "sp-trapeze-eam"
+  IS_PULL_REQUEST: "false"
 
 jobs:
-  ALZ_Bicep_2_PolicyAssignments:
-    runs-on: ubuntu-latest
-    environment: Production
+  - job: ALZ_Bicep_4A_HubSpoke
+    pool:
+      vmImage: ubuntu-latest
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+      - checkout: self
+        displayName: Checkout Repo
 
-      - name: "Remove Quotation Marks from Environment File"
-        uses: azure/powershell@v2
-        with:
-          inlineScript: |
-            Write-Host $ENV_FILE
-            (Get-Content -Path $env:ENV_FILE -Encoding UTF8) | ForEach-Object {$_ -replace '"',''} | Out-File -FilePath $env:ENV_FILE -Encoding UTF8
-          azPSVersion: "latest"
+      - pwsh: |
+          (Get-Content -Path $env:ENV_FILE -Encoding UTF8) | ForEach-Object {$_ -replace '"',''} | Out-File -FilePath $env:ENV_FILE -Encoding UTF8
+        displayName: Remove Quotation Marks from Environment File
 
-      - name: Import Environment Variables from File
-        run: cat ${{ env.ENV_FILE }} >> $GITHUB_ENV
+      - pwsh: |
+          Write-Host $env:ENV_FILE
+          Get-Content -Path $env:ENV_FILE -Encoding UTF8 | ForEach-Object {
+            $envVarName, $envVarValue = ($_ -replace '"','').split('=')
+            echo "##vso[task.setvariable variable=$envVarName;]$envVarValue"
+            echo "Set $envVarName to $envVarValue]"
+          }
+        displayName: Import Environment Variables from File
 
-      - name: OIDC Login to Tenant
-        uses: azure/login@v2
-        with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.SPACE_AZURE_SUBSCRIPTION_ID }}
-          enable-AzPSSession: true
+      - pwsh: |
+          echo "##vso[task.setvariable variable=IS_PULL_REQUEST;]true"
+        condition: eq(variables['Build.Reason'], 'PullRequest')
+        displayName: Set IS_PULL_REQUEST Variable to True
 
-      # Example: Modify Deploy-ALZRoleAssignments.ps1 with applicable pararameter file and uncomment lines below to enable Role Assignments Deployment.
-      # - name: "Role Assignments Deployment"
-      #   uses: azure/powershell@v2
-      #   with:
-      #     inlineScript: |
-      #       .\pipeline-scripts\Deploy-ALZRoleAssignments.ps1
-      #     azPSVersion: "latest"
+      - task: AzurePowerShell@5
+        displayName: "Connectivity Resource Group Deployment"
+        inputs:
+          azureSubscription: ${{ variables.SERVICE_CONNECTION_NAME }}
+          azurePowerShellVersion: "LatestVersion"
+          pwsh: true
+          ScriptType: "InlineScript"
+          Inline: |
+            .\pipeline-scripts\Deploy-ALZConnectivityResourceGroup.ps1 -TemplateParameterFile ./config/custom-parameters/resourceGroupConnectivity.parameters.all.bicepparam
 
-      - name: "Built-in and Custom Policy Assignments Deployment"
-        uses: azure/powershell@v2
-        with:
-          inlineScript: |
-            .\pipeline-scripts\Deploy-ALZPolicyAssignments.ps1
-          azPSVersion: "latest"
-          
+      - task: AzurePowerShell@5
+        displayName: "Hub (Hub-and-Spoke) Deployment"
+        inputs:
+          azureSubscription: ${{ variables.SERVICE_CONNECTION_NAME }}
+          azurePowerShellVersion: "LatestVersion"
+          pwsh: true
+          ScriptType: "InlineScript"
+          Inline: |
+            .\pipeline-scripts\Deploy-ALZHub-HubAndSpoke.ps1 -TemplateParameterFile ./config/custom-parameters/hubNetworking.parameters.all.bicepparam

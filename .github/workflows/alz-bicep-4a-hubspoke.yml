@@ -28,6 +28,7 @@ permissions:
 
 env:
   ENV_FILE: ".env"
+  AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
   UKS_LOCATION: ${{ vars.UKS_LOCATION }}
   ENV_HUB: ${{ vars.ENV_HUB }}
   UPSTREAM_RELEASE_VERSION: ${{ vars.UPSTREAM_RELEASE_VERSION }}

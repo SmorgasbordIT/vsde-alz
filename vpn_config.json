@@ -1,0 +1,129 @@
+{
+    "name": "AZNEU-SNK-HUB-VPNGW-01",
+    "id": "/subscriptions/a9ae3abb-308c-4d3a-bc71-7810b7ae5913/resourceGroups/AZNEU-RG-VSDE-NET-01/providers/Microsoft.Network/virtualNetworkGateways/AZNEU-SNK-HUB-VPNGW-01",
+    "etag": "W/\"54170dad-8b81-4418-8e44-2fe8230ff5e0\"",
+    "type": "Microsoft.Network/virtualNetworkGateways",
+    "location": "northeurope",
+    "properties": {
+        "provisioningState": "Succeeded",
+        "resourceGuid": "8dbef6c2-bbc1-4d62-818c-d16ba1ece331",
+        "enablePrivateIpAddress": false,
+        "virtualNetworkGatewayMigrationStatus": {
+            "state": "None",
+            "phase": "None",
+            "errorMessage": ""
+        },
+        "ipConfigurations": [
+            {
+                "name": "default",
+                "id": "/subscriptions/a9ae3abb-308c-4d3a-bc71-7810b7ae5913/resourceGroups/AZNEU-RG-VSDE-NET-01/providers/Microsoft.Network/virtualNetworkGateways/AZNEU-SNK-HUB-VPNGW-01/ipConfigurations/default",
+                "etag": "W/\"54170dad-8b81-4418-8e44-2fe8230ff5e0\"",
+                "type": "Microsoft.Network/virtualNetworkGateways/ipConfigurations",
+                "properties": {
+                    "provisioningState": "Succeeded",
+                    "privateIPAllocationMethod": "Dynamic",
+                    "publicIPAddress": {
+                        "id": "/subscriptions/a9ae3abb-308c-4d3a-bc71-7810b7ae5913/resourceGroups/AZNEU-RG-VSDE-NET-01/providers/Microsoft.Network/publicIPAddresses/AZNEU-SNK-HUB-VPNGW-01-pip-01"
+                    },
+                    "subnet": {
+                        "id": "/subscriptions/a9ae3abb-308c-4d3a-bc71-7810b7ae5913/resourceGroups/AZNEU-RG-VSDE-NET-01/providers/Microsoft.Network/virtualNetworks/AZNEU-VNET-VSDE-01/subnets/GatewaySubnet"
+                    }
+                }
+            },
+            {
+                "name": "activeActive",
+                "id": "/subscriptions/a9ae3abb-308c-4d3a-bc71-7810b7ae5913/resourceGroups/AZNEU-RG-VSDE-NET-01/providers/Microsoft.Network/virtualNetworkGateways/AZNEU-SNK-HUB-VPNGW-01/ipConfigurations/activeActive",
+                "etag": "W/\"54170dad-8b81-4418-8e44-2fe8230ff5e0\"",
+                "type": "Microsoft.Network/virtualNetworkGateways/ipConfigurations",
+                "properties": {
+                    "provisioningState": "Succeeded",
+                    "privateIPAllocationMethod": "Dynamic",
+                    "publicIPAddress": {
+                        "id": "/subscriptions/a9ae3abb-308c-4d3a-bc71-7810b7ae5913/resourceGroups/AZNEU-RG-VSDE-NET-01/providers/Microsoft.Network/publicIPAddresses/AZNEU-SNK-HUB-VPNGW-01-pip-02"
+                    },
+                    "subnet": {
+                        "id": "/subscriptions/a9ae3abb-308c-4d3a-bc71-7810b7ae5913/resourceGroups/AZNEU-RG-VSDE-NET-01/providers/Microsoft.Network/virtualNetworks/AZNEU-VNET-VSDE-01/subnets/GatewaySubnet"
+                    }
+                }
+            },
+            {
+                "name": "AZNEU-SNK-HUB-VPN-P2S-01-pip",
+                "id": "/subscriptions/a9ae3abb-308c-4d3a-bc71-7810b7ae5913/resourceGroups/AZNEU-RG-VSDE-NET-01/providers/Microsoft.Network/virtualNetworkGateways/AZNEU-SNK-HUB-VPNGW-01/ipConfigurations/AZNEU-SNK-HUB-VPN-P2S-01-pip",
+                "etag": "W/\"54170dad-8b81-4418-8e44-2fe8230ff5e0\"",
+                "type": "Microsoft.Network/virtualNetworkGateways/ipConfigurations",
+                "properties": {
+                    "provisioningState": "Succeeded",
+                    "privateIPAllocationMethod": "Dynamic",
+                    "publicIPAddress": {
+                        "id": "/subscriptions/a9ae3abb-308c-4d3a-bc71-7810b7ae5913/resourceGroups/AZNEU-RG-VSDE-NET-01/providers/Microsoft.Network/publicIPAddresses/AZNEU-SNK-HUB-VPN-P2S-01-pip"
+                    },
+                    "subnet": {
+                        "id": "/subscriptions/a9ae3abb-308c-4d3a-bc71-7810b7ae5913/resourceGroups/AZNEU-RG-VSDE-NET-01/providers/Microsoft.Network/virtualNetworks/AZNEU-VNET-VSDE-01/subnets/GatewaySubnet"
+                    }
+                }
+            }
+        ],
+        "virtualNetworkGatewayPolicyGroups": [],
+        "sku": {
+            "name": "VpnGw2",
+            "tier": "VpnGw2",
+            "capacity": 2
+        },
+        "gatewayType": "Vpn",
+        "vpnType": "RouteBased",
+        "enableBgp": false,
+        "activeActive": true,
+        "vpnClientConfiguration": {
+            "vpnClientAddressPool": {
+                "addressPrefixes": [
+                    "172.16.1.0/24"
+                ]
+            },
+            "vpnClientProtocols": [
+                "OpenVPN"
+            ],
+            "vpnClientRootCertificates": [],
+            "vpnClientRevokedCertificates": [],
+            "vngClientConnectionConfigurations": [],
+            "vpnClientConnectionHealth": {
+                "vpnClientConnectionsCount": 0,
+                "totalIngressBytesTransferred": 0,
+                "totalEgressBytesTransferred": 0
+            },
+            "radiusServers": [],
+            "vpnClientIpsecPolicies": [],
+            "aadTenant": "https://login.microsoftonline.com/ec5f282f-1669-4a4b-b01f-120c7c8e8acf/",
+            "aadAudience": "41b23e61-6c1e-4545-b367-cd054e0ed4b4",
+            "aadIssuer": "https://sts.windows.net/ec5f282f-1669-4a4b-b01f-120c7c8e8acf/"
+        },
+        "bgpSettings": {
+            "asn": 65515,
+            "bgpPeeringAddress": "10.200.12.5,10.200.12.4",
+            "peerWeight": 0,
+            "bgpPeeringAddresses": [
+                {
+                    "ipconfigurationId": "/subscriptions/a9ae3abb-308c-4d3a-bc71-7810b7ae5913/resourceGroups/AZNEU-RG-VSDE-NET-01/providers/Microsoft.Network/virtualNetworkGateways/AZNEU-SNK-HUB-VPNGW-01/ipConfigurations/default",
+                    "defaultBgpIpAddresses": [
+                        "10.200.12.5"
+                    ],
+                    "customBgpIpAddresses": [],
+                    "tunnelIpAddresses": [
+                        "20.238.49.159"
+                    ]
+                },
+                {
+                    "ipconfigurationId": "/subscriptions/a9ae3abb-308c-4d3a-bc71-7810b7ae5913/resourceGroups/AZNEU-RG-VSDE-NET-01/providers/Microsoft.Network/virtualNetworkGateways/AZNEU-SNK-HUB-VPNGW-01/ipConfigurations/activeActive",
+                    "defaultBgpIpAddresses": [
+                        "10.200.12.4"
+                    ],
+                    "customBgpIpAddresses": [],
+                    "tunnelIpAddresses": [
+                        "4.210.90.17"
+                    ]
+                }
+            ]
+        },
+        "vpnGatewayGeneration": "Generation2"
+    },
+    "apiVersion": "2017-06-01"
+}
