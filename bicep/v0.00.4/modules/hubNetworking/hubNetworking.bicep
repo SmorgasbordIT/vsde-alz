@@ -259,9 +259,6 @@ param parHubRouteTableLock lockType = {
   notes: 'This lock was created by the ALZ Bicep Hub Networking Module.'
 }
 
-@sys.description('')
-param parGeoCode string
-
 @sys.description('Switch to enable/disable Private DNS Zones deployment.')
 param parPrivateDnsZonesEnabled bool = true
 

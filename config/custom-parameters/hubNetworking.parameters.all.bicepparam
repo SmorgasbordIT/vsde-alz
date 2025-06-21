@@ -123,9 +123,6 @@ param parAzFirewallDnsServers = []
 param parHubRouteTableName = varAzHubRtName
 param parDisableBgpRoutePropagation = false
 
-// Azure Backup Location Code for Private DNS Zone - Geo-Code
-param parGeoCode = ''
-
 // Private DNS zone parameters.
 param parPrivateDnsZonesEnabled = true
 param parPrivateDnsZones = [
