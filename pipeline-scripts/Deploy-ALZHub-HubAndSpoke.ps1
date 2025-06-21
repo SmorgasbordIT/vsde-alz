@@ -3,6 +3,9 @@ param (
   [String]$azUk = "$($env:AZUREUK)",
 
   [Parameter()]
+  [String]$azUks = "$($env:AZ_UKSOUTH)",
+
+  [Parameter()]
   [String]$azSnk = "$($env:SPACENK_ABBR)",
 
   [Parameter()]
@@ -13,9 +16,6 @@ param (
 
   [Parameter()]
   [String]$azLocation = "$($env:UKS_LOCATION)",
-
-  [Parameter()]
-  [String]$azConnectivityResourceGroup = "$($env:CONNECTIVITY_RESOURCE_GROUP)",
 
   [Parameter()]
   [String]$azTemplateFile = "upstream-releases\$($env:UPSTREAM_RELEASE_VERSION)\infra-as-code\bicep\modules\hubNetworking\hubNetworking.bicep",
@@ -41,10 +41,13 @@ $azConnSubName = ('{0}-{1}-{2}-{3}-01' -f $azUk.ToUpper(),$azSnk.ToUpper(),$azEn
 $azConnSubAliasId = Get-AzSubscription -SubscriptionName $azConnSubName
 $azConnectivitySubscriptionId = $azConnSubAliasId.Id
 
+# Create the Netwoking RG name
+$azRgConnNetwork = ('{0}-{1}-RG-CONN-NETWORK-01' -f $azUk.ToUpper(),$azUks.ToUpper())
+
 # Parameters necessary for deployment
 $inputObject = @{
   DeploymentName        = -join ('alz-Hub-and-SpokeDeploy-{0}' -f (Get-Date -Format 'yyyyMMddTHHMMssffffZ'))[0..63]
-  ResourceGroupName     = $azConnectivityResourceGroup
+  ResourceGroupName     = $azRgConnNetwork
   parGeoCode            = $varGeoCode
   TemplateFile          = $azTemplateFile
   TemplateParameterFile = $azTemplateParameterFile
