@@ -7,7 +7,6 @@ param parLocation = readEnvironmentVariable('UKS_LOCATION','uksouth')
 param parCompanyPrefix = readEnvironmentVariable('TOP_LEVEL_MG_PREFIX','azuk-snk')
 
 // Read environment abbreviations for naming convention
-var varGeoCode = substring(parLocation, 0, 3)
 var varAzUk = readEnvironmentVariable('AZUREUK','')
 var varUks  = readEnvironmentVariable('AZ_UKSOUTH','')
 var varSnk  = readEnvironmentVariable('SPACENK_ABBR','')
@@ -131,7 +130,7 @@ param parGeoCode = ''
 param parPrivateDnsZonesEnabled = true
 param parPrivateDnsZones = [
   'privatelink.${varLocationFormatted}.azmk8s.io'
-  'privatelink.${varGeoCode}.backup.windowsazure.com'
+  'privatelink.${varLocationFormatted}.backup.windowsazure.com'
   'privatelink.adf.azure.com'
   'privatelink.afs.azure.net'
   'privatelink.azure-api.net'
