@@ -196,8 +196,8 @@ param parVpnGatewayConfig = {
     aadAudience: '41b23e61-6c1e-4545-b367-cd054e0ed4b4'
     aadIssuer: 'https://sts.windows.net/${parAzTenantId}/'
   }
-  ipConfigurationName: '${vnetGatewayConfig}'
-  ipConfigurationActiveActiveName: '${vnetGatewayConfig2}'
+  ipConfigurationName: 'AZUKS-SNK-HUB-VPNGW-AA-01'
+  ipConfigurationActiveActiveName: 'AZUKS-SNK-HUB-VPNGW-AA-02'
 }
 
 param parExpressRouteGatewayEnabled = false
@@ -218,8 +218,8 @@ param parExpressRouteGatewayConfig = {
     bgpPeeringAddress: ''
     peerWeight: '5'
   }
-  ipConfigurationName: '${vnetGatewayConfig}'
-  ipConfigurationActiveActiveName: '${vnetGatewayConfig2}'
+  ipConfigurationName: 'AZUKS-SNK-HUB-ERGW-AA-01'
+  ipConfigurationActiveActiveName: 'AZUKS-SNK-HUB-ERGW-AA-02'
 }
 
 param parTags = {
