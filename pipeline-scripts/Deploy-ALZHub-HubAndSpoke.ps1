@@ -35,7 +35,7 @@ $azConnSubAliasId = Get-AzSubscription -SubscriptionName $azConnSubName
 $azConnectivitySubscriptionId = $azConnSubAliasId.Id
 
 # Create the Netwoking RG name
-$azRgConnNetwork = ('{0}-{1}-RG-CONN-NETWORK-01' -f $azUk.ToUpper(),$azUks.ToUpper())
+$azRgConnNetwork = ('{0}{1}-RG-CONN-NETWORK-01' -f $azUk.ToUpper(),$azUks.ToUpper())
 
 # Parameters necessary for deployment
 $inputObject = @{
