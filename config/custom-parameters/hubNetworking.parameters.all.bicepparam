@@ -53,11 +53,17 @@ param parSubnets = [
     routeTableId: ''
   }
   {
-    name: 'GatewaySubnet'
+    name: 'GatewaySubnet' // VPN Gateway Subnet
     ipAddressRange: '10.0.0.128/27'
     networkSecurityGroupId: ''
     routeTableId: ''
   }
+//  {
+//    name: 'GatewaySubnet' // ExpressRoute Gateway Subnet
+//    ipAddressRange: '10.0.0.160/27'
+//    networkSecurityGroupId: ''
+//    routeTableId: ''
+//  }
   {
     name: 'AzureBastionSubnet'
     ipAddressRange: '10.0.0.192/27'
@@ -66,25 +72,25 @@ param parSubnets = [
   }
   {
     name: varHubSnetPepName
-    ipAddressRange: '10.0.0.240/26'
+    ipAddressRange: '10.0.1.0/26'
     networkSecurityGroupId: ''
     routeTableId: ''
   }
   {
     name: varDnsPrIn01
-    ipAddressRange: '10.0.1.4/27'
+    ipAddressRange: '10.0.1.64/27'
     networkSecurityGroupId: ''
     routeTableId: ''
   }
   {
     name: varDnsPrOut01
-    ipAddressRange: '10.0.1.36/27'
+    ipAddressRange: '10.0.1.96/27'
     networkSecurityGroupId: ''
     routeTableId: ''
   }
   {
     name: varHubSnetMgmtName
-    ipAddressRange: '10.0.1.68/28'
+    ipAddressRange: '10.0.1.128/28'
     networkSecurityGroupId: ''
     routeTableId: ''
   }
