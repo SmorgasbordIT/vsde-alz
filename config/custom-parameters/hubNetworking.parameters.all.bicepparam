@@ -14,6 +14,11 @@ var varAzEnvironmentHub = readEnvironmentVariable('ENV_HUB','')
 // Need location formatted without spaces for private DNS zone names.
 var varLocationFormatted = toLower(replace(parLocation, ' ', ''))
 
+// Resource Groups name
+//var varRgConnNet = toUpper('${varAzUk}${varUks}-rg-conn-network-01')
+//var varRgConnSec = toUpper('${varAzUk}${varUks}-rg-conn-security-01')
+var varRgConnDns = toUpper('${varAzUk}${varUks}-rg-conn-dns-01')
+
 // Read environment variables for naming convention
 var varHubNetworkName    = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnvironmentHub}-vnet-01')
 var varHubSnetPepName    = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnvironmentHub}-snet-pep-01')
@@ -123,6 +128,7 @@ param parHubRouteTableName = varAzHubRtName
 param parDisableBgpRoutePropagation = false
 
 // Private DNS zone parameters.
+param parPrivateDnsZonesResourceGroup = varRgConnDns
 param parPrivateDnsZonesEnabled = true
 param parPrivateDnsZones = [
   'privatelink-global.wvd.microsoft.com'
