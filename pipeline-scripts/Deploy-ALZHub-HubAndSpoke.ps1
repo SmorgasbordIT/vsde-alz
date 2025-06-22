@@ -18,7 +18,7 @@ param (
   [String]$azLocation = "$($env:UKS_LOCATION)",
 
   [Parameter()]
-  [String]$azTemplateFile = "upstream-releases\$($env:UPSTREAM_RELEASE_VERSION)\infra-as-code\bicep\modules\hubNetworking\hubNetworking.bicep",
+  [String]$azTemplateFile = "bicep\$($env:MODULES_RELEASE_VERSION)\modules\hubNetworking\hubNetworking.bicep",
 
   [Parameter()]
   [String]$azTemplateParameterFile = "config\custom-parameters\hubNetworking.parameters.all.bicepparam",
