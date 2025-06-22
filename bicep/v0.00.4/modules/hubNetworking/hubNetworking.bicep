@@ -222,9 +222,6 @@ param parAzVpnGatewayAvailabilityZones array = []
 @sys.description('Switch to enable/disable Azure Firewall DNS Proxy.')
 param parAzFirewallDnsProxyEnabled bool = true
 
-@sys.description('Enables support for FQDNs in network rules when set to true.')
-param parAzFirewallDnsRequireProxyForNetworkRules bool = true
-
 @sys.description('Array of custom DNS servers used by Azure Firewall')
 param parAzFirewallDnsServers array = []
 
@@ -917,7 +914,6 @@ resource resFirewallPolicies 'Microsoft.Network/firewallPolicies@2024-05-01' = i
     : {
         dnsSettings: {
           enableProxy: parAzFirewallDnsProxyEnabled
-          requireProxyForNetworkRules: parAzFirewallDnsRequireProxyForNetworkRules
           servers: parAzFirewallDnsServers
         }
         sku: {

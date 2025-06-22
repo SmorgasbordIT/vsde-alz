@@ -120,7 +120,6 @@ param parAzFirewallTier = 'Standard'
 param parAzFirewallIntelMode = 'Alert'
 param parAzFirewallAvailabilityZones = null
 param parAzFirewallDnsProxyEnabled = true
-param parAzFirewallDnsRequireProxyForNetworkRules = true
 param parAzFirewallDnsServers = []
 
 // Routing table parameters.
