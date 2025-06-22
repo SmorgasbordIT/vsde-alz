@@ -259,6 +259,9 @@ param parHubRouteTableLock lockType = {
 @sys.description('Switch to enable/disable Private DNS Zones deployment.')
 param parPrivateDnsZonesEnabled bool = true
 
+@sys.description('An array of Private Link Private DNS Zones to exclude from the deployment. ')
+param privateLinkPrivateDnsZonesToExclude array = []
+
 @sys.description('Resource Group Name for Private DNS Zones.')
 param parPrivateDnsZonesResourceGroup string = resourceGroup().name
 
