@@ -1,12 +1,11 @@
 using '../../bicep/v0.00.4/modules/hubNetworking/hubNetworking.bicep'
 
-param parAzTenantId = readEnvironmentVariable('AZURE_TENANT_ID','')
-
 param parLocation = readEnvironmentVariable('UKS_LOCATION','uksouth')
 
 param parCompanyPrefix = readEnvironmentVariable('TOP_LEVEL_MG_PREFIX','azuk-snk')
 
 // Read environment abbreviations for naming convention
+var varAzTenantId = readEnvironmentVariable('AZURE_TENANT_ID','')
 var varAzUk = readEnvironmentVariable('AZUREUK','')
 var varUks  = readEnvironmentVariable('AZ_UKSOUTH','')
 var varSnk  = readEnvironmentVariable('SPACENK_ABBR','')
@@ -187,9 +186,9 @@ param parVpnGatewayConfig = {
     vngClientConnectionConfigurations: []
     radiusServers: []
     vpnClientIpsecPolicies: []
-    aadTenant: 'https://login.microsoftonline.com/${parAzTenantId}/'
+    aadTenant: 'https://login.microsoftonline.com/${varAzTenantId}/'
     aadAudience: '41b23e61-6c1e-4545-b367-cd054e0ed4b4'
-    aadIssuer: 'https://sts.windows.net/${parAzTenantId}/'
+    aadIssuer: 'https://sts.windows.net/${varAzTenantId}/'
   }
   ipConfigurationName: 'AZUKS-SNK-HUB-VPNGW-AA-01'
   ipConfigurationActiveActiveName: 'AZUKS-SNK-HUB-VPNGW-AA-02'
