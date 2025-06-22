@@ -59,12 +59,6 @@ param parSubnets = [
     routeTableId: ''
   }
   {
-    name: 'GatewaySubnet'
-    ipAddressRange: '10.0.0.160/27'
-    networkSecurityGroupId: ''
-    routeTableId: ''
-  }
-  {
     name: 'AzureBastionSubnet'
     ipAddressRange: '10.0.0.192/27'
     networkSecurityGroupId: ''
