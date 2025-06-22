@@ -30,7 +30,7 @@ type lockType = {
 }
 
 @sys.description('Azure Tenant ID')
-param parAzTenantId string
+param parAzTenantId string = ''
 
 @sys.description('The Azure Region to deploy the resources into.')
 param parLocation string = resourceGroup().location
