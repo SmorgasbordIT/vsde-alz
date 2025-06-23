@@ -252,6 +252,10 @@ param parPrivateDNSZonesLock lockType = {
 @sys.description('Switch to enable/disable VPN virtual network gateway deployment.')
 param parVpnGatewayEnabled bool = true
 
+@sys.description('VPN Gateway Public IP names for an active-active gateway')
+param parHubVpnGwPipActiveActiveName01 string = ''
+param parHubVpnGwPipActiveActiveName02 string = ''
+
 //ASN must be 65515 if deploying VPN & ER for co-existence to work: https://docs.microsoft.com/en-us/azure/expressroute/expressroute-howto-coexist-resource-manager#limits-and-limitations
 @sys.description('Configuration for VPN virtual network gateway to be deployed.')
 param parVpnGatewayConfig object = {
@@ -441,7 +445,7 @@ module modGatewayPublicIp '../../../../upstream-releases/v0.22.0/infra-as-code/b
               ? ['1', '2']
               : parAzVpnGatewayAvailabilityZones)
           : [])
-      parPublicIpName: '${parPublicIpPrefix}${gateway.name}${parPublicIpSuffix}'
+      parPublicIpName: parHubVpnGwPipActiveActiveName01
       parPublicIpProperties: {
         publicIpAddressVersion: 'IPv4'
         publicIpAllocationMethod: 'Static'
@@ -473,7 +477,7 @@ module modGatewayPublicIpActiveActive '../../../../upstream-releases/v0.22.0/inf
               ? ['1', '2']
               : parAzVpnGatewayAvailabilityZones)
           : [])
-      parPublicIpName: '${parPublicIpPrefix}${gateway.name}${parPublicIpSuffix}-aa'
+      parPublicIpName: parHubVpnGwPipActiveActiveName02
       parPublicIpProperties: {
         publicIpAddressVersion: 'IPv4'
         publicIpAllocationMethod: 'Static'

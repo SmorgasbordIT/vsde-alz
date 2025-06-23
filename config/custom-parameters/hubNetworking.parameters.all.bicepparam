@@ -27,7 +27,8 @@ var varDnsPrOut01        = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnviron
 var varHubSnetMgmtName   = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnvironmentHub}-snet-mgmt-01')
 var varAzFirewallName    = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnvironmentHub}-afw-01')
 var varAzHubRtName       = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnvironmentHub}-rt-afw-01')
-var varHubVpnGwName      = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnvironmentHub}-vpngw-01')
+var varHubVpnGwName01    = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnvironmentHub}-vpngw-01')
+var varHubVpnGwName02    = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnvironmentHub}-vpngw-02')
 var varHubErGwName       = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnvironmentHub}-ergw-01')
 
 // Hub networking parameters.
@@ -146,9 +147,11 @@ param parPrivateDnsZones = [
 ]
 
 param parVpnGatewayEnabled = true
+param parHubVpnGwPipActiveActiveName01 = '${varHubVpnGwName01}-pip'
+param parHubVpnGwPipActiveActiveName02 = '${varHubVpnGwName02}-pip'
 param parAzVpnGatewayAvailabilityZones = null
 param parVpnGatewayConfig = {
-  name: varHubVpnGwName
+  name: varHubVpnGwName01
   gatewayType: 'Vpn'
   sku: 'VpnGw2'
   vpnType: 'RouteBased'
@@ -164,8 +167,8 @@ param parVpnGatewayConfig = {
     peerWeight: '5'
   }
   vpnClientConfiguration: {}
-  ipConfigurationName: 'AZUKS-SNK-HUB-VPNGW-AA-01'
-  ipConfigurationActiveActiveName: 'AZUKS-SNK-HUB-VPNGW-AA-02'
+  ipConfigurationName: 'vnetGatewayConfig'
+  ipConfigurationActiveActiveName: 'vnetGatewayConfig2'
 }
 
 param parExpressRouteGatewayEnabled = false
@@ -186,8 +189,8 @@ param parExpressRouteGatewayConfig = {
     bgpPeeringAddress: ''
     peerWeight: '5'
   }
-  ipConfigurationName: 'AZUKS-SNK-HUB-ERGW-AA-01'
-  ipConfigurationActiveActiveName: 'AZUKS-SNK-HUB-ERGW-AA-02'
+  ipConfigurationName: 'vnetGatewayConfig'
+  ipConfigurationActiveActiveName: 'vnetGatewayConfig2'
 }
 
 param parTags = {
