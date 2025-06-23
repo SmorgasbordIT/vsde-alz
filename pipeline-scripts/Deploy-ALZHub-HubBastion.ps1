@@ -18,10 +18,10 @@ param (
   [String]$azLocation = "$($env:UKS_LOCATION)",
 
   [Parameter()]
-  [String]$azTemplateFile = "bicep\$($env:MODULES_RELEASE_VERSION)\modules\hubNetworking\hubNetworking.bicep",
+  [String]$azTemplateFile = "bicep\$($env:MODULES_RELEASE_VERSION)\modules\hubBastion\hubBastion.bicep",
 
   [Parameter()]
-  [String]$azTemplateParameterFile = "config\custom-parameters\hubNetworking.parameters.all.bicepparam",
+  [String]$azTemplateParameterFile = "config\custom-parameters\hubBastion.parameters.all.bicepparam",
 
   [Parameter()]
   [Boolean]$WhatIfEnabled = [System.Convert]::ToBoolean($env:WHAT_IF_ENABLED)

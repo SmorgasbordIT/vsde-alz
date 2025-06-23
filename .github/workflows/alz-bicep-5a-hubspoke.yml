@@ -7,12 +7,14 @@ on:
     paths:
       - "config/custom-parameters/resourceGroupConnectivity.parameters.all.bicepparam"
       - "config/custom-parameters/hubNetworking.parameters.all.bicepparam"
+      - "config/custom-parameters/hubBastion.parameters.all.bicepparam"
   pull_request:
     branches:
       - "main"
     paths:
       - "config/custom-parameters/resourceGroupConnectivity.parameters.all.bicepparam"
       - "config/custom-parameters/hubNetworking.parameters.all.bicepparam"
+      - "config/custom-parameters/hubBastion.parameters.all.bicepparam"
   workflow_dispatch:
     inputs:
       what_if_enabled:
