@@ -1,5 +1,5 @@
-metadata name = 'ALZ Bicep - Hub Bastion Subnet Module'
-metadata description = 'ALZ Bicep Module used to set up Hub Bastion Subnet'
+metadata name = 'ALZ Bicep - Hub Subnet Module'
+metadata description = 'ALZ Bicep Module used to set up Hub Subnet'
 
 @description('Subnet name')
 param subnetName string

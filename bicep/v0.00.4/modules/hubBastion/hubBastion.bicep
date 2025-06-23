@@ -58,16 +58,6 @@ param parGlobalResourceLock lockType = {
   notes: 'This lock was created by the ALZ Bicep Hub Networking Module.'
 }
 
-@sys.description('The name, IP address range, network security group, route table and delegation serviceName for each subnet in the virtual networks.')
-param parSubnets subnetOptionsType = [
-  {
-    name: 'AzureBastionSubnet'
-    ipAddressRange: '10.10.15.0/24'
-    networkSecurityGroupId: ''
-    routeTableId: ''
-  }
-]
-
 @sys.description('Public IP Address SKU.')
 @allowed([
   'Basic'
@@ -300,7 +290,7 @@ resource resBastionNsg 'Microsoft.Network/networkSecurityGroups@2024-05-01' = if
   }
 }
 
-module modBastionSubnetModule '../hubBastionSubnet/hubBastionSubnet.bicep' = {
+module modBastionSubnetModule '../hubSubnet/hubSubnet.bicep' = {
   name: parBastionSubnetName
   scope: resourceGroup(parRgHubNetworkVnet) // Deploys to VNet's RG
   params: {
