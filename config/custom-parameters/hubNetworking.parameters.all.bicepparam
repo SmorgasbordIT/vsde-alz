@@ -27,8 +27,8 @@ var varDnsPrOut01        = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnviron
 var varHubSnetMgmtName   = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnvironmentHub}-snet-mgmt-01')
 var varAzFirewallName    = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnvironmentHub}-afw-01')
 var varAzHubRtName       = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnvironmentHub}-rt-afw-01')
-var varHubVpnGwName      = toLower('${varAzEnvironmentHub}-vpngw-01')
-var varHubErGwName       = toLower('${varAzEnvironmentHub}-ergw-01')
+var varHubVpnGwName      = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnvironmentHub}-vpngw-01')
+var varHubErGwName       = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnvironmentHub}-ergw-01')
 
 // Hub networking parameters.
 param parHubNetworkName = '${varHubNetworkName}'
@@ -145,7 +145,7 @@ param parPrivateDnsZones = [
   'privatelink.wvd.microsoft.com'
 ]
 
-param parVpnGatewayEnabled = false
+param parVpnGatewayEnabled = true
 param parAzVpnGatewayAvailabilityZones = null
 param parVpnGatewayConfig = {
   name: varHubVpnGwName
