@@ -82,10 +82,3 @@ jobs:
           inlineScript: |
             .\pipeline-scripts\Deploy-ALZHub-HubAndSpoke.ps1
           azPSVersion: "latest"
-
-      - name: "Hub Bastion Deployment"
-        uses: azure/powershell@v2
-        with:
-          inlineScript: |
-            .\pipeline-scripts\Deploy-ALZHub-HubBastion.ps1
-          azPSVersion: "latest"

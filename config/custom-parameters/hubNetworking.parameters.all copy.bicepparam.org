@@ -25,6 +25,8 @@ var varHubSnetPepName    = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnviron
 var varDnsPrIn01         = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnvironmentHub}-snet-dnspr-in-01')
 var varDnsPrOut01        = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnvironmentHub}-snet-dnspr-out-01')
 var varHubSnetMgmtName   = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnvironmentHub}-snet-mgmt-01')
+var varAzBastionName     = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnvironmentHub}-bst-01')
+var varAzBstSnetNsgName  = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnvironmentHub}-snet-bst-nsg-01')
 var varAzFirewallName    = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnvironmentHub}-afw-01')
 var varAzHubRtName       = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnvironmentHub}-rt-afw-01')
 var varHubVpnGwName      = toLower('${varAzEnvironmentHub}-vpngw-01')
@@ -63,6 +65,12 @@ param parSubnets = [
 //    routeTableId: ''
 //  }
   {
+    name: 'AzureBastionSubnet'
+    ipAddressRange: '10.0.0.192/27'
+    networkSecurityGroupId: ''
+    routeTableId: ''
+  }
+  {
     name: varHubSnetPepName
     ipAddressRange: '10.0.1.0/26'
     networkSecurityGroupId: ''
@@ -92,6 +100,17 @@ param parSubnets = [
 param parPublicIpSku = 'Standard'
 param parPublicIpPrefix = ''
 param parPublicIpSuffix = '-pip'
+
+// Azure Bastion host parameters.
+param parAzBastionEnabled = true
+param parAzBastionName = varAzBastionName
+param parAzBastionSku = 'Standard'
+param parAzBastionTunneling = false
+param parAzBastionNsgName = varAzBstSnetNsgName
+param parBastionOutboundSshRdpPorts = [
+  '22'
+  '3389'
+]
 
 // Azure Firewall parameters.
 param parAzFirewallEnabled = true
@@ -221,6 +240,11 @@ param parGlobalResourceLock = {
 }
 
 param parVirtualNetworkLock = {
+  kind: 'None'
+  notes: 'This lock was created by the ALZ Bicep Hub Networking Module.'
+}
+
+param parBastionLock = {
   kind: 'None'
   notes: 'This lock was created by the ALZ Bicep Hub Networking Module.'
 }
