@@ -63,6 +63,12 @@ param parSubnets = [
 //    routeTableId: ''
 //  }
   {
+    name: 'AzureBastionSubnet'
+    ipAddressRange: '10.0.0.192/27'
+    networkSecurityGroupId: ''
+    routeTableId: ''
+  }
+  {
     name: varHubSnetPepName
     ipAddressRange: '10.0.1.0/26'
     networkSecurityGroupId: ''

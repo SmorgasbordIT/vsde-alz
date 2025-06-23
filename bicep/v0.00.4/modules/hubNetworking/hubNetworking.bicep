@@ -55,6 +55,12 @@ param parHubNetworkAddressPrefix string = '10.10.0.0/16'
 @sys.description('The name, IP address range, network security group, route table and delegation serviceName for each subnet in the virtual networks.')
 param parSubnets subnetOptionsType = [
   {
+    name: 'AzureBastionSubnet'
+    ipAddressRange: '10.10.15.0/24'
+    networkSecurityGroupId: ''
+    routeTableId: ''
+  }
+  {
     name: 'GatewaySubnet'
     ipAddressRange: '10.10.252.0/24'
     networkSecurityGroupId: ''
