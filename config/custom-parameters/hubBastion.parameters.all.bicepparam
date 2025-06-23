@@ -10,26 +10,26 @@ var varUks  = readEnvironmentVariable('AZ_UKSOUTH','')
 var varSnk  = readEnvironmentVariable('SPACENK_ABBR','')
 var varAzEnvironmentHub = readEnvironmentVariable('ENV_HUB','')
 
+// Resource Groups name
+var varRgHubNetworkVnet = toUpper('${varAzUk}${varUks}-rg-conn-network-01')
+
 // Read environment variables for naming convention
-var varHubNetworkName    = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnvironmentHub}-vnet-01')
-var varAzBastionName     = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnvironmentHub}-bst-01')
-var varAzBstSnetNsgName  = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnvironmentHub}-snet-bst-nsg-01')
+var varHubNetworkVnetName = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnvironmentHub}-vnet-01')
+var varAzBastionName      = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnvironmentHub}-bst-01')
+var varAzBstSnetNsgName   = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnvironmentHub}-snet-bst-nsg-01')
 
 // Hub networking parameters.
-param parHubNetworkName = '${varHubNetworkName}'
-param parHubNetworkAddressPrefix = '10.0.0.0/16'
-param parDnsServerIps = []
-param parDdosEnabled = false
-param parDdosPlanName = 'alz-ddos-plan'
+param parHubNetworkVnetName = '${varHubNetworkVnetName}'
+param parRgHubNetworkVnet = '${varRgHubNetworkVnet}'
 
-param parSubnets = [
-  {
-    name: 'AzureBastionSubnet'
-    ipAddressRange: '10.0.0.192/27'
-    networkSecurityGroupId: ''
-    routeTableId: ''
-  }
-]
+//param parSubnets = [
+//  {
+//    name: 'AzureBastionSubnet'
+//    ipAddressRange: '10.0.0.192/27'
+//    networkSecurityGroupId: ''
+//    routeTableId: ''
+//  }
+//]
 
 // Default public IP parameters.
 param parPublicIpSku = 'Standard'
@@ -37,6 +37,8 @@ param parPublicIpPrefix = ''
 param parPublicIpSuffix = '-pip'
 
 // Azure Bastion host parameters.
+param parBastionSubnetPrefix = '10.0.0.192/27'
+param parBastionSubnetName = 'AzureBastionSubnet'
 param parAzBastionEnabled = true
 param parAzBastionName = varAzBastionName
 param parAzBastionSku = 'Standard'

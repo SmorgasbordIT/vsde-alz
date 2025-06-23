@@ -36,16 +36,7 @@ param parLocation string = resourceGroup().location
 param parCompanyPrefix string = 'alz'
 
 @sys.description('Name for Hub Network.')
-param parHubNetworkVnetName string = '${parCompanyPrefix}-hub-${parLocation}'
-
-@sys.description('')
-param parRgHubNetworkVnet string = ''
-
-@sys.description('')
-param parBastionSubnetPrefix string = ''
-
-@sys.description('')
-param parBastionSubnetName string = ''
+param parHubNetworkName string = '${parCompanyPrefix}-hub-${parLocation}'
 
 @sys.description('''Global Resource Lock Configuration used for all resources deployed in this module.
 
@@ -58,6 +49,9 @@ param parGlobalResourceLock lockType = {
   notes: 'This lock was created by the ALZ Bicep Hub Networking Module.'
 }
 
+@sys.description('The IP address range for Hub Network.')
+param parHubNetworkAddressPrefix string = '10.10.0.0/16'
+
 @sys.description('The name, IP address range, network security group, route table and delegation serviceName for each subnet in the virtual networks.')
 param parSubnets subnetOptionsType = [
   {
@@ -67,6 +61,20 @@ param parSubnets subnetOptionsType = [
     routeTableId: ''
   }
 ]
+
+@sys.description('Array of DNS Server IP addresses for VNet.')
+param parDnsServerIps array = []
+
+@sys.description('''Resource Lock Configuration for Virtual Network.
+
+- `kind` - The lock settings of the service which can be CanNotDelete, ReadOnly, or None.
+- `notes` - Notes about this lock.
+
+''')
+param parVirtualNetworkLock lockType = {
+  kind: 'None'
+  notes: 'This lock was created by the ALZ Bicep Hub Networking Module.'
+}
 
 @sys.description('Public IP Address SKU.')
 @allowed([
@@ -114,19 +122,107 @@ param parBastionLock lockType = {
   notes: 'This lock was created by the ALZ Bicep Hub Networking Module.'
 }
 
+@sys.description('Switch to enable/disable DDoS Network Protection deployment.')
+param parDdosEnabled bool = true
+
+@sys.description('DDoS Plan Name.')
+param parDdosPlanName string = '${parCompanyPrefix}-ddos-plan'
+
 @sys.description('Tags you would like to be applied to all resources in this module.')
 param parTags object = {}
 
 @sys.description('Set Parameter to true to Opt-out of deployment telemetry.')
 param parTelemetryOptOut bool = false
 
-resource resHubVnet 'Microsoft.Network/virtualNetworks@2024-07-01' existing = {
-  name: parHubNetworkVnetName
-  scope: resourceGroup(parRgHubNetworkVnet)
-}
+var varSubnetMap = map(range(0, length(parSubnets)), i => {
+  name: parSubnets[i].name
+  ipAddressRange: parSubnets[i].ipAddressRange
+  networkSecurityGroupId: parSubnets[i].?networkSecurityGroupId ?? ''
+  routeTableId: parSubnets[i].?routeTableId ?? ''
+  delegation: parSubnets[i].?delegation ?? ''
+})
+
+var varSubnetProperties = [
+  for subnet in varSubnetMap: {
+    name: subnet.name
+    properties: {
+      addressPrefix: subnet.ipAddressRange
+
+      delegations: (empty(subnet.delegation))
+        ? null
+        : [
+            {
+              name: subnet.delegation
+              properties: {
+                serviceName: subnet.delegation
+              }
+            }
+          ]
+
+      networkSecurityGroup: (subnet.name == 'AzureBastionSubnet' && parAzBastionEnabled)
+        ? {
+            id: '${resourceGroup().id}/providers/Microsoft.Network/networkSecurityGroups/${parAzBastionNsgName}'
+          }
+        : (empty(subnet.networkSecurityGroupId))
+            ? null
+            : {
+                id: subnet.networkSecurityGroupId
+              }
+
+      routeTable: (empty(subnet.routeTableId))
+        ? null
+        : {
+            id: subnet.routeTableId
+          }
+    }
+  }
+]
 
 // Customer Usage Attribution Id Telemetry
 var varCuaid = '2686e846-5fdc-4d4f-b533-16dcb09d6e6c'
+
+//DDos Protection plan will only be enabled if parDdosEnabled is true.
+resource resDdosProtectionPlan 'Microsoft.Network/ddosProtectionPlans@2023-02-01' = if (parDdosEnabled) {
+  name: parDdosPlanName
+  location: parLocation
+  tags: parTags
+}
+
+resource resHubVnet 'Microsoft.Network/virtualNetworks@2024-05-01' = {
+  dependsOn: [
+    resBastionNsg
+  ]
+  name: parHubNetworkName
+  location: parLocation
+  tags: parTags
+  properties: {
+    addressSpace: {
+      addressPrefixes: [
+        parHubNetworkAddressPrefix
+      ]
+    }
+    dhcpOptions: {
+      dnsServers: parDnsServerIps
+    }
+    subnets: varSubnetProperties
+    enableDdosProtection: parDdosEnabled
+    ddosProtectionPlan: (parDdosEnabled)
+      ? {
+          id: resDdosProtectionPlan.id
+        }
+      : null
+  }
+}
+
+// Create a virtual network resource lock if parGlobalResourceLock.kind != 'None' or if parVirtualNetworkLock.kind != 'None'
+resource resVirtualNetworkLock 'Microsoft.Authorization/locks@2020-05-01' = if (parVirtualNetworkLock.kind != 'None' || parGlobalResourceLock.kind != 'None') {
+  scope: resHubVnet
+  name: parVirtualNetworkLock.?name ?? '${resHubVnet.name}-lock'
+  properties: {
+    level: (parGlobalResourceLock.kind != 'None') ? parGlobalResourceLock.kind : parVirtualNetworkLock.kind
+    notes: (parGlobalResourceLock.kind != 'None') ? parGlobalResourceLock.?notes : parVirtualNetworkLock.?notes
+  }
+}
 
 module modBastionPublicIp '../../../../upstream-releases/v0.22.0/infra-as-code/bicep/modules/publicIp/publicIp.bicep' = if (parAzBastionEnabled) {
   name: 'deploy-Bastion-Public-IP'
@@ -297,17 +393,6 @@ resource resBastionNsg 'Microsoft.Network/networkSecurityGroups@2024-05-01' = if
         }
       }
     ]
-  }
-}
-
-module modBastionSubnetModule '../hubBastionSubnet/hubBastionSubnet.bicep' = {
-  name: parBastionSubnetName
-  scope: resourceGroup(parRgHubNetworkVnet) // Deploys to VNet's RG
-  params: {
-    subnetName: parBastionSubnetName
-    addressPrefix: parBastionSubnetPrefix
-    nsgId: resBastionNsg.id
-    rgNetworkVnet: parAzBastionNsgName
   }
 }
 
