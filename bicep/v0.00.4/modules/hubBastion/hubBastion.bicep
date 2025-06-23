@@ -307,7 +307,7 @@ module modBastionSubnetModule '../hubBastionSubnet/hubBastionSubnet.bicep' = {
     subnetName: parBastionSubnetName
     addressPrefix: parBastionSubnetPrefix
     nsgId: resBastionNsg.id
-    rgNetworkVnet: parAzBastionNsgName
+    rgNetworkVnet: parRgHubNetworkVnet
   }
 }
 
