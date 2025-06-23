@@ -304,10 +304,10 @@ module modBastionSubnetModule '../hubBastionSubnet/hubBastionSubnet.bicep' = {
   name: parBastionSubnetName
   scope: resourceGroup(parRgHubNetworkVnet) // Deploys to VNet's RG
   params: {
+    vnetName: parHubNetworkVnetName
     subnetName: parBastionSubnetName
     addressPrefix: parBastionSubnetPrefix
     nsgId: resBastionNsg.id
-    rgNetworkVnet: parRgHubNetworkVnet
   }
 }
 

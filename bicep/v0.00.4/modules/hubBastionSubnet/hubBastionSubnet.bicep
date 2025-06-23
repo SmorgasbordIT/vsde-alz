@@ -11,7 +11,7 @@ param addressPrefix string
 param nsgId string
 
 @description('ALZ Hub VNet resource group name')
-param rgNetworkVnet string
+param vnetName string
 
 resource subnet 'Microsoft.Network/virtualNetworks/subnets@2024-07-01' = {
   name: subnetName
@@ -26,5 +26,5 @@ resource subnet 'Microsoft.Network/virtualNetworks/subnets@2024-07-01' = {
 
 // Reference the parent VNet at this module's scope
 resource existingVnet 'Microsoft.Network/virtualNetworks@2024-07-01' existing = {
-  name: rgNetworkVnet
+  name: vnetName
 }
