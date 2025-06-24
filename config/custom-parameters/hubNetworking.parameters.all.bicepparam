@@ -157,7 +157,7 @@ param parVpnGatewayConfig = {
   vpnType: 'RouteBased'
   generation: 'Generation2'
   enableBgp: false
-  activeActive: true
+  activeActive: false
   enableBgpRouteTranslationForNat: false
   enableDnsForwarding: false
   bgpPeeringAddress: ''
