@@ -29,6 +29,7 @@ var varAzFirewallName    = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnviron
 var varAzHubRtName       = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnvironmentHub}-rt-afw-01')
 var varHubVpnGwName01    = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnvironmentHub}-vpngw-01')
 var varHubVpnGwName02    = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnvironmentHub}-vpngw-02')
+var varHubVpnGwP2sName01 = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnvironmentHub}-vpngw-p2s-01')
 var varHubErGwName       = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnvironmentHub}-ergw-01')
 
 // Hub networking parameters.
@@ -149,6 +150,7 @@ param parPrivateDnsZones = [
 param parVpnGatewayEnabled = true
 param parHubVpnGwPipActiveActiveName01 = '${varHubVpnGwName01}-pip'
 param parHubVpnGwPipActiveActiveName02 = '${varHubVpnGwName02}-pip'
+param parHubVpnGwPipPointToSiteName01  = '${varHubVpnGwP2sName01}-pip'
 param parAzVpnGatewayAvailabilityZones = null
 param parVpnGatewayConfig = {
   name: varHubVpnGwName01
@@ -157,7 +159,7 @@ param parVpnGatewayConfig = {
   vpnType: 'RouteBased'
   generation: 'Generation2'
   enableBgp: false
-  activeActive: false
+  activeActive: true
   enableBgpRouteTranslationForNat: false
   enableDnsForwarding: false
   bgpPeeringAddress: ''
@@ -166,9 +168,30 @@ param parVpnGatewayConfig = {
     bgpPeeringAddress: '10.0.0.132,10.0.0.133'
     peerWeight: '5'
   }
-  vpnClientConfiguration: {}
+  vpnClientConfiguration: {
+    vpnClientAddressPool: {
+      addressPrefixes: [
+        '172.16.255.0/24'
+      ]
+    }
+    vpnClientProtocols: [
+      'OpenVPN'
+    ]
+    vpnAuthenticationTypes: [
+      'AAD'
+    ]
+    vpnClientRootCertificates: []
+    vpnClientRevokedCertificates: []
+    vngClientConnectionConfigurations: []
+    radiusServers: []
+    vpnClientIpsecPolicies: []
+    aadTenant: 'https://login.microsoftonline.com/${varAzTenantId}/'
+    aadAudience: '41b23e61-6c1e-4545-b367-cd054e0ed4b4'
+    aadIssuer: 'https://sts.windows.net/${varAzTenantId}/'
+  }
   ipConfigurationName: 'vnetGatewayConfig'
   ipConfigurationActiveActiveName: 'vnetGatewayConfig2'
+  ipConfigurationPointToSiteName: 'vnetGatewayP2SConfig'
 }
 
 param parExpressRouteGatewayEnabled = false

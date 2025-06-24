@@ -252,12 +252,9 @@ param parPrivateDNSZonesLock lockType = {
 @sys.description('Switch to enable/disable VPN virtual network gateway deployment.')
 param parVpnGatewayEnabled bool = true
 
-@sys.description('VPN Gateway Public IP names for an active-active gateway.')
+@sys.description('VPN Gateway Public IP names for an active-active gateway')
 param parHubVpnGwPipActiveActiveName01 string = ''
 param parHubVpnGwPipActiveActiveName02 string = ''
-
-@sys.description('VPN Gateway Public IP names for an point-to-site.')
-param parHubVpnGwPipPointToSiteName01 string = ''
 
 //ASN must be 65515 if deploying VPN & ER for co-existence to work: https://docs.microsoft.com/en-us/azure/expressroute/expressroute-howto-coexist-resource-manager#limits-and-limitations
 @sys.description('Configuration for VPN virtual network gateway to be deployed.')
@@ -497,38 +494,6 @@ module modGatewayPublicIpActiveActive '../../../../upstream-releases/v0.22.0/inf
   }
 ]
 
-// If the gateway is going to have a point-to-site config, create a third public IP
-module modGatewayPublicIpPointToSite '../../../../upstream-releases/v0.22.0/infra-as-code/bicep/modules/publicIp/publicIp.bicep' = [
-  for (gateway, i) in varGwConfig: if ((gateway.name != 'noconfigVpn') && (gateway.name != 'noconfigEr') && !empty(gateway.vpnClientConfiguration)) {
-    name: 'deploy-Gateway-Public-IP-PointToSite-${i}'
-    params: {
-      parLocation: parLocation
-      parAvailabilityZones: toLower(gateway.gatewayType) == 'expressroute'
-      ? (contains(toLower(gateway.sku), 'az') && empty(parAzErGatewayAvailabilityZones)
-          ? ['1', '2']
-          : parAzErGatewayAvailabilityZones)
-      : (toLower(gateway.gatewayType) == 'vpn'
-          ? (contains(toLower(gateway.sku), 'az') && empty(parAzVpnGatewayAvailabilityZones)
-              ? ['1', '2']
-              : parAzVpnGatewayAvailabilityZones)
-          : [])
-      parPublicIpName: parHubVpnGwPipPointToSiteName01
-      parPublicIpProperties: {
-        publicIpAddressVersion: 'IPv4'
-        publicIpAllocationMethod: 'Static'
-      }
-      parPublicIpSku: {
-        name: parPublicIpSku
-      }
-      parResourceLockConfig: (parGlobalResourceLock.kind != 'None')
-        ? parGlobalResourceLock
-        : parVirtualNetworkGatewayLock
-      parTags: parTags
-      parTelemetryOptOut: parTelemetryOptOut
-    }
-  }
-]
-
 //Minumum subnet size is /27 supporting documentation https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-vpn-gateway-settings#gwsub
 resource resGateway 'Microsoft.Network/virtualNetworkGateways@2024-05-01' = [
   for (gateway, i) in varGwConfig: if ((gateway.name != 'noconfigVpn') && (gateway.name != 'noconfigEr')) {
@@ -587,23 +552,6 @@ resource resGateway 'Microsoft.Network/virtualNetworkGateways@2024-05-01' = [
                 properties: {
                   publicIPAddress: {
                     id: modGatewayPublicIpActiveActive[i].outputs.outPublicIpId // Secondary Public IP
-                  }
-                  subnet: {
-                    id: resGatewaySubnetRef.id
-                  }
-                }
-              }
-            ]
-          : [],
-        // Add third IP configuration if Point-To-Site config is present
-        !empty(gateway.vpnClientConfiguration)
-          ? [
-              {
-                id: resHubVnet.id
-                name: gateway.ipConfigurationPointToSiteName
-                properties: {
-                  publicIPAddress: {
-                    id: modGatewayPublicIpPointToSite[i].outputs.outPublicIpId // Third Public IP
                   }
                   subnet: {
                     id: resGatewaySubnetRef.id
