@@ -167,7 +167,6 @@ param parVpnGatewayConfig = {
     peerWeight: '5'
   }
   vpnClientConfiguration: {
-    vpnClientConfiguration: {
     vpnClientAddressPool: {
       addressPrefixes: [
         '172.16.255.0/24'
@@ -187,7 +186,6 @@ param parVpnGatewayConfig = {
     aadTenant: 'https://login.microsoftonline.com/${varAzTenantId}/'
     aadAudience: '41b23e61-6c1e-4545-b367-cd054e0ed4b4'
     aadIssuer: 'https://sts.windows.net/${varAzTenantId}/'
-    }
   }
   ipConfigurationName: 'vnetGatewayConfig'
   ipConfigurationActiveActiveName: 'vnetGatewayConfig2'
