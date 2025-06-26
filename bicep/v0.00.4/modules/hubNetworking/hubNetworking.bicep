@@ -544,11 +544,16 @@ resource resGateway 'Microsoft.Network/virtualNetworkGateways@2024-05-01' = [
       bgpSettings: (gateway.enableBgp) ? gateway.bgpSettings : null
       gatewayType: gateway.gatewayType
       vpnGatewayGeneration: (toLower(gateway.gatewayType) == 'vpn') ? gateway.generation : 'None'
-      vpnType: gateway.vpnType
       sku: {
         name: gateway.sku
         tier: gateway.sku
       }
+
+      // Conditionally include vpnType only for VPN gateways
+        ...(toLower(gateway.gatewayType) == 'vpn' ? {
+          vpnType: gateway.vpnType
+        } : {})
+
       vpnClientConfiguration: (toLower(gateway.gatewayType) == 'vpn')
         ? {
             vpnClientAddressPool: gateway.vpnClientConfiguration.?vpnClientAddressPool ?? ''

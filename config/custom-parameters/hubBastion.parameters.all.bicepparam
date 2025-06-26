@@ -22,22 +22,13 @@ var varAzBstSnetNsgName   = toUpper('${varAzUk}${varUks}-${varSnk}-${varAzEnviro
 param parHubNetworkVnetName = '${varHubNetworkVnetName}'
 param parRgHubNetworkVnet = '${varRgHubNetworkVnet}'
 
-//param parSubnets = [
-//  {
-//    name: 'AzureBastionSubnet'
-//    ipAddressRange: '10.0.0.192/27'
-//    networkSecurityGroupId: ''
-//    routeTableId: ''
-//  }
-//]
-
 // Default public IP parameters.
 param parPublicIpSku = 'Standard'
 param parPublicIpPrefix = ''
 param parPublicIpSuffix = '-pip'
 
 // Azure Bastion host parameters.
-param parBastionSubnetPrefix = '10.0.0.192/27'
+param parBastionSubnetPrefix = '10.0.1.0/27'
 param parBastionSubnetName = 'AzureBastionSubnet'
 param parAzBastionEnabled = true
 param parAzBastionName = varAzBastionName
