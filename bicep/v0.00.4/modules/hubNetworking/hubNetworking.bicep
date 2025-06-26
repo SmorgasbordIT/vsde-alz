@@ -499,7 +499,7 @@ module modGatewayPublicIpActiveActive '../../../../upstream-releases/v0.22.0/inf
 
 // If the gateway is going to have a point-to-site config, create a third public IP
 module modGatewayPublicIpPointToSite '../../../../upstream-releases/v0.22.0/infra-as-code/bicep/modules/publicIp/publicIp.bicep' = [
-  for (gateway, i) in varGwConfig: if ((gateway.name != 'noconfigVpn') && (gateway.name != 'noconfigEr') && !empty(gateway.vpnClientConfiguration)) {
+  for (gateway, i) in varGwConfig: if ((gateway.name != 'noconfigVpn') && (gateway.name != 'noconfigEr') && (toLower(gateway.gatewayType) == 'vpn') && !empty(gateway.vpnClientConfiguration)) {
     name: 'deploy-Gateway-Public-IP-PointToSite-${i}'
     params: {
       parLocation: parLocation
