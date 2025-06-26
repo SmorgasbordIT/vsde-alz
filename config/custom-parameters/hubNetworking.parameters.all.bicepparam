@@ -141,7 +141,7 @@ param parPrivateDnsZones = [
   'privatelink.wvd.microsoft.com'
 ]
 
-param parVpnGatewayEnabled = true
+param parVpnGatewayEnabled = false
 param parHubVpnGwPipActiveActiveName01 = '${varHubVpnGwName01}-pip'
 param parHubVpnGwPipActiveActiveName02 = '${varHubVpnGwName02}-pip'
 param parHubVpnGwPipPointToSiteName01  = '${varHubVpnGwP2sName01}-pip'
@@ -188,7 +188,7 @@ param parVpnGatewayConfig = {
   ipConfigurationPointToSiteName: 'vnetGatewayP2SConfig'
 }
 
-param parExpressRouteGatewayEnabled = false
+param parExpressRouteGatewayEnabled = true
 param parAzErGatewayAvailabilityZones = null
 param parExpressRouteGatewayConfig = {
   name: varHubErGwName
@@ -197,7 +197,7 @@ param parExpressRouteGatewayConfig = {
   vpnType: 'RouteBased'
   generation: 'None'
   enableBgp: false
-  activeActive: true
+  activeActive: false
   allowRemoteVnetTraffic: true
   enableBgpRouteTranslationForNat: false
   enableDnsForwarding: false
