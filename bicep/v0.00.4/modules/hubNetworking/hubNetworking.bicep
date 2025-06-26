@@ -596,8 +596,8 @@ resource resGateway 'Microsoft.Network/virtualNetworkGateways@2024-05-01' = [
               }
             ]
           : [],
-        // Add third IP configuration if Point-To-Site config is present
-        !empty(gateway.vpnClientConfiguration)
+        // Add third IP configuration only if VPN gateway and P2S config exists
+        (toLower(gateway.gatewayType) == 'vpn') && !empty(gateway.vpnClientConfiguration)
           ? [
               {
                 id: resHubVnet.id
