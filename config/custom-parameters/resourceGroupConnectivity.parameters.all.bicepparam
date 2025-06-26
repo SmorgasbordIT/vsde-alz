@@ -23,7 +23,7 @@ param parResourceGroupNames = [
 
 param parTags = {
   Location: ('${parLocation}')
-  Environment: 'Connectivity'
+  Environment: 'Hub'
   DeployedBy: 'Cloud Tech'
   CreatedBy: 'jonathan.davis@spacenk.com'
   SvcName: 'Infrastructure'

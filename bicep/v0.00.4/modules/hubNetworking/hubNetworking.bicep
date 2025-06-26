@@ -538,6 +538,7 @@ resource resGateway 'Microsoft.Network/virtualNetworkGateways@2024-05-01' = [
     properties: {
       activeActive: gateway.activeActive
       enableBgp: gateway.enableBgp
+      allowRemoteVnetTraffic: (toLower(gateway.gatewayType) == 'expressroute') ? gateway.allowRemoteVnetTraffic : null
       enableBgpRouteTranslationForNat: gateway.enableBgpRouteTranslationForNat
       enableDnsForwarding: gateway.enableDnsForwarding
       bgpSettings: (gateway.enableBgp) ? gateway.bgpSettings : null

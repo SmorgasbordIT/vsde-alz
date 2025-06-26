@@ -1,0 +1,48 @@
+{
+    "name": "AZUKS-SNK-HUB-ERGW-01",
+    "id": "/subscriptions/418b1b0c-5109-4c71-b3ec-bb2aede68fb5/resourceGroups/AZUKS-RG-CONN-NETWORK-01/providers/Microsoft.Network/virtualNetworkGateways/AZUKS-SNK-HIB-ERGW-01",
+    "etag": "W/\"9504da4f-144c-46aa-a836-0319a3eeb560\"",
+    "type": "Microsoft.Network/virtualNetworkGateways",
+    "location": "uksouth",
+    "tags": {
+        "Location": "uksouth",
+        "Environment": "Hub"
+    },
+    "properties": {
+        "provisioningState": "Succeeded",
+        "resourceGuid": "f4c79c74-3b63-412b-a843-4ae8df53f425",
+        "enablePrivateIpAddress": false,
+        "virtualNetworkGatewayMigrationStatus": {
+            "state": "None",
+            "phase": "None",
+            "errorMessage": ""
+        },
+        "ipConfigurations": [
+            {
+                "name": "default",
+                "id": "/subscriptions/418b1b0c-5109-4c71-b3ec-bb2aede68fb5/resourceGroups/AZUKS-RG-CONN-NETWORK-01/providers/Microsoft.Network/virtualNetworkGateways/AZUKS-SNK-HUB-ERGW-01/ipConfigurations/default",
+                "etag": "W/\"9504da4f-144c-46aa-a836-0319a3eeb560\"",
+                "type": "Microsoft.Network/virtualNetworkGateways/ipConfigurations",
+                "properties": {
+                    "provisioningState": "Succeeded",
+                    "privateIPAllocationMethod": "Dynamic",
+                    "subnet": {
+                        "id": "/subscriptions/418b1b0c-5109-4c71-b3ec-bb2aede68fb5/resourceGroups/AZUKS-RG-CONN-NETWORK-01/providers/Microsoft.Network/virtualNetworks/AZUKS-SNK-HUB-VNET-01/subnets/GatewaySubnet"
+                    }
+                }
+            }
+        ],
+        "virtualNetworkGatewayPolicyGroups": [],
+        "sku": {
+            "name": "Standard",
+            "tier": "Standard",
+            "capacity": 2
+        },
+        "gatewayType": "ExpressRoute",
+        "vpnType": "PolicyBased",
+        "enableBgp": false,
+        "activeActive": false,
+        "vpnGatewayGeneration": "None"
+    },
+    "apiVersion": "2017-06-01"
+}

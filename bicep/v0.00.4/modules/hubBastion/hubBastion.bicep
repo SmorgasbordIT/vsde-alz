@@ -315,6 +315,10 @@ resource resBastionNsgLock 'Microsoft.Authorization/locks@2020-05-01' = if (parA
 // There is a minimum subnet requirement of /27 prefix.
 // If you are deploying standard this needs to be larger. https://docs.microsoft.com/en-us/azure/bastion/configuration-settings#subnet
 resource resBastion 'Microsoft.Network/bastionHosts@2024-05-01' = if (parAzBastionEnabled) {
+  dependsOn: [
+    modBastionPublicIp
+    resBastionSubnetRef
+  ]
   location: parLocation
   name: parAzBastionName
   tags: parTags

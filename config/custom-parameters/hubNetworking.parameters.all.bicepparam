@@ -53,44 +53,38 @@ param parSubnets = [
     routeTableId: ''
   }
   {
-    name: 'GatewaySubnet' // VPN Gateway Subnet
-    ipAddressRange: '10.0.0.128/27'
+    name: 'GatewaySubnet' // VPN & ExpressRoute Gateway Subnet
+    ipAddressRange: '10.0.0.128/25'
     networkSecurityGroupId: ''
     routeTableId: ''
   }
-//  {
-//    name: 'GatewaySubnet' // ExpressRoute Gateway Subnet
-//    ipAddressRange: '10.0.0.160/27'
-//    networkSecurityGroupId: ''
-//    routeTableId: ''
-//  }
   {
     name: 'AzureBastionSubnet'
-    ipAddressRange: '10.0.0.192/27'
+    ipAddressRange: '10.0.1.0/27'
     networkSecurityGroupId: ''
     routeTableId: ''
   }
   {
     name: varHubSnetPepName
-    ipAddressRange: '10.0.1.0/26'
+    ipAddressRange: '10.0.1.64/26'
     networkSecurityGroupId: ''
     routeTableId: ''
   }
   {
     name: varDnsPrIn01
-    ipAddressRange: '10.0.1.64/27'
+    ipAddressRange: '10.0.1.128/27'
     networkSecurityGroupId: ''
     routeTableId: ''
   }
   {
     name: varDnsPrOut01
-    ipAddressRange: '10.0.1.96/27'
+    ipAddressRange: '10.0.1.160/27'
     networkSecurityGroupId: ''
     routeTableId: ''
   }
   {
     name: varHubSnetMgmtName
-    ipAddressRange: '10.0.1.128/28'
+    ipAddressRange: '10.0.1.192/28'
     networkSecurityGroupId: ''
     routeTableId: ''
   }
@@ -147,7 +141,7 @@ param parPrivateDnsZones = [
   'privatelink.wvd.microsoft.com'
 ]
 
-param parVpnGatewayEnabled = true
+param parVpnGatewayEnabled = false
 param parHubVpnGwPipActiveActiveName01 = '${varHubVpnGwName01}-pip'
 param parHubVpnGwPipActiveActiveName02 = '${varHubVpnGwName02}-pip'
 param parHubVpnGwPipPointToSiteName01  = '${varHubVpnGwP2sName01}-pip'
@@ -194,7 +188,7 @@ param parVpnGatewayConfig = {
   ipConfigurationPointToSiteName: 'vnetGatewayP2SConfig'
 }
 
-param parExpressRouteGatewayEnabled = false
+param parExpressRouteGatewayEnabled = true
 param parAzErGatewayAvailabilityZones = null
 param parExpressRouteGatewayConfig = {
   name: varHubErGwName
@@ -203,7 +197,8 @@ param parExpressRouteGatewayConfig = {
   vpnType: 'RouteBased'
   generation: 'None'
   enableBgp: false
-  activeActive: false
+  activeActive: true
+  allowRemoteVnetTraffic: true
   enableBgpRouteTranslationForNat: false
   enableDnsForwarding: false
   bgpPeeringAddress: ''
@@ -218,7 +213,7 @@ param parExpressRouteGatewayConfig = {
 
 param parTags = {
   Location: ('${parLocation}')
-  Environment: 'Connectivity'
+  Environment: 'Hub'
   DeployedBy: 'Cloud Tech'
   CreatedBy: 'jonathan.davis@spacenk.com'
   SvcName: 'Infrastructure'
