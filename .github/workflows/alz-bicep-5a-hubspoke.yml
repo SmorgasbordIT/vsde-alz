@@ -1,4 +1,4 @@
-name: ALZ-Bicep-5a-UKS-HubSpoke
+name: ALZ-Bicep-5a-HubSpoke
 
 on:
   push:
@@ -22,6 +22,15 @@ on:
         required: false
         default: 'false'
         type: boolean
+      targetRegion:
+        description: "Select which region(s) to deploy to"
+        required: true
+        default: "UKS"
+        type: choice
+        options:
+            - UKS
+            - UKW
+            - BOTH
 
 permissions:
   id-token: write
@@ -43,7 +52,7 @@ env:
   IS_PULL_REQUEST: "${{ github.event_name == 'pull_request' }}"
 
 jobs:
-  ALZ_Bicep_5a_UKS_HubSpoke:
+  ALZ_Bicep_5a_HubSpoke:
     runs-on: ubuntu-latest
     environment: SBN-ALZ-Prod
     steps:

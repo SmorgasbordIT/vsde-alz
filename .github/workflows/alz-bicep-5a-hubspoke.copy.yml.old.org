@@ -1,4 +1,4 @@
-name: ALZ-Bicep-5a-UKW-HubSpoke
+name: ALZ-Bicep-5a-HubSpoke
 
 on:
   push:
@@ -43,7 +43,7 @@ env:
   IS_PULL_REQUEST: "${{ github.event_name == 'pull_request' }}"
 
 jobs:
-  ALZ_Bicep_5a_UKW-HubSpoke:
+  ALZ_Bicep_5a_HubSpoke:
     runs-on: ubuntu-latest
     environment: SBN-ALZ-Prod
     steps:
