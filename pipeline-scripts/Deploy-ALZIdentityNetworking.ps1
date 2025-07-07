@@ -12,42 +12,42 @@ param (
   [String]$azEnvHub = "$($env:ENV_HUB)",
 
   [Parameter()]
-  [String]$azConn = "$($env:CONN_GRP_NAME)",
+  [String]$azId = "$($env:ID_GRP_NAME)",
 
   [Parameter()]
   [String]$azLocation = "$($env:UKS_LOCATION)",
 
   [Parameter()]
-  [String]$azTemplateFile = "bicep\$($env:MODULES_RELEASE_VERSION)\modules\bastion\hubBastion.bicep",
+  [String]$azTemplateFile = "bicep\$($env:MODULES_RELEASE_VERSION)\modules\networking\idNetworking.bicep",
 
   [Parameter()]
-  [String]$azTemplateParameterFile = "config\custom-parameters\hubBastion.parameters.all.bicepparam",
+  [String]$azTemplateParameterFile = "config\custom-parameters\idNetworking.parameters.all.bicepparam",
 
   [Parameter()]
   [Boolean]$WhatIfEnabled = [System.Convert]::ToBoolean($env:WHAT_IF_ENABLED)
 )
 
 # Create the Azure Connectivity Subscription name
-$azConnSubName = ('{0}-{1}-{2}-{3}-01' -f $azUk.ToUpper(),$azSnk.ToUpper(),$azEnvHub.ToUpper(),$azConn.ToUpper())
+$azIdSubName = ('{0}-{1}-{2}-{3}-01' -f $azUk.ToUpper(),$azSnk.ToUpper(),$azEnvHub.ToUpper(),$azId.ToUpper())
 
 # Get the Management Subscription Alias Id
-$azConnSubAliasId = Get-AzSubscription -SubscriptionName $azConnSubName
-$azConnectivitySubscriptionId = $azConnSubAliasId.Id
+$azIdSubAliasId = Get-AzSubscription -SubscriptionName $azIdSubName
+$azIdentitySubscriptionId = $azIdSubAliasId.Id
 
 # Create the Netwoking RG name
-$azRgConnNetwork = ('{0}{1}-RG-CONN-SECURITY-01' -f $azUk.ToUpper(),$azUks.ToUpper())
+$azRgIdNetwork = ('{0}{1}-RG-ID-NETWORK-01' -f $azUk.ToUpper(),$azUks.ToUpper())
 
 # Parameters necessary for deployment
 $inputObject = @{
-  DeploymentName        = -join ('alz-Hub-and-SpokeDeploy-{0}' -f (Get-Date -Format 'yyyyMMddTHHMMssffffZ'))[0..63]
-  ResourceGroupName     = $azRgConnNetwork
+  DeploymentName        = -join ('alz-Id-Network-Deploy-{0}' -f (Get-Date -Format 'yyyyMMddTHHMMssffffZ'))[0..63]
+  ResourceGroupName     = $azRgIdNetwork
   TemplateFile          = $azTemplateFile
   TemplateParameterFile = $azTemplateParameterFile
   WhatIf                = $WhatIfEnabled
   Verbose               = $true
 }
 
-Select-AzSubscription -SubscriptionId $azConnectivitySubscriptionId
+Select-AzSubscription -SubscriptionId $azIdentitySubscriptionId
 
 Write-Output "WhatIfEnabled: $WhatIfEnabled"
 

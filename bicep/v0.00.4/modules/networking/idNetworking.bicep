@@ -1,5 +1,6 @@
-metadata name = 'ALZ Bicep - Hub Networking Module'
-metadata description = 'ALZ Bicep Module used to set up Hub Networking'
+
+metadata name = 'ALZ Bicep - ID Networking Module'
+metadata description = 'ALZ Bicep Module used to set up ID Networking'
 
 type subnetOptionsType = ({
   @description('Name of subnet.')
@@ -39,34 +40,29 @@ param parSubnets subnetOptionsType = [
 @description('Array of DNS Server IP addresses for VNet.')
 param parDnsServerIps array = []
 
-@description('Name of Route table to create for the default route of ID Network.')
+@sys.description('Name of Route table to create for the default route of ID Network.')
 param parIdRouteTableName string = '${parCompanyPrefix}-hub-routetable'
 
-@description('Tags to apply to resources')
+@sys.description('Switch to enable/disable BGP Propagation on route table.')
+param parDisableBgpRoutePropagation bool = false
+
+@sys.description('Tags to apply to resources')
 param parTags object = {}
 
-@description('Switch to enable/disable DDoS Network Protection deployment.')
+@sys.description('Switch to enable/disable DDoS Network Protection deployment.')
 param parDdosEnabled bool = true
 
-@description('DDoS Plan Name.')
+@sys.description('DDoS Plan Name.')
 param parDdosPlanName string = '${parCompanyPrefix}-ddos-plan'
 
-@description('Set Parameter to true to Opt-out of deployment telemetry.')
-param parTelemetryOptOut bool = false
-
-@description('Switch to enable/disable Azure Firewall default route.')
+@sys.description('Switch to enable/disable Azure Firewall default route.')
 param parAzFirewallEnabled bool = false
 
-@description('Disable BGP route propagation on Route Table')
-param parDisableBgpRoutePropagation bool = true
+@sys.description('The Azure Firewall IP address to use for the default route (required if parAzFirewallEnabled is true)')
+param parAzFirewallIpAddress string = '${parCompanyPrefix}-azfw'
 
-@description('Name of the Azure Firewall resource (required if parAzFirewallEnabled is true)')
-param parAzFirewallName string = '${parCompanyPrefix}-azfw'
-
-// Optional Azure Firewall reference (if enabled)
-resource resAzureFirewall 'Microsoft.Network/azureFirewalls@2023-02-01' existing = if (parAzFirewallEnabled) {
-  name: parAzFirewallName
-}
+@sys.description('Set Parameter to true to Opt-out of deployment telemetry.')
+param parTelemetryOptOut bool = false
 
 // Optional Route Table with default route to Azure Firewall
 resource resHubRouteTable 'Microsoft.Network/routeTables@2024-05-01' = if (parAzFirewallEnabled) {
@@ -81,27 +77,27 @@ resource resHubRouteTable 'Microsoft.Network/routeTables@2024-05-01' = if (parAz
         properties: {
           addressPrefix: '0.0.0.0/0'
           nextHopType: 'VirtualAppliance'
-          nextHopIpAddress: resAzureFirewall.properties.ipConfigurations[0].properties.privateIPAddress
+          nextHopIpAddress: parAzFirewallIpAddress
         }
       }
     ]
   }
 }
 
-// DDoS Protection Plan (optional)
+//DDos Protection plan will only be enabled if parDdosEnabled is true.
 resource resDdosProtectionPlan 'Microsoft.Network/ddosProtectionPlans@2023-02-01' = if (parDdosEnabled) {
   name: parDdosPlanName
   location: parLocation
   tags: parTags
 }
 
-// VNet module
+// Create the Virtual Network using a module
 module modVnet '../virtualNetwork/vnet.bicep' = {
   name: 'mod-Vnet'
   params: {
     vnetName: parIdNetworkName
     location: parLocation
-    tags: parTags
+    tags: parTags 
     addressPrefixes: [parIdNetworkAddressPrefix]
     dnsServers: parDnsServerIps
     enableDdosProtection: parDdosEnabled
@@ -109,7 +105,7 @@ module modVnet '../virtualNetwork/vnet.bicep' = {
   }
 }
 
-// Subnet modules
+// Deploy subnets using module and depend on VNet creation
 module modSubnets '../subnet/subnet.bicep' = [for subnet in parSubnets: {
   name: 'modSubnet-${subnet.name}'
   scope: resourceGroup()

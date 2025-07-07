@@ -115,9 +115,6 @@ resource resHubVnet 'Microsoft.Network/virtualNetworks@2024-07-01' existing = {
   scope: resourceGroup(parRgHubNetworkVnet)
 }
 
-// Customer Usage Attribution Id Telemetry
-var varCuaid = '2686e846-5fdc-4d4f-b533-16dcb09d6e6c'
-
 module modBastionPublicIp '../../../../upstream-releases/v0.22.0/infra-as-code/bicep/modules/publicIp/publicIp.bicep' = if (parAzBastionEnabled) {
   name: 'deploy-Bastion-Public-IP'
   params: {
@@ -290,7 +287,7 @@ resource resBastionNsg 'Microsoft.Network/networkSecurityGroups@2024-05-01' = if
   }
 }
 
-module modBastionSubnetModule '../hubSubnet/hubSubnet.bicep' = {
+module modBastionSubnetModule '../Subnet/subnet.bicep' = {
   name: parBastionSubnetName
   scope: resourceGroup(parRgHubNetworkVnet) // Deploys to VNet's RG
   params: {
@@ -352,13 +349,6 @@ resource resBastionLock 'Microsoft.Authorization/locks@2020-05-01' = if (parAzBa
     level: (parGlobalResourceLock.kind != 'None') ? parGlobalResourceLock.kind : parBastionLock.kind
     notes: (parGlobalResourceLock.kind != 'None') ? parGlobalResourceLock.?notes : parBastionLock.?notes
   }
-}
-
-// Optional Deployments for Customer Usage Attribution
-module modCustomerUsageAttribution '../../../../upstream-releases/v0.22.0/infra-as-code/bicep/CRML/customerUsageAttribution/cuaIdResourceGroup.bicep' = if (!parTelemetryOptOut) {
-  #disable-next-line no-loc-expr-outside-params //Only to ensure telemetry data is stored in same location as deployment. See https://github.com/Azure/ALZ-Bicep/wiki/FAQ#why-are-some-linter-rules-disabled-via-the-disable-next-line-bicep-function for more information
-  name: 'pid-${varCuaid}-${uniqueString(resourceGroup().location)}'
-  params: {}
 }
 
 output outBastionNsgId string = parAzBastionEnabled ? resBastionNsg.id : ''

@@ -1,20 +1,18 @@
-name: ALZ-Bicep-5a-HubSpoke
+name: ALZ-Bicep-5b-ID-Network
 
 on:
   push:
     branches:
       - "main"
     paths:
-      - "config/custom-parameters/resourceGroupConnectivity.parameters.all.bicepparam"
-      - "config/custom-parameters/Networking.parameters.all.bicepparam"
-      - "config/custom-parameters/Bastion.parameters.all.bicepparam"
+      - "config/custom-parameters/resourceGroupIdentity.parameters.all.bicepparam"
+      - "config/custom-parameters/idNetworking.parameters.all.bicepparam"
   pull_request:
     branches:
       - "main"
     paths:
-      - "config/custom-parameters/resourceGroupConnectivity.parameters.all.bicepparam"
-      - "config/custom-parameters/Networking.parameters.all.bicepparam"
-      - "config/custom-parameters/Bastion.parameters.all.bicepparam"
+      - "config/custom-parameters/resourceGroupIdentity.parameters.all.bicepparam"
+      - "config/custom-parameters/idNetworking.parameters.all.bicepparam"
   workflow_dispatch:
     inputs:
       what_if_enabled:
@@ -52,7 +50,7 @@ env:
   IS_PULL_REQUEST: "${{ github.event_name == 'pull_request' }}"
 
 jobs:
-  ALZ_Bicep_5a_HubSpoke:
+  ALZ_Bicep_5b_ID_Network:
     runs-on: ubuntu-latest
     environment: SBN-ALZ-Prod
     steps:
@@ -80,23 +78,16 @@ jobs:
           subscription-id: ${{ secrets.VSDE_SUBSCRIPTION_ID }}
           enable-AzPSSession: true
 
-      - name: "Connectivity Resource Group Deployment"
+      - name: "Identity Resource Group Deployment"
         uses: azure/powershell@v2
         with:
           inlineScript: |
-            .\pipeline-scripts\Deploy-ALZConnectivityResourceGroup.ps1
+            .\pipeline-scripts\Deploy-ALZIdentityResourceGroup.ps1
           azPSVersion: "latest"
 
-      - name: "Hub (Hub-and-Spoke) Deployment"
+      - name: "Identity Network Deployment"
         uses: azure/powershell@v2
         with:
           inlineScript: |
-            .\pipeline-scripts\Deploy-ALZHub-HubAndSpoke.ps1
-          azPSVersion: "latest"
-
-      - name: "Hub Bastion Deployment"
-        uses: azure/powershell@v2
-        with:
-          inlineScript: |
-            .\pipeline-scripts\Deploy-ALZHub-HubBastion.ps1
+            .\pipeline-scripts\Deploy-ALZIdentityNetworking.ps1
           azPSVersion: "latest"

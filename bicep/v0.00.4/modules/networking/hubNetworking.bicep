@@ -145,7 +145,6 @@ param parAzFirewallPoliciesAutoLearn string = 'Disabled'
 @description('Private IP addresses/IP ranges to which traffic will not be SNAT.')
 param parAzFirewallPoliciesPrivateRanges array = []
 
-@sys.description('Private IP addresses/IP ranges to which traffic will not be SNAT.')
 @sys.description('Azure Firewall Tier associated with the Firewall to deploy.')
 @allowed([
   'Basic'

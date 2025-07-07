@@ -1,0 +1,274 @@
+metadata name = 'ALZ Bicep - Hub Networking Module'
+metadata description = 'ALZ Bicep Module used to set up Hub Networking'
+
+type subnetOptionsType = ({
+  @description('Name of subnet.')
+  name: string
+
+  @description('IP-address range for subnet.')
+  ipAddressRange: string
+
+  @description('Id of Network Security Group to associate with subnet.')
+  networkSecurityGroupId: string?
+
+  @description('Id of Route Table to associate with subnet.')
+  routeTableId: string?
+
+  @description('Name of the delegation to create for the subnet.')
+  delegation: string?
+})[]
+
+type lockType = {
+  @description('Optional. Specify the name of lock.')
+  name: string?
+
+  @description('Optional. The lock settings of the service.')
+  kind: ('CanNotDelete' | 'ReadOnly' | 'None')
+
+  @description('Optional. Notes about this lock.')
+  notes: string?
+}
+
+@sys.description('The Azure Region to deploy the resources into.')
+param parLocation string = resourceGroup().location
+
+@sys.description('Prefix value which will be prepended to all resource names.')
+param parCompanyPrefix string = 'alz'
+
+@sys.description('Name for ID Network.')
+param parIdNetworkName string = '${parCompanyPrefix}-id-${parLocation}'
+
+@sys.description('''Global Resource Lock Configuration used for all resources deployed in this module.
+
+- `kind` - The lock settings of the service which can be CanNotDelete, ReadOnly, or None.
+- `notes` - Notes about this lock.
+
+''')
+param parGlobalResourceLock lockType = {
+  kind: 'None'
+  notes: 'This lock was created by the ALZ Bicep Hub Networking Module.'
+}
+
+@sys.description('The IP address range for ID Network.')
+param parIdNetworkAddressPrefix string = '10.10.0.0/16'
+
+@sys.description('The name, IP address range, network security group, route table and delegation serviceName for each subnet in the virtual networks.')
+param parSubnets subnetOptionsType = [
+  {
+    name: 'GatewaySubnet'
+    ipAddressRange: '10.10.15.0/24'
+    networkSecurityGroupId: ''
+    routeTableId: ''
+  }
+]
+
+@sys.description('Array of DNS Server IP addresses for VNet.')
+param parDnsServerIps array = []
+
+@sys.description('''Resource Lock Configuration for Virtual Network.
+
+- `kind` - The lock settings of the service which can be CanNotDelete, ReadOnly, or None.
+- `notes` - Notes about this lock.
+
+''')
+param parVirtualNetworkLock lockType = {
+  kind: 'None'
+  notes: 'This lock was created by the ALZ Bicep Hub Networking Module.'
+}
+
+
+@sys.description('Switch to enable/disable DDoS Network Protection deployment.')
+param parDdosEnabled bool = true
+
+@sys.description('DDoS Plan Name.')
+param parDdosPlanName string = '${parCompanyPrefix}-ddos-plan'
+
+@sys.description('''Resource Lock Configuration for DDoS Plan.
+
+- `kind` - The lock settings of the service which can be CanNotDelete, ReadOnly, or None.
+- `notes` - Notes about this lock.
+
+''')
+param parDdosLock lockType = {
+  kind: 'None'
+  notes: 'This lock was created by the ALZ Bicep Hub Networking Module.'
+}
+
+@sys.description('Name of Route table to create for the default route of ID Network.')
+param parIdRouteTableName string = '${parCompanyPrefix}-hub-routetable'
+
+@sys.description('Switch to enable/disable BGP Propagation on route table.')
+param parDisableBgpRoutePropagation bool = false
+
+@sys.description('''Resource Lock Configuration for Hub Route Table.
+
+- `kind` - The lock settings of the service which can be CanNotDelete, ReadOnly, or None.
+- `notes` - Notes about this lock.
+
+''')
+param parHubRouteTableLock lockType = {
+  kind: 'None'
+  notes: 'This lock was created by the ALZ Bicep Hub Networking Module.'
+}
+
+@sys.description('Tags you would like to be applied to all resources in this module.')
+param parTags object = {}
+
+@sys.description('Set Parameter to true to Opt-out of deployment telemetry.')
+param parTelemetryOptOut bool = false
+
+var varSubnetMap = map(range(0, length(parSubnets)), i => {
+  name: parSubnets[i].name
+  ipAddressRange: parSubnets[i].ipAddressRange
+  networkSecurityGroupId: parSubnets[i].?networkSecurityGroupId ?? ''
+  routeTableId: parSubnets[i].?routeTableId ?? ''
+  delegation: parSubnets[i].?delegation ?? ''
+})
+
+var varSubnetProperties = [
+  for subnet in varSubnetMap: {
+    name: subnet.name
+    properties: {
+      addressPrefix: subnet.ipAddressRange
+
+      delegations: (empty(subnet.delegation))
+        ? null
+        : [
+            {
+              name: subnet.delegation
+              properties: {
+                serviceName: subnet.delegation
+              }
+            }
+          ]
+
+      routeTable: (empty(subnet.routeTableId))
+        ? null
+        : {
+            id: subnet.routeTableId
+          }
+    }
+  }
+]
+
+// Customer Usage Attribution Id Telemetry
+var varCuaid = '2686e846-5fdc-4d4f-b533-16dcb09d6e6c'
+
+//DDos Protection plan will only be enabled if parDdosEnabled is true.
+resource resDdosProtectionPlan 'Microsoft.Network/ddosProtectionPlans@2023-02-01' = if (parDdosEnabled) {
+  name: parDdosPlanName
+  location: parLocation
+  tags: parTags
+}
+
+// Create resource lock if parDdosEnabled is true and parGlobalResourceLock.kind != 'None' or if parDdosLock.kind != 'None'
+resource resDDoSProtectionPlanLock 'Microsoft.Authorization/locks@2020-05-01' = if (parDdosEnabled && (parDdosLock.kind != 'None' || parGlobalResourceLock.kind != 'None')) {
+  scope: resDdosProtectionPlan
+  name: parDdosLock.?name ?? '${resDdosProtectionPlan.name}-lock'
+  properties: {
+    level: (parGlobalResourceLock.kind != 'None') ? parGlobalResourceLock.kind : parDdosLock.kind
+    notes: (parGlobalResourceLock.kind != 'None') ? parGlobalResourceLock.?notes : parDdosLock.?notes
+  }
+}
+
+resource resHubVnet 'Microsoft.Network/virtualNetworks@2024-05-01' = {
+  name: parIdNetworkName
+  location: parLocation
+  tags: parTags
+  properties: {
+    addressSpace: {
+      addressPrefixes: [
+        parIdNetworkAddressPrefix
+      ]
+    }
+    dhcpOptions: {
+      dnsServers: parDnsServerIps
+    }
+    subnets: varSubnetProperties
+    enableDdosProtection: parDdosEnabled
+    ddosProtectionPlan: (parDdosEnabled)
+      ? {
+          id: resDdosProtectionPlan.id
+        }
+      : null
+  }
+}
+
+// Create a virtual network resource lock if parGlobalResourceLock.kind != 'None' or if parVirtualNetworkLock.kind != 'None'
+resource resVirtualNetworkLock 'Microsoft.Authorization/locks@2020-05-01' = if (parVirtualNetworkLock.kind != 'None' || parGlobalResourceLock.kind != 'None') {
+  scope: resHubVnet
+  name: parVirtualNetworkLock.?name ?? '${resHubVnet.name}-lock'
+  properties: {
+    level: (parGlobalResourceLock.kind != 'None') ? parGlobalResourceLock.kind : parVirtualNetworkLock.kind
+    notes: (parGlobalResourceLock.kind != 'None') ? parGlobalResourceLock.?notes : parVirtualNetworkLock.?notes
+  }
+}
+
+// If Azure Firewall is enabled we will deploy a RouteTable to redirect Traffic to the Firewall.
+resource resHubRouteTable 'Microsoft.Network/routeTables@2024-05-01' = if (parAzFirewallEnabled) {
+  name: parIdRouteTableName
+  location: parLocation
+  tags: parTags
+  properties: {
+    routes: [
+      {
+        name: 'id-udr-default-azfw'
+        properties: {
+          addressPrefix: '0.0.0.0/0'
+          nextHopType: 'VirtualAppliance'
+          nextHopIpAddress: parAzFirewallEnabled
+            ? resAzureFirewall.properties.ipConfigurations[0].properties.privateIPAddress
+            : ''
+        }
+      }
+    ]
+    disableBgpRoutePropagation: parDisableBgpRoutePropagation
+  }
+}
+
+// Create a Route Table if parAzFirewallEnabled is true and parGlobalResourceLock.kind != 'None' or if parHubRouteTableLock.kind != 'None'
+resource resHubRouteTableLock 'Microsoft.Authorization/locks@2020-05-01' = if (parAzFirewallEnabled && (parHubRouteTableLock.kind != 'None' || parGlobalResourceLock.kind != 'None')) {
+  scope: resHubRouteTable
+  name: parHubRouteTableLock.?name ?? '${resHubRouteTable.name}-lock'
+  properties: {
+    level: (parGlobalResourceLock.kind != 'None') ? parGlobalResourceLock.kind : parHubRouteTableLock.kind
+    notes: (parGlobalResourceLock.kind != 'None') ? parGlobalResourceLock.?notes : parHubRouteTableLock.?notes
+  }
+}
+
+// Optional Deployments for Customer Usage Attribution
+module modCustomerUsageAttribution '../../../../upstream-releases/v0.22.0/infra-as-code/bicep/CRML/customerUsageAttribution/cuaIdResourceGroup.bicep' = if (!parTelemetryOptOut) {
+  #disable-next-line no-loc-expr-outside-params //Only to ensure telemetry data is stored in same location as deployment. See https://github.com/Azure/ALZ-Bicep/wiki/FAQ#why-are-some-linter-rules-disabled-via-the-disable-next-line-bicep-function for more information
+  name: 'pid-${varCuaid}-${uniqueString(resourceGroup().location)}'
+  params: {}
+}
+
+module modCustomerUsageAttributionZtnP1 '../../../../upstream-releases/v0.22.0/infra-as-code/bicep/CRML/customerUsageAttribution/cuaIdResourceGroup.bicep' = if (!parTelemetryOptOut && varZtnP1Trigger) {
+  #disable-next-line no-loc-expr-outside-params //Only to ensure telemetry data is stored in same location as deployment. See https://github.com/Azure/ALZ-Bicep/wiki/FAQ#why-are-some-linter-rules-disabled-via-the-disable-next-line-bicep-function for more information
+  name: 'pid-${varZtnP1CuaId}-${uniqueString(resourceGroup().location)}'
+  params: {}
+}
+
+//If Azure Firewall is enabled we will deploy a RouteTable to redirect Traffic to the Firewall.
+output outAzFirewallPrivateIp string = parAzFirewallEnabled
+  ? resAzureFirewall.properties.ipConfigurations[0].properties.privateIPAddress
+  : ''
+
+//If Azure Firewall is enabled we will deploy a RouteTable to redirect Traffic to the Firewall.
+output outAzFirewallName string = parAzFirewallEnabled ? parAzFirewallName : ''
+
+output outPrivateDnsZones array = (parPrivateDnsZonesEnabled
+  ? modPrivateDnsZonesAVM.outputs.combinedPrivateLinkPrivateDnsZonesReplacedWithVnetsToLink
+  : [])
+output outPrivateDnsZonesNames array = (parPrivateDnsZonesEnabled
+  ? map(
+      modPrivateDnsZonesAVM.outputs.combinedPrivateLinkPrivateDnsZonesReplacedWithVnetsToLink,
+      zone => zone.pdnsZoneName
+    )
+  : [])
+
+output outDdosPlanResourceId string = parDdosEnabled ? resDdosProtectionPlan.id : ''
+output outHubVirtualNetworkName string = resHubVnet.name
+output outHubVirtualNetworkId string = resHubVnet.id
+output outHubRouteTableId string = parAzFirewallEnabled ? resHubRouteTable.id : ''
+output outHubRouteTableName string = parAzFirewallEnabled ? resHubRouteTable.name : ''

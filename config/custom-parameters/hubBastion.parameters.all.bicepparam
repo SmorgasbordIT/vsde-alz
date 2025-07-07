@@ -1,4 +1,4 @@
-using '../../bicep/v0.00.4/modules/hubBastion/hubBastion.bicep'
+using '../../bicep/v0.00.4/modules/bastion/hubBastion.bicep'
 
 param parLocation = readEnvironmentVariable('UKS_LOCATION','uksouth')
 
