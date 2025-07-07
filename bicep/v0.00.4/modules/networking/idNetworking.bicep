@@ -117,7 +117,7 @@ module modSubnets '../subnet/subnet.bicep' = [for subnet in parSubnets: {
     addressPrefix: subnet.ipAddressRange
     nsgId: subnet.networkSecurityGroupId
     routeTableId: subnet.routeTableId
-    delegation: subnet.delegation
+    delegation: contains(subnet, 'delegation') ? subnet.delegation : ''
     vnetName: parIdNetworkName
   }
 }]

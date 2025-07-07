@@ -38,36 +38,42 @@ param parSubnets = [
     ipAddressRange: '10.1.0.0/25'
     networkSecurityGroupId: ''
     routeTableId: ''
+    delegation: ''
   }
   {
     name: varIdSnetEcsName
     ipAddressRange: '10.1.0.128/26'
     networkSecurityGroupId: ''
     routeTableId: ''
+    delegation: ''
   }
   {
     name: varIdSnetPepBakName
     ipAddressRange: '10.1.1.0/26'
     networkSecurityGroupId: ''
     routeTableId: ''
+    delegation: ''
   }
   {
     name: varIdSnetPepAkvName
     ipAddressRange: '10.1.1.64/26'
     networkSecurityGroupId: ''
     routeTableId: ''
+    delegation: ''
   }
   {
     name: varIdSnetIdName
     ipAddressRange: '10.1.1.128/26'
     networkSecurityGroupId: ''
     routeTableId: ''
+    delegation: ''
   }
   {
     name: varIdSnetMgmtName
     ipAddressRange: '10.1.1.192/26'
     networkSecurityGroupId: ''
     routeTableId: ''
+    delegation: ''
   }
 ]
 
