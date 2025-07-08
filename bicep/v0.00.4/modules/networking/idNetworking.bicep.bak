@@ -105,23 +105,19 @@ module modVnet '../virtualNetwork/vnet.bicep' = {
   }
 }
 
-// Deploy subnets one by one to avoid VNet write lock
-var subnetCount = length(parSubnets)
-
-// Build list of modules with sequential dependencies
-var subnetModules = [for i in range(0, subnetCount): {
-  name: 'modSubnet-${parSubnets[i].name}'
+// Deploy subnets using module and depend on VNet creation
+module modSubnets '../subnet/subnet.bicep' = [for subnet in parSubnets: {
+  name: 'modSubnet-${subnet.name}'
   scope: resourceGroup()
-  dependsOn: dependsOn: i == 0 ? [modVnet] : [modVnet, subnetModules[i - 1]]
+  dependsOn: [
+    modVnet
+  ]
   params: {
-    subnetName: parSubnets[i].name
-    addressPrefix: parSubnets[i].ipAddressRange
-    nsgId: parSubnets[i].networkSecurityGroupId
-    routeTableId: parSubnets[i].routeTableId
-    delegation: contains(parSubnets[i], 'delegation') ? parSubnets[i].delegation : ''
+    subnetName: subnet.name
+    addressPrefix: subnet.ipAddressRange
+    nsgId: subnet.networkSecurityGroupId
+    routeTableId: subnet.routeTableId
+    delegation: contains(subnet, 'delegation') ? subnet.delegation : ''
     vnetName: parIdNetworkName
   }
 }]
-
-// Actually deploy the modules using the list
-module modSubnets '../subnet/subnet.bicep' = [for subnet in subnetModules: subnet]
