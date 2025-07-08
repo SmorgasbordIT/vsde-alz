@@ -132,7 +132,11 @@ module modSubnets '../subnet/subnet.bicep' = [for i in range(0, length(parSubnet
   scope: resourceGroup()
   dependsOn: i == 0
     ? [modVnet, resNsgs]
-    : [modVnet, resNsgs, 'modSubnet-${parSubnets[i - 1].name}']
+    : [
+        modVnet,
+        resNsgs,
+        'modSubnet-${parSubnets[i - 1].name}'
+      ]
   params: {
     subnetName: parSubnets[i].name
     addressPrefix: parSubnets[i].ipAddressRange
