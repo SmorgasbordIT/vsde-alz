@@ -1,23 +1,20 @@
-metadata name = 'ALZ Bicep - Hub Subnet Module'
-metadata description = 'ALZ Bicep Module used to set up Hub Subnet'
 
-@description('ALZ Hub VNet resource group name')
-param vnetName string
-
-@description('Array of subnet definitions')
+@description('Array of subnet configurations')
 param subnets array
+
+@description('Name of the VNet')
+param vnetName string
 
 @description('Location of the deployment')
 param location string
 
-// Reference the parent VNet at this module's scope
-resource existingVnet 'Microsoft.Network/virtualNetworks@2024-07-01' existing = {
+resource vnet 'Microsoft.Network/virtualNetworks@2024-07-01' existing = {
   name: vnetName
 }
 
 resource subnetResources 'Microsoft.Network/virtualNetworks/subnets@2024-07-01' = [for subnet in subnets: {
   name: subnet.name
-  parent: existingVnet
+  parent: vnet
   properties: {
     addressPrefix: subnet.ipAddressRange
     networkSecurityGroup: empty(subnet.networkSecurityGroupId) ? null : {

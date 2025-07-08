@@ -1,4 +1,3 @@
-
 metadata name = 'ALZ Bicep - ID Networking Module'
 metadata description = 'ALZ Bicep Module used to set up ID Networking'
 
