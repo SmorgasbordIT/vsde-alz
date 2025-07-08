@@ -126,14 +126,15 @@ module modVnet '../virtualNetwork/vnet.bicep' = {
   }
 }
 
-// Deploy subnets using module and depend on VNet creation
+// Deploy subnets using module that depend on VNet & NSGs creation
 @batchSize(1)
 module modSubnets '../subnet/subnet.bicep' = [for i in range(0, length(parSubnets)): {
   name: 'modSubnet-${parSubnets[i].name}'
   scope: resourceGroup()
-  dependsOn: i == 0
-    ? [modVnet, resNsgs]
-    : [modVnet, resNsgs, 'modSubnet-${parSubnets[i - 1].name}']
+  dependsOn: [
+    modVnet
+    resNsgs
+  ]
   params: {
     subnetName: parSubnets[i].name
     addressPrefix: parSubnets[i].ipAddressRange
