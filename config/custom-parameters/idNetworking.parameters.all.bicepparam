@@ -25,6 +25,14 @@ var varIdSnetIdName     = toUpper('${varAzUk}${varUks}-${varSnk}-${varIdFormatte
 var varIdSnetMgmtName   = toUpper('${varAzUk}${varUks}-${varSnk}-${varIdFormatted}-snet-mgmt-01')
 var varAzIdRtName       = toUpper('${varAzUk}${varUks}-${varSnk}-${varIdFormatted}-rt-afw-01')
 
+// Network Security Group names.
+var varIdNsgAddsName   = toUpper('${varAzUk}${varUks}-${varSnk}-${varIdFormatted}-nsg-adds-01')
+var varIdNsgEcsName    = toUpper('${varAzUk}${varUks}-${varSnk}-${varIdFormatted}-nsg-ecs-01')
+var varIdNsgPepBakName = toUpper('${varAzUk}${varUks}-${varSnk}-${varIdFormatted}-nsg-pep-bak-01')
+var varIdNsgPepAkvName = toUpper('${varAzUk}${varUks}-${varSnk}-${varIdFormatted}-nsg-pep-akv-01')
+var varIdNsgIdName     = toUpper('${varAzUk}${varUks}-${varSnk}-${varIdFormatted}-nsg-pep-id-01')
+var varIdNsgMgmtName   = toUpper('${varAzUk}${varUks}-${varSnk}-${varIdFormatted}-nsg-mgmt-01')
+
 // ID networking parameters.
 param parIdNetworkName = '${varIdNetworkName}'
 param parIdNetworkAddressPrefix = '10.1.0.0/16'
@@ -36,6 +44,7 @@ param parSubnets = [
   {
     name: varIdSnetAddsName
     ipAddressRange: '10.1.0.0/25'
+    nsgName: varIdNsgAddsName
     networkSecurityGroupId: ''
     routeTableId: ''
     delegation: ''
@@ -43,6 +52,7 @@ param parSubnets = [
   {
     name: varIdSnetEcsName
     ipAddressRange: '10.1.0.128/26'
+    nsgName: varIdNsgEcsName
     networkSecurityGroupId: ''
     routeTableId: ''
     delegation: ''
@@ -50,6 +60,7 @@ param parSubnets = [
   {
     name: varIdSnetPepBakName
     ipAddressRange: '10.1.1.0/26'
+    nsgName: varIdNsgPepBakName
     networkSecurityGroupId: ''
     routeTableId: ''
     delegation: ''
@@ -57,6 +68,7 @@ param parSubnets = [
   {
     name: varIdSnetPepAkvName
     ipAddressRange: '10.1.1.64/26'
+    nsgName: varIdNsgPepAkvName
     networkSecurityGroupId: ''
     routeTableId: ''
     delegation: ''
@@ -64,6 +76,7 @@ param parSubnets = [
   {
     name: varIdSnetIdName
     ipAddressRange: '10.1.1.128/26'
+    nsgName: varIdNsgIdName
     networkSecurityGroupId: ''
     routeTableId: ''
     delegation: ''
@@ -71,6 +84,7 @@ param parSubnets = [
   {
     name: varIdSnetMgmtName
     ipAddressRange: '10.1.1.192/26'
+    nsgName: varIdNsgMgmtName
     networkSecurityGroupId: ''
     routeTableId: ''
     delegation: ''

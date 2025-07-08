@@ -7,6 +7,8 @@ type subnetOptionsType = ({
   name: string
   @description('IP-address range for subnet.')
   ipAddressRange: string
+  @description('Id of Network Security Group to associate with subnet. If not provided, no NSG will be associated.')
+  nsgName: string
   @description('Id of Network Security Group to associate with subnet.')
   networkSecurityGroupId: string?
   @description('Id of Route Table to associate with subnet.')
@@ -32,8 +34,10 @@ param parSubnets subnetOptionsType = [
   {
     name: 'GatewaySubnet'
     ipAddressRange: '10.10.15.0/24'
+    nsgName: ''
     networkSecurityGroupId: ''
     routeTableId: ''
+    delegation: ''
   }
 ]
 
@@ -63,6 +67,16 @@ param parAzFirewallIpAddress string = '${parCompanyPrefix}-azfw'
 
 @sys.description('Set Parameter to true to Opt-out of deployment telemetry.')
 param parTelemetryOptOut bool = false
+
+// 
+resource resNsgs 'Microsoft.Network/networkSecurityGroups@2024-05-01' = [for i in range(0, length(parSubnets)): {
+  name: parSubnets[i].nsgName
+  location: parLocation
+  tags: parTags
+  properties: {
+    securityRules: []
+  }
+}]
 
 // Optional Route Table with default route to Azure Firewall
 resource resHubRouteTable 'Microsoft.Network/routeTables@2024-05-01' = if (parAzFirewallEnabled) {
@@ -115,7 +129,7 @@ module modSubnets '../subnet/subnet.bicep' = [for i in range(0, length(parSubnet
   params: {
     subnetName: parSubnets[i].name
     addressPrefix: parSubnets[i].ipAddressRange
-    nsgId: parSubnets[i].networkSecurityGroupId
+    nsgId: resNsgs[i].id
     routeTableId: parSubnets[i].routeTableId
     delegation: contains(parSubnets[i], 'delegation') ? parSubnets[i].delegation : ''
     vnetName: parIdNetworkName
