@@ -1,47 +1,36 @@
-metadata name = 'ALZ Bicep - Hub Subnet Module'
-metadata description = 'ALZ Bicep Module used to set up Hub Subnet'
+metadata name = 'ALZ Bicep - Subnet Module'
+metadata description = 'ALZ Bicep Module used to set up multiple Subnets'
 
-@description('Subnet name')
-param subnetName string
+@description('Array of subnet definitions (name, address, NSG ID, route table ID, delegation, etc.)')
+param subnets array
 
-@description('Address prefix for the subnet')
-param addressPrefix string
-
-@description('ID of the NSG to associate')
-param nsgId string
-
-@description('ALZ Hub VNet resource group name')
+@description('Name of the VNet where the subnets will be created')
 param vnetName string
 
-@description('ID of the route table to associate (optional)')
-param routeTableId string = ''
-
-@description('Delegation service name (optional)')
-param delegation string = ''
-
-// Reference the parent VNet at this module's scope
 resource existingVnet 'Microsoft.Network/virtualNetworks@2024-07-01' existing = {
   name: vnetName
 }
 
-resource subnet 'Microsoft.Network/virtualNetworks/subnets@2024-07-01' = {
-  name: subnetName
+resource subnetResources 'Microsoft.Network/virtualNetworks/subnets@2024-07-01' = [for subnet in subnets: {
+  name: subnet.name
   parent: existingVnet
   properties: {
-    addressPrefix: addressPrefix
-    networkSecurityGroup: empty(nsgId) ? null : {
-      id: nsgId
+    addressPrefix: subnet.ipAddressRange
+    networkSecurityGroup: empty(subnet.networkSecurityGroupId) ? null : {
+      id: subnet.networkSecurityGroupId
     }
-    routeTable: empty(routeTableId) ? null : {
-      id: routeTableId
+    routeTable: empty(subnet.routeTableId) ? null : {
+      id: subnet.routeTableId
     }
-    delegations: empty(delegation) ? [] : [
+    delegations: empty(subnet.delegation) ? [] : [
       {
-        name: '${subnetName}-delegation'
+        name: '${subnet.name}-delegation'
         properties: {
-          serviceName: delegation
+          serviceName: subnet.delegation
         }
       }
     ]
   }
-}
+}]
+
+output subnetIds array = [for subnet in subnetResources: subnet.id]
