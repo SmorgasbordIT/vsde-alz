@@ -68,14 +68,6 @@ param parAzFirewallIpAddress string = '${parCompanyPrefix}-azfw'
 @sys.description('Set Parameter to true to Opt-out of deployment telemetry.')
 param parTelemetryOptOut bool = false
 
-var batchedSubnets = [for i in range(0, length(parSubnets)): {
-  name: parSubnets[i].name
-  ipAddressRange: parSubnets[i].ipAddressRange
-  networkSecurityGroupId: resNsgs[i].id
-  routeTableId: parSubnets[i].routeTableId
-  delegation: contains(parSubnets[i], 'delegation') ? parSubnets[i].delegation : ''
-}]
-
 // Create the Network Security Groups for each subnet
 resource resNsgs 'Microsoft.Network/networkSecurityGroups@2024-05-01' = [for i in range(0, length(parSubnets)): {
   name: parSubnets[i].nsgName
@@ -128,16 +120,18 @@ module modVnet '../virtualNetwork/vnet.bicep' = {
 }
 
 // Deploy subnets using module and depend on VNet creation
-module modSubnets '../subnet/subnet.bicep' = {
-  name: 'modAllSubnets'
+module modSubnets '../subnet/subnet.bicep' = [for i in range(0, length(parSubnets)): {
+  name: 'modSubnet-${parSubnets[i].name}'
   scope: resourceGroup()
-  dependsOn: [
-    modVnet
-    resNsgs
-  ]
+  dependsOn: i == 0
+    ? [modVnet]
+    : [modVnet, 'modSubnet-${parSubnets[i - 1].name}']
   params: {
-    subnets: batchedSubnets
+    subnetName: parSubnets[i].name
+    addressPrefix: parSubnets[i].ipAddressRange
+    nsgId: resNsgs[i].id
+    routeTableId: parSubnets[i].routeTableId
+    delegation: contains(parSubnets[i], 'delegation') ? parSubnets[i].delegation : ''
     vnetName: parIdNetworkName
-    location: parLocation
   }
-}
+}]

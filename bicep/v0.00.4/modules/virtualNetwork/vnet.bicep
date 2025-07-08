@@ -19,7 +19,7 @@ param enableDdosProtection bool
 @description('DDoS Protection Plan name')
 param ddosProtectionPlan string
 
-resource vnet 'Microsoft.Network/virtualNetworks@2024-07-01' = {
+resource resVnet 'Microsoft.Network/virtualNetworks@2024-07-01' = {
   name: vnetName
   location: location
   tags: tags
@@ -37,4 +37,4 @@ resource vnet 'Microsoft.Network/virtualNetworks@2024-07-01' = {
   }
 }
 
-output vnetName string = vnet.name
+output vnetName string = resVnet.name
