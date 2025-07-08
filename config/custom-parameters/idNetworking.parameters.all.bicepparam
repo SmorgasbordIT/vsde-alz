@@ -15,8 +15,6 @@ var varIdFormatted = empty(varAzEnvironmentId) || length(varAzEnvironmentId) < 2
   ? 'XX'
   : toUpper(substring(varAzEnvironmentId, 0, 2))
 
-param parVnetRgName = toUpper('${varAzUk}${varUks}-rg-${varIdFormatted}-network-01')
-
 // Read environment variables for naming convention
 var varIdNetworkName    = toUpper('${varAzUk}${varUks}-${varSnk}-${varIdFormatted}-vnet-01')
 var varIdSnetAddsName   = toUpper('${varAzUk}${varUks}-${varSnk}-${varIdFormatted}-snet-adds-01')

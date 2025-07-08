@@ -21,6 +21,9 @@ param parLocation string = resourceGroup().location
 @description('Prefix value which will be prepended to all resource names.')
 param parCompanyPrefix string = 'alz'
 
+@description('Name of the Resource Group where the VNet will be deployed.')
+param parVnetRgName string = toUpper('${parCompanyPrefix}-${parLocation}-network-01')
+
 @description('Name for ID Network.')
 param parIdNetworkName string = '${parCompanyPrefix}-id-${parLocation}'
 
@@ -106,18 +109,15 @@ module modVnet '../virtualNetwork/vnet.bicep' = {
 }
 
 // Deploy subnets using module and depend on VNet creation
-module modSubnets '../subnet/subnet.bicep' = [for subnet in parSubnets: {
-  name: 'modSubnet-${subnet.name}'
-  scope: resourceGroup()
+module modSubnets '../subnet/subnet.bicep' = {
+  name: 'modSubnet-SubnetsDeployment'
+  scope: resourceGroup(parVnetRgName)
   dependsOn: [
     modVnet
   ]
   params: {
-    subnetName: subnet.name
-    addressPrefix: subnet.ipAddressRange
-    nsgId: subnet.networkSecurityGroupId
-    routeTableId: subnet.routeTableId
-    delegation: contains(subnet, 'delegation') ? subnet.delegation : ''
+    subnets: parSubnets
     vnetName: parIdNetworkName
+    resourceGroupName: parVnetRgName
   }
-}]
+}
