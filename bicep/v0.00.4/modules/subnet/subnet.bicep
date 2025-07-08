@@ -7,6 +7,9 @@ param subnets array
 @description('Name of the VNet where the subnets will be created')
 param vnetName string
 
+@description('Resource group of the VNet')
+param resourceGroupName string
+
 resource existingVnet 'Microsoft.Network/virtualNetworks@2024-07-01' existing = {
   name: vnetName
 }

@@ -118,5 +118,6 @@ module modSubnets '../subnet/subnet.bicep' = {
   params: {
     subnets: parSubnets
     vnetName: parIdNetworkName
+    resourceGroupName: parVnetRgName
   }
 }
