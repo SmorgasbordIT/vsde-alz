@@ -18,10 +18,10 @@ param (
   [String]$azLocation = "$($env:UKS_LOCATION)",
 
   [Parameter()]
-  [String]$azTemplateFile = "bicep\$($env:MODULES_RELEASE_VERSION)\modules\networking\hubNetworking.bicep",
+  [String]$azTemplateFile = "upstream-releases\$($env:UPSTREAM_RELEASE_VERSION)\infra-as-code\bicep\modules\vnetPeering\vnetPeering.bicep",
 
   [Parameter()]
-  [String]$azTemplateParameterFile = "config\custom-parameters\hubNetworking.parameters.all.bicepparam",
+  [String]$azTemplateParameterFile = "config\custom-parameters\vnetPeering.parameters.all.bicepparam",
 
   [Parameter()]
   [Boolean]$WhatIfEnabled = [System.Convert]::ToBoolean($env:WHAT_IF_ENABLED)
@@ -43,6 +43,7 @@ $inputObject = @{
   ResourceGroupName     = $azRgConnNetwork
   TemplateFile          = $azTemplateFile
   TemplateParameterFile = $azTemplateParameterFile
+  parHubSubscriptionId  = $azConnectivitySubscriptionId
   WhatIf                = $WhatIfEnabled
   Verbose               = $true
 }

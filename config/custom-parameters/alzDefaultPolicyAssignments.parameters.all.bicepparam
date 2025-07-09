@@ -24,7 +24,7 @@ var varLogAnalyticsWorkspaceName = toUpper('${varAzUkAbbrName}${varAzUkSouth}-${
 
 // Read environment variables for subscription IDs and resource group names
 param parConnectivitySubscriptionId = ''
-var varConnectivityResourceGroupName = toUpper('${varAzUkAbbrName}${varAzUkSouth}-rg-con-net-01')
+var varConnectivityResourceGroupName = toUpper('${varAzUkAbbrName}${varAzUkSouth}-rg-conn-dns-01')
 param parLoggingSubscriptionId = ''
 var varLoggingResourceGroupName = toUpper('${varAzUkAbbrName}${varAzUkSouth}-rg-mgt-log-01')
 

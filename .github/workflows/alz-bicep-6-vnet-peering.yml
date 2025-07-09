@@ -1,20 +1,16 @@
-name: ALZ-Bicep-5a-HubSpoke
+name: ALZ-Bicep-6-VNetPeering
 
 on:
   push:
     branches:
       - "main"
     paths:
-      - "config/custom-parameters/resourceGroupConnectivity.parameters.all.bicepparam"
-      - "config/custom-parameters/hubNetworking.parameters.all.bicepparam"
-      - "config/custom-parameters/hubBastion.parameters.all.bicepparam"
+      - "config/custom-parameters/vnetPeering.parameters.all.bicepparam"
   pull_request:
     branches:
       - "main"
     paths:
-      - "config/custom-parameters/resourceGroupConnectivity.parameters.all.bicepparam"
-      - "config/custom-parameters/hubNetworking.parameters.all.bicepparam"
-      - "config/custom-parameters/hubBastion.parameters.all.bicepparam"
+      - "config/custom-parameters/vnetPeering.parameters.all.bicepparam"
   workflow_dispatch:
     inputs:
       what_if_enabled:
@@ -39,7 +35,6 @@ permissions:
 
 env:
   ENV_FILE: ".env"
-  AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
   UKS_LOCATION: ${{ vars.UKS_LOCATION }}
   ENV_HUB: ${{ vars.ENV_HUB }}
   UPSTREAM_RELEASE_VERSION: ${{ vars.UPSTREAM_RELEASE_VERSION }}
@@ -52,7 +47,7 @@ env:
   IS_PULL_REQUEST: "${{ github.event_name == 'pull_request' }}"
 
 jobs:
-  ALZ_Bicep_5a_HubSpoke:
+  ALZ_Bicep_6_VNetPeering:
     runs-on: ubuntu-latest
     environment: SBN-ALZ-Prod
     steps:
@@ -80,23 +75,10 @@ jobs:
           subscription-id: ${{ secrets.VSDE_SUBSCRIPTION_ID }}
           enable-AzPSSession: true
 
-      - name: "Connectivity Resource Group Deployment"
+      - name: "VNet Peering Deployment"
         uses: azure/powershell@v2
         with:
           inlineScript: |
-            .\pipeline-scripts\Deploy-ALZConnectivityResourceGroup.ps1
+            .\pipeline-scripts\Deploy-ALZVNetPeering.ps1
           azPSVersion: "latest"
 
-      - name: "Hub (Hub-and-Spoke) Deployment"
-        uses: azure/powershell@v2
-        with:
-          inlineScript: |
-            .\pipeline-scripts\Deploy-ALZHub-HubAndSpoke.ps1
-          azPSVersion: "latest"
-
-      - name: "Hub Bastion Deployment"
-        uses: azure/powershell@v2
-        with:
-          inlineScript: |
-            .\pipeline-scripts\Deploy-ALZHub-HubBastion.ps1
-          azPSVersion: "latest"
