@@ -86,13 +86,13 @@ resource resNsgs 'Microsoft.Network/networkSecurityGroups@2024-05-01' = [for i i
 }]
 
 // Optional Route Table with default route to Azure Firewall
-resource resRouteTables 'Microsoft.Network/routeTables@2024-05-01' = [for i in range(0, length(parSubnets)): if (!empty(parSubnets[i].name)) {
-  name: '${parCompanyPrefix}-rt-${parSubnets[i].name}'
+resource resHubRouteTable 'Microsoft.Network/routeTables@2024-05-01' = if (parAzFirewallEnabled) {
+  name: parIdRouteTableName
   location: parLocation
   tags: parTags
   properties: {
     disableBgpRoutePropagation: parDisableBgpRoutePropagation
-    routes: parAzFirewallEnabled ? [
+    routes: [
       {
         name: 'hub-udr-default-azfw'
         properties: {
@@ -101,9 +101,9 @@ resource resRouteTables 'Microsoft.Network/routeTables@2024-05-01' = [for i in r
           nextHopIpAddress: parAzFirewallIpAddress
         }
       }
-    ] : []
+    ]
   }
-}]
+}
 
 //DDos Protection plan will only be enabled if parDdosEnabled is true.
 resource resDdosProtectionPlan 'Microsoft.Network/ddosProtectionPlans@2023-02-01' = if (parDdosEnabled) {
@@ -134,13 +134,12 @@ module modSubnets '../subnet/subnet.bicep' = [for i in range(0, length(parSubnet
   dependsOn: [
     modVnet
     resNsgs
-    resRouteTables
   ]
   params: {
     subnetName: parSubnets[i].name
     addressPrefix: parSubnets[i].ipAddressRange
     nsgId: resNsgs[i].id
-    routeTableId: resRouteTables[i].id
+    routeTableId: parSubnets[i].routeTableId
     delegation: contains(parSubnets[i], 'delegation') ? parSubnets[i].delegation : ''
     vnetName: parIdNetworkName
   }
