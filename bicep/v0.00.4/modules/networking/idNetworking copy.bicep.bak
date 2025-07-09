@@ -139,7 +139,7 @@ module modSubnets '../subnet/subnet.bicep' = [for i in range(0, length(parSubnet
     subnetName: parSubnets[i].name
     addressPrefix: parSubnets[i].ipAddressRange
     nsgId: resNsgs[i].id
-    routeTableId: parAzFirewallEnabled ? resHubRouteTable.id : ''
+    routeTableId: parSubnets[i].routeTableId
     delegation: contains(parSubnets[i], 'delegation') ? parSubnets[i].delegation : ''
     vnetName: parIdNetworkName
   }
