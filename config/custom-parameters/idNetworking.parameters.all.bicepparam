@@ -92,7 +92,7 @@ param parSubnets = [
 ]
 
 // Azure Firewall parameters.
-param parAzFirewallEnabled = false
+param parAzFirewallEnabled = true
 param parAzFirewallIpAddress = '10.0.0.4'
 
 // Routing table parameters.
