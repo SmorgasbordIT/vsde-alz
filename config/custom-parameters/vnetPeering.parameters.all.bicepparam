@@ -42,7 +42,7 @@ param parAllowVirtualNetworkAccess = true
 param parAllowForwardedTraffic = true
 
 // Switch to enable/disable gateway transit for the Network Peer
-param parAllowGatewayTransit = false
+param parAllowGatewayTransit = true
 
 // Switch to enable/disable remote gateway for the Network Peer
 param parUseRemoteGateways = false
