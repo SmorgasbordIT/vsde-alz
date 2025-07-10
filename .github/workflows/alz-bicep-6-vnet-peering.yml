@@ -43,6 +43,7 @@ env:
   AZ_UKSOUTH: ${{ vars.AZ_UKSOUTH }}
   SPACENK_ABBR: ${{ vars.SPACENK_ABBR }}
   CONN_GRP_NAME: ${{ vars.CONN_GRP_NAME }}
+  ID_GRP_NAME: ${{ vars.ID_GRP_NAME }}
   WHAT_IF_ENABLED: ${{ github.event.inputs.what_if_enabled }}
   IS_PULL_REQUEST: "${{ github.event_name == 'pull_request' }}"
 
