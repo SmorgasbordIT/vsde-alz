@@ -30,7 +30,7 @@ param (
 # Create the Azure Connectivity Subscription name
 $azConnSubName = ('{0}-{1}-{2}-{3}-01' -f $azUk.ToUpper(),$azSnk.ToUpper(),$azEnvHub.ToUpper(),$azConn.ToUpper())
 
-# Get the Management Subscription Alias Id
+# Get the Connectivity Subscription Alias Id
 $azConnSubAliasId = Get-AzSubscription -SubscriptionName $azConnSubName
 $azConnectivitySubscriptionId = $azConnSubAliasId.Id
 
@@ -39,7 +39,7 @@ $azRgConnNetwork = ('{0}{1}-RG-CONN-NETWORK-01' -f $azUk.ToUpper(),$azUks.ToUppe
 
 # Parameters necessary for deployment
 $inputObject = @{
-  DeploymentName        = -join ('alz-Hub-and-SpokeDeploy-{0}' -f (Get-Date -Format 'yyyyMMddTHHMMssffffZ'))[0..63]
+  DeploymentName        = -join ('alz-VNetPeeringDeploy-{0}' -f (Get-Date -Format 'yyyyMMddTHHMMssffffZ'))[0..63]
   ResourceGroupName     = $azRgConnNetwork
   TemplateFile          = $azTemplateFile
   TemplateParameterFile = $azTemplateParameterFile

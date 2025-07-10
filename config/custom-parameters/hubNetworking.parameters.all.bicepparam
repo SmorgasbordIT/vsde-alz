@@ -1,4 +1,4 @@
-using '../../bicep/v0.00.4/modules/networking/hubNetworking.bicep'
+using '../../bicep/v0.00.4/modules/coreNetworking/hubNetworking.bicep'
 
 param parLocation = readEnvironmentVariable('UKS_LOCATION','uksouth')
 

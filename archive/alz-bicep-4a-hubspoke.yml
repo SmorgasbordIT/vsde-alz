@@ -1,20 +1,36 @@
-
-name: ALZ-Bicep-4A-HubSpoke
+name: ALZ-Bicep-5a-HubSpoke
 
 on:
   push:
     branches:
       - "main"
     paths:
-      - "config/custom-parameters/resourceGroupConnectivity.parameters.all.json"
-      - "config/custom-parameters/hubNetworking.parameters.all.json"
+      - "config/custom-parameters/resourceGroupConnectivity.parameters.all.bicepparam"
+      - "config/custom-parameters/hubNetworking.parameters.all.bicepparam"
+      - "config/custom-parameters/hubBastion.parameters.all.bicepparam"
   pull_request:
     branches:
       - "main"
     paths:
-      - "config/custom-parameters/resourceGroupConnectivity.parameters.all.json"
-      - "config/custom-parameters/hubNetworking.parameters.all.json"
+      - "config/custom-parameters/resourceGroupConnectivity.parameters.all.bicepparam"
+      - "config/custom-parameters/hubNetworking.parameters.all.bicepparam"
+      - "config/custom-parameters/hubBastion.parameters.all.bicepparam"
   workflow_dispatch:
+    inputs:
+      what_if_enabled:
+        description: 'Enable What-If analysis?'
+        required: false
+        default: 'false'
+        type: boolean
+      targetRegion:
+        description: "Select which region(s) to deploy to"
+        required: true
+        default: "UKS"
+        type: choice
+        options:
+            - UKS
+            - UKW
+            - BOTH
 
 permissions:
   id-token: write
@@ -23,11 +39,22 @@ permissions:
 
 env:
   ENV_FILE: ".env"
+  AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+  UKS_LOCATION: ${{ vars.UKS_LOCATION }}
+  ENV_HUB: ${{ vars.ENV_HUB }}
+  UPSTREAM_RELEASE_VERSION: ${{ vars.UPSTREAM_RELEASE_VERSION }}
+  MODULES_RELEASE_VERSION: ${{ vars.MODULES_RELEASE_VERSION }}
+  AZUREUK: ${{ vars.AZUREUK }}
+  AZ_UKSOUTH: ${{ vars.AZ_UKSOUTH }}
+  SPACENK_ABBR: ${{ vars.SPACENK_ABBR }}
+  CONN_GRP_NAME: ${{ vars.CONN_GRP_NAME }}
+  WHAT_IF_ENABLED: ${{ github.event.inputs.what_if_enabled }}
   IS_PULL_REQUEST: "${{ github.event_name == 'pull_request' }}"
 
 jobs:
-  ALZ_Bicep_4a_HubSpoke:
+  ALZ_Bicep_5a_HubSpoke:
     runs-on: ubuntu-latest
+    environment: pre-uks
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
@@ -35,7 +62,7 @@ jobs:
           fetch-depth: 0
 
       - name: "Remove Quotation Marks from Environment File"
-        uses: azure/powershell@v1
+        uses: azure/powershell@v2
         with:
           inlineScript: |
             Write-Host $ENV_FILE
@@ -45,24 +72,31 @@ jobs:
       - name: Import Environment Variables from File
         run: cat ${{ env.ENV_FILE }} >> $GITHUB_ENV
 
-      - name: OIDC Login to Tenant
+      - name: "OIDC Login to Tenant"
         uses: azure/login@v2
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ env.CONNECTIVITY_SUBSCRIPTION_ID }}
+          subscription-id: ${{ secrets.VSDE_SUBSCRIPTION_ID }}
           enable-AzPSSession: true
 
       - name: "Connectivity Resource Group Deployment"
-        uses: azure/powershell@v1
+        uses: azure/powershell@v2
         with:
           inlineScript: |
             .\pipeline-scripts\Deploy-ALZConnectivityResourceGroup.ps1
           azPSVersion: "latest"
 
       - name: "Hub (Hub-and-Spoke) Deployment"
-        uses: azure/powershell@v1
+        uses: azure/powershell@v2
         with:
           inlineScript: |
             .\pipeline-scripts\Deploy-ALZHub-HubAndSpoke.ps1
+          azPSVersion: "latest"
+
+      - name: "Hub Bastion Deployment"
+        uses: azure/powershell@v2
+        with:
+          inlineScript: |
+            .\pipeline-scripts\Deploy-ALZHub-HubBastion.ps1
           azPSVersion: "latest"

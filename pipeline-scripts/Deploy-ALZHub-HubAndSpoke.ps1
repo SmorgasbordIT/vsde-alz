@@ -18,7 +18,7 @@ param (
   [String]$azLocation = "$($env:UKS_LOCATION)",
 
   [Parameter()]
-  [String]$azTemplateFile = "bicep\$($env:MODULES_RELEASE_VERSION)\modules\networking\hubNetworking.bicep",
+  [String]$azTemplateFile = "bicep\$($env:MODULES_RELEASE_VERSION)\modules\coreNetworking\hubNetworking.bicep",
 
   [Parameter()]
   [String]$azTemplateParameterFile = "config\custom-parameters\hubNetworking.parameters.all.bicepparam",
@@ -30,7 +30,7 @@ param (
 # Create the Azure Connectivity Subscription name
 $azConnSubName = ('{0}-{1}-{2}-{3}-01' -f $azUk.ToUpper(),$azSnk.ToUpper(),$azEnvHub.ToUpper(),$azConn.ToUpper())
 
-# Get the Management Subscription Alias Id
+# Get the Connectivity Subscription Alias Id
 $azConnSubAliasId = Get-AzSubscription -SubscriptionName $azConnSubName
 $azConnectivitySubscriptionId = $azConnSubAliasId.Id
 

@@ -18,7 +18,7 @@ param (
   [String]$azLocation = "$($env:UKS_LOCATION)",
 
   [Parameter()]
-  [String]$azTemplateFile = "bicep\$($env:MODULES_RELEASE_VERSION)\modules\networking\idNetworking.bicep",
+  [String]$azTemplateFile = "bicep\$($env:MODULES_RELEASE_VERSION)\modules\coreNetworking\idNetworking.bicep",
 
   [Parameter()]
   [String]$azTemplateParameterFile = "config\custom-parameters\idNetworking.parameters.all.bicepparam",

@@ -287,7 +287,7 @@ resource resBastionNsg 'Microsoft.Network/networkSecurityGroups@2024-05-01' = if
   }
 }
 
-module modBastionSubnetModule '../Subnet/subnet.bicep' = {
+module modBastionSubnetModule '../subnet/subnet.bicep' = {
   name: parBastionSubnetName
   scope: resourceGroup(parRgHubNetworkVnet) // Deploys to VNet's RG
   params: {

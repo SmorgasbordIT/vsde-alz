@@ -1,4 +1,4 @@
-using '../../upstream-releases/v0.22.0/infra-as-code/bicep/modules/vnetPeering/vnetPeering.bicep'
+using '../../bicep/v0.00.4/modules/vnetPeering/vnetPeering.bicep'
 
 var varAzUkAbbrName = readEnvironmentVariable('AZUREUK','azuk')
 var varAzUkSouth    = readEnvironmentVariable('AZ_UKSOUTH','')
@@ -8,7 +8,7 @@ var varAzEnvId      = readEnvironmentVariable('ID_GRP_NAME','')
 var varAzEnvtHub    = readEnvironmentVariable('ENV_HUB','')
 
 // Use the Hub subscription ID if it is set, otherwise use the connectivity subscription ID ("Platform only" scenario)
-var varSubIdVnetSource = !empty(parHubSubscriptionId) ? parHubSubscriptionId : parConnectivitySubscriptionId
+param parHubSubscriptionId = ''
 
 // ALZ Environment formatted for Env var
 var varConnFormatted = toUpper(substring(varAzEnvConn, 0, 4))
@@ -27,7 +27,7 @@ var varSourceVirtualNetworkName = toUpper('${varAzUkAbbrName}${varAzUkSouth}-vne
 var varDestinationVirtualNetworkName = toUpper('${varAzUkAbbrName}${varAzUkSouth}-vnet-${varIDFormatted}-01')
 
 // Virtual Network ID of Virtual Network destination
-param parDestinationVirtualNetworkId = '/subscriptions/${varSubIdVnetSource}/resourceGroups/${varSourceResourceGroupName}/providers/Microsoft.Network/virtualNetworks/${varHubNetworkName}'
+param parDestinationVirtualNetworkId = '/subscriptions/${parHubSubscriptionId}/resourceGroups/${varSourceResourceGroupName}/providers/Microsoft.Network/virtualNetworks/${varHubNetworkName}'
 
 // Name of source Virtual Network we are peering
 param parSourceVirtualNetworkName = varSourceVirtualNetworkName
