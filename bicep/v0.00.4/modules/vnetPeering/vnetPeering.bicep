@@ -1,8 +1,8 @@
 metadata name = 'ALZ Bicep - Virtual Network Peering module'
 metadata description = 'Module used to set up Virtual Network Peering between Virtual Networks'
 
-@sys.description('The Hub Subscription ID where the destination Virtual Network is located.')
-param parHubSubscriptionId string
+@sys.description('The Subscription ID where the destination Virtual Network is located.')
+param parIdSubscriptionId string
 
 @sys.description('Virtual Network ID of Virtual Network destination.')
 param parDestinationVirtualNetworkId string

@@ -12,6 +12,9 @@ param (
   [String]$azEnvHub = "$($env:ENV_HUB)",
 
   [Parameter()]
+  [String]$azEnvId = "$($env:ID_GRP_NAME)",
+
+  [Parameter()]
   [String]$azConn = "$($env:CONN_GRP_NAME)",
 
   [Parameter()]
@@ -26,6 +29,13 @@ param (
   [Parameter()]
   [Boolean]$WhatIfEnabled = [System.Convert]::ToBoolean($env:WHAT_IF_ENABLED)
 )
+
+# Create the Azure ID Subscription name
+$azIdSubName = ('{0}-{1}-{2}-{3}-01' -f $azUk.ToUpper(),$azSnk.ToUpper(),$azEnvHub.ToUpper(),$azEnvId.ToUpper())
+
+# Get the ID Subscription Alias Id
+$azIdSubAliasId = Get-AzSubscription -SubscriptionName $azIdSubName
+$azIdentitySubscriptionId = $azIdSubAliasId.Id
 
 # Create the Azure Connectivity Subscription name
 $azConnSubName = ('{0}-{1}-{2}-{3}-01' -f $azUk.ToUpper(),$azSnk.ToUpper(),$azEnvHub.ToUpper(),$azConn.ToUpper())
@@ -43,7 +53,7 @@ $inputObject = @{
   ResourceGroupName     = $azRgConnNetwork
   TemplateFile          = $azTemplateFile
   TemplateParameterFile = $azTemplateParameterFile
-  parHubSubscriptionId  = $azConnectivitySubscriptionId
+  parIdSubscriptionId   = $azIdentitySubscriptionId
   WhatIf                = $WhatIfEnabled
   Verbose               = $true
 }
