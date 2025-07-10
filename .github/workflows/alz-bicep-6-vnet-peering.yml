@@ -79,6 +79,6 @@ jobs:
         uses: azure/powershell@v2
         with:
           inlineScript: |
-            .\pipeline-scripts\Deploy-ALZVNetPeering.ps1
+            .\pipeline-scripts\Deploy-AZLVNetPerring.ps1
           azPSVersion: "latest"
 

@@ -18,7 +18,7 @@ param (
   [String]$azLocation = "$($env:UKS_LOCATION)",
 
   [Parameter()]
-  [String]$azTemplateFile = "upstream-releases\$($env:UPSTREAM_RELEASE_VERSION)\infra-as-code\bicep\modules\vnetPeering\vnetPeering.bicep",
+  [String]$azTemplateFile = "bicep\$($env:MODULES_RELEASE_VERSION)\modules\vnetPeering\vnetPeering.bicep",
 
   [Parameter()]
   [String]$azTemplateParameterFile = "config\custom-parameters\vnetPeering.parameters.all.bicepparam",
