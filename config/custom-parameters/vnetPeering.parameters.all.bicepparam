@@ -11,8 +11,13 @@ var varAzEnvtHub    = readEnvironmentVariable('ENV_HUB','')
 param parHubSubscriptionId = ''
 
 // ALZ Environment formatted for Env var
-var varConnFormatted = toUpper(substring(varAzEnvConn, 0, 4))
-var varIDFormatted = toUpper(substring(varAzEnvId, 0, 2))
+var varConnFormatted = empty(varAzEnvConn) || length(varAzEnvConn) < 4
+  ? 'XXXX'
+  : toUpper(substring(varAzEnvConn, 0, 4))
+
+var varIdFormatted = empty(varAzEnvId) || length(varAzEnvId) < 2
+  ? 'XX'
+  : toUpper(substring(varAzEnvId, 0, 2))
 
 // The Hub Virtual Network Resource Group name
 var varSourceResourceGroupName = toUpper('${varAzUkAbbrName}${varAzUkSouth}-rg-${varConnFormatted}-network-01')
@@ -24,7 +29,7 @@ var varHubNetworkName = toUpper('${varAzUkAbbrName}${varAzUkSouth}-${varSnk}-${v
 var varSourceVirtualNetworkName = toUpper('${varAzUkAbbrName}${varAzUkSouth}-vnet-${varAzEnvtHub}-01')
 
 // Name of the destination Virtual Network we are peering
-var varDestinationVirtualNetworkName = toUpper('${varAzUkAbbrName}${varAzUkSouth}-vnet-${varIDFormatted}-01')
+var varDestinationVirtualNetworkName = toUpper('${varAzUkAbbrName}${varAzUkSouth}-vnet-${varIdFormatted}-01')
 
 // Virtual Network ID of Virtual Network destination
 param parDestinationVirtualNetworkId = '/subscriptions/${parHubSubscriptionId}/resourceGroups/${varSourceResourceGroupName}/providers/Microsoft.Network/virtualNetworks/${varHubNetworkName}'
