@@ -21,10 +21,10 @@ var varDestinationResourceGroupName = toUpper('${varAzUkAbbrName}${varAzUkSouth}
 var varIdNetworkName = toUpper('${varAzUkAbbrName}${varAzUkSouth}-${varSnk}-${varIdFormatted}-vnet-01')
 
 // Name of the source Virtual Network we are peering
-var varSourceVirtualNetworkName = toUpper('${varAzUkAbbrName}${varAzUkSouth}-vnet-${varAzEnvtHub}-01')
+var varSourceVirtualNetworkName = toUpper('${varAzUkAbbrName}${varAzUkSouth}-${varAzEnvtHub}-vnet-01')
 
 // Name of the destination Virtual Network we are peering
-var varDestinationVirtualNetworkName = toUpper('${varAzUkAbbrName}${varAzUkSouth}-vnet-${varIdFormatted}-01')
+var varDestinationVirtualNetworkName = toUpper('${varAzUkAbbrName}${varAzUkSouth}-${varIdFormatted}-vnet-01')
 
 // Virtual Network ID of Virtual Network destination
 param parDestinationVirtualNetworkId = '/subscriptions/${parIdSubscriptionId}/resourceGroups/${varDestinationResourceGroupName}/providers/Microsoft.Network/virtualNetworks/${varIdNetworkName}'
