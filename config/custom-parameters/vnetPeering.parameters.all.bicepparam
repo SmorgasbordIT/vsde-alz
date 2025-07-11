@@ -3,31 +3,36 @@ using '../../bicep/v0.00.4/modules/vnetPeering/vnetPeering.bicep'
 var varAzUkAbbrName = readEnvironmentVariable('AZUREUK','azuk')
 var varAzUkSouth    = readEnvironmentVariable('AZ_UKSOUTH','')
 var varSnk          = readEnvironmentVariable('SPACENK_ABBR','')
+var varAzEnvConn    = readEnvironmentVariable('CONN_GRP_NAME','')
 var varAzEnvId      = readEnvironmentVariable('ID_GRP_NAME','')
 var varAzEnvtHub    = readEnvironmentVariable('ENV_HUB','')
 
-// Use the Hub subscription ID if it is set, otherwise use the connectivity subscription ID ("Platform only" scenario)
-param parIdSubscriptionId = ''
+// The Source & Destination subscription ID if it is set, otherwise use the connectivity subscription ID ("Platform only" scenario)
+param parSourceSubscriptionId = ''
+param parDestinationSubscriptionId = ''
 
 // ALZ Environment formatted for Env var
-var varIdFormatted = empty(varAzEnvId) || length(varAzEnvId) < 2
+var varSourceFormatted = empty(varAzEnvConn) || length(varAzEnvConn) < 4
+  ? 'XXXX'
+  : toUpper(substring(varAzEnvConn, 0, 4))
+
+var varDestinationFormatted = empty(varAzEnvId) || length(varAzEnvId) < 2
   ? 'XX'
   : toUpper(substring(varAzEnvId, 0, 2))
 
-// The Virtual Network Resource Group name of the destination in the Identity Subscription
-var varDestinationResourceGroupName = toUpper('${varAzUkAbbrName}${varAzUkSouth}-rg-${varIdFormatted}-network-01')
+// The Virtual Network Resource Group names of the source & destination Virtual Networks
+param parSourceResourceGroupName = toUpper('${varAzUkAbbrName}${varAzUkSouth}-rg-${varSourceFormatted}-network-01')
+param parDestinationResourceGroupName = toUpper('${varAzUkAbbrName}${varAzUkSouth}-rg-${varDestinationFormatted}-network-01')
 
-// The Virtual Network name of the source in the Hub Subscription
-var varIdNetworkName = toUpper('${varAzUkAbbrName}${varAzUkSouth}-${varSnk}-${varIdFormatted}-vnet-01')
-
-// Name of the source Virtual Network we are peering
+// Name of the source & destination of the Virtual Network we are peering
 var varSourceVirtualNetworkName = toUpper('${varAzUkAbbrName}${varAzUkSouth}-${varSnk}-${varAzEnvtHub}-vnet-01')
+var varDestinationVirtualNetworkName = toUpper('${varAzUkAbbrName}${varAzUkSouth}-${varSnk}-${varDestinationFormatted}-vnet-01')
 
-// Name of the destination Virtual Network we are peering
-var varDestinationVirtualNetworkName = toUpper('${varAzUkAbbrName}${varAzUkSouth}-${varSnk}-${varIdFormatted}-vnet-01')
+// Virtual Network ID of Virtual Network source
+param parSourceVirtualNetworkId = '/subscriptions/${parSourceSubscriptionId}/resourceGroups/${parSourceResourceGroupName}/providers/Microsoft.Network/virtualNetworks/${varSourceVirtualNetworkName}'
 
 // Virtual Network ID of Virtual Network destination
-param parDestinationVirtualNetworkId = '/subscriptions/${parIdSubscriptionId}/resourceGroups/${varDestinationResourceGroupName}/providers/Microsoft.Network/virtualNetworks/${varIdNetworkName}'
+param parDestinationVirtualNetworkId = '/subscriptions/${parDestinationSubscriptionId}/resourceGroups/${parDestinationResourceGroupName}/providers/Microsoft.Network/virtualNetworks/${varDestinationVirtualNetworkName}}'
 
 // Name of source Virtual Network we are peering
 param parSourceVirtualNetworkName = varSourceVirtualNetworkName

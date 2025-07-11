@@ -53,7 +53,8 @@ $inputObject = @{
   ResourceGroupName     = $azRgConnNetwork
   TemplateFile          = $azTemplateFile
   TemplateParameterFile = $azTemplateParameterFile
-  parIdSubscriptionId   = $azIdentitySubscriptionId
+  parSourceSubscriptionId = $azConnectivitySubscriptionId
+  parDestinationSubscriptionId = $azIdentitySubscriptionId
   WhatIf                = $WhatIfEnabled
   Verbose               = $true
 }
