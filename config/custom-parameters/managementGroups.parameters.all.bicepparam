@@ -17,7 +17,7 @@ param parTopLevelManagementGroupPrefix = readEnvironmentVariable('TOP_LEVEL_MG_P
 // Typically blank in default Alz-Bicep deployments
 param parTopLevelManagementGroupSuffix = ''
 
-param parTopLevelManagementGroupDisplayName = 'AZUK SNK'
+param parTopLevelManagementGroupDisplayName = 'AZUK SBIT'
 
 // To deploy to existing intermediate management group, set the parent ID here, otherwise leave blank for default Alz-Bicep deployment.
 param parTopLevelManagementGroupParentId = ''
