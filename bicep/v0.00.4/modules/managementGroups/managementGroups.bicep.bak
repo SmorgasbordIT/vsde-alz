@@ -45,86 +45,19 @@ var varPlatformMg = {
 
 // Used if parPlatformMgAlzDefaultsEnable == true
 var varPlatformMgChildrenAlzDefault = {
-  prd: {
-    displayName: 'Platform - Production'
-    children: {
-      connectivity: {
-        displayName: 'Connectivity'
-      }
-      identity: {
-        displayName: 'Identity'
-      }
-      management: {
-        displayName: 'Management'
-      }
-      shared: {
-        displayName: 'Shared'
-      }
-    }
+  connectivity: {
+    displayName: 'Connectivity'
   }
-  nonprd: {
-    displayName: 'Platform - NonProduction'
-    children: {
-      connectivity: {
-        displayName: 'Connectivity'
-      }
-      identity: {
-        displayName: 'Identity'
-      }
-      management: {
-        displayName: 'Management'
-      }
-      shared: {
-        displayName: 'Shared'
-      }
-    }
+  identity: {
+    displayName: 'Identity'
+  }
+  management: {
+    displayName: 'Management'
+  }
+  shared: {
+    displayName: 'Shared'
   }
 }
-
-// Platform Child Management Groups
-// This is used to create the child management groups under the Platform Management Group 
-var varPlatformChildMgs = [
-  {
-    tierKey: 'prd'
-    childKey: 'connectivity'
-    childDisplayName: 'Connectivity'
-  }
-  {
-    tierKey: 'prd'
-    childKey: 'identity'
-    childDisplayName: 'Identity'
-  }
-  {
-    tierKey: 'prd'
-    childKey: 'management'
-    childDisplayName: 'Management'
-  }
-  {
-    tierKey: 'prd'
-    childKey: 'shared'
-    childDisplayName: 'Shared'
-  }
-  {
-    tierKey: 'nonprd'
-    childKey: 'connectivity'
-    childDisplayName: 'Connectivity'
-  }
-  {
-    tierKey: 'nonprd'
-    childKey: 'identity'
-    childDisplayName: 'Identity'
-  }
-  {
-    tierKey: 'nonprd'
-    childKey: 'management'
-    childDisplayName: 'Management'
-  }
-  {
-    tierKey: 'nonprd'
-    childKey: 'shared'
-    childDisplayName: 'Shared'
-  }
-]
 
 // Landing Zones & Child Management Groups
 var varLandingZoneMg = {
@@ -134,54 +67,13 @@ var varLandingZoneMg = {
 
 // Used if parLandingZoneMgAlzDefaultsEnable == true
 var varLandingZoneMgChildrenAlzDefault = {
-  prd: {
-    displayName: 'Landing Zone - Production'
-    children: {
-      corp: {
-        displayName: 'Corp'
-      }
-      online: {
-        displayName: 'Online'
-      }
-    }
+  corp: {
+    displayName: 'Corp'
   }
-  nonprd: {
-    displayName: 'Landing Zone - NonProduction'
-    children: {
-      development: {
-        displayName: 'Development'
-      }
-      staging: {
-        displayName: 'Staging'
-      }
-    }
+  online: {
+    displayName: 'Online'
   }
 }
-
-// Landing Zone Child Management Groups
-// This is used to create the child management groups under the Landing Zones Management Group
-var varLandingZoneChildMgs = [
-  {
-    tierKey: 'prd'
-    childKey: 'corp'
-    childDisplayName: 'Corp'
-  }
-  {
-    tierKey: 'prd'
-    childKey: 'online'
-    childDisplayName: 'Online'
-  }
-  {
-    tierKey: 'nonprd'
-    childKey: 'development'
-    childDisplayName: 'Development'
-  }
-  {
-    tierKey: 'nonprd'
-    childKey: 'staging'
-    childDisplayName: 'Staging'
-  }
-]
 
 // Used if parLandingZoneMgConfidentialEnable == true
 var varLandingZoneMgChildrenConfidential = {
@@ -275,10 +167,10 @@ resource resDecommissionedMg 'Microsoft.Management/managementGroups@2023-04-01' 
 }
 
 // Level 3 - Child Management Groups under Landing Zones MG
-resource resLandingZonesIntermediateMgs 'Microsoft.Management/managementGroups@2023-04-01' = [for tier in items(varLandingZoneMgChildrenUnioned): {
-  name: '${parTopLevelManagementGroupPrefix}-alz-${tier.key}${parTopLevelManagementGroupSuffix}'
+resource resLandingZonesChildMgs 'Microsoft.Management/managementGroups@2023-04-01' = [for mg in items(varLandingZoneMgChildrenUnioned): if (!empty(varLandingZoneMgChildrenUnioned)) {
+  name: '${parTopLevelManagementGroupPrefix}-alz-${mg.key}${parTopLevelManagementGroupSuffix}'
   properties: {
-    displayName: tier.value.displayName
+    displayName: mg.value.displayName
     details: {
       parent: {
         id: resLandingZonesMg.id
@@ -287,38 +179,14 @@ resource resLandingZonesIntermediateMgs 'Microsoft.Management/managementGroups@2
   }
 }]
 
-resource resLandingZonesChildMgs 'Microsoft.Management/managementGroups@2023-04-01' = [for mg in varLandingZoneChildMgs: {
-  name: '${parTopLevelManagementGroupPrefix}-alz-${mg.tierKey}-${mg.childKey}${parTopLevelManagementGroupSuffix}'
-  properties: {
-    displayName: mg.childDisplayName
-    details: {
-      parent: {
-        id: '/providers/Microsoft.Management/managementGroups/${parTopLevelManagementGroupPrefix}-alz-${mg.tierKey}${parTopLevelManagementGroupSuffix}'
-      }
-    }
-  }
-}]
-
 //Level 3 - Child Management Groups under Platform MG
-resource resPlatformIntermediateMgs 'Microsoft.Management/managementGroups@2023-04-01' = [for tier in items(varPlatformMgChildrenUnioned): {
-  name: '${parTopLevelManagementGroupPrefix}-plat-${tier.key}${parTopLevelManagementGroupSuffix}'
+resource resPlatformChildMgs 'Microsoft.Management/managementGroups@2023-04-01' = [for mg in items(varPlatformMgChildrenUnioned): if (!empty(varPlatformMgChildrenUnioned)) {
+  name: '${parTopLevelManagementGroupPrefix}-plat-${mg.key}${parTopLevelManagementGroupSuffix}'
   properties: {
-    displayName: tier.value.displayName
+    displayName: mg.value.displayName
     details: {
       parent: {
         id: resPlatformMg.id
-      }
-    }
-  }
-}]
-
-resource resPlatformChildMgs 'Microsoft.Management/managementGroups@2023-04-01' = [for mg in varPlatformChildMgs: {
-  name: '${parTopLevelManagementGroupPrefix}-plat-${mg.tierKey}-${mg.childKey}${parTopLevelManagementGroupSuffix}'
-  properties: {
-    displayName: mg.childDisplayName
-    details: {
-      parent: {
-        id: '/providers/Microsoft.Management/managementGroups/${parTopLevelManagementGroupPrefix}-plat-${mg.tierKey}${parTopLevelManagementGroupSuffix}'
       }
     }
   }
@@ -335,10 +203,10 @@ module modCustomerUsageAttribution '../../../../upstream-releases/v0.22.0/infra-
 output outTopLevelManagementGroupId string = resTopLevelMg.id
 
 output outPlatformManagementGroupId string = resPlatformMg.id
-output outPlatformChildrenManagementGroupIds array = [for tier in items(varPlatformMgChildrenUnioned): '/providers/Microsoft.Management/managementGroups/${parTopLevelManagementGroupPrefix}-plat-${tier.key}${parTopLevelManagementGroupSuffix}']
+output outPlatformChildrenManagementGroupIds array = [for mg in items(varPlatformMgChildrenUnioned): '/providers/Microsoft.Management/managementGroups/${parTopLevelManagementGroupPrefix}-platform-${mg.key}${parTopLevelManagementGroupSuffix}']
 
 output outLandingZonesManagementGroupId string = resLandingZonesMg.id
-output outLandingZoneChildrenManagementGroupIds array = [for tier in items(varLandingZoneMgChildrenUnioned): '/providers/Microsoft.Management/managementGroups/${parTopLevelManagementGroupPrefix}-alz-${tier.key}${parTopLevelManagementGroupSuffix}']
+output outLandingZoneChildrenManagementGroupIds array = [for mg in items(varLandingZoneMgChildrenUnioned): '/providers/Microsoft.Management/managementGroups/${parTopLevelManagementGroupPrefix}-landingzones-${mg.key}${parTopLevelManagementGroupSuffix}']
 
 output outSandboxManagementGroupId string = resSandboxMg.id
 
@@ -349,11 +217,9 @@ output outTopLevelManagementGroupName string = resTopLevelMg.name
 
 output outPlatformManagementGroupName string = resPlatformMg.name
 output outPlatformChildrenManagementGroupNames array = [for mg in items(varPlatformMgChildrenUnioned): mg.value.displayName]
-output outPlatformChildNames array = [for mg in varPlatformChildMgs: '${parTopLevelManagementGroupPrefix}-plat-${mg.tierKey}-${mg.childKey}${parTopLevelManagementGroupSuffix}']
 
 output outLandingZonesManagementGroupName string = resLandingZonesMg.name
 output outLandingZoneChildrenManagementGroupNames array = [for mg in items(varLandingZoneMgChildrenUnioned): mg.value.displayName]
-output outLandingZoneChildNames array = [for mg in varLandingZoneChildMgs: '${parTopLevelManagementGroupPrefix}-alz-${mg.tierKey}-${mg.childKey}${parTopLevelManagementGroupSuffix}']
 
 output outSandboxManagementGroupName string = resSandboxMg.name
 
