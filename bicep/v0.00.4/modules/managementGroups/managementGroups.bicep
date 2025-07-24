@@ -44,6 +44,9 @@ param parPlatformMgChildren object = {}
 @sys.description('Set Parameter to true to Opt-out of deployment telemetry.')
 param parTelemetryOptOut bool = false
 
+// Determine if the deployment is for NonProduction environment
+var isNonProduction = parDeploymentEnvironment == 'NonProduction'
+
 // Platform and Child Management Groups
 var varPlatformMg = {
   name: '${parTopLevelManagementGroupPrefix}-plat${parTopLevelManagementGroupSuffix}'
@@ -181,10 +184,10 @@ resource resDecommissionedMg 'Microsoft.Management/managementGroups@2023-04-01' 
 }
 
 // Level 3: Intermediate NonProd MG under Landing Zones
-resource resLandingZonesNonProd 'Microsoft.Management/managementGroups@2023-04-01' = if (parDeploymentEnvironment == 'NonProduction') {
+resource resLandingZonesNonProd 'Microsoft.Management/managementGroups@2023-04-01' = if (isNonProduction) {
   name: '${parTopLevelManagementGroupPrefix}-alz-nonprd'
   properties: {
-    displayName: 'Landing Zones - NonProduction'
+    displayName: 'Landing Zones - ${parDeploymentEnvironment}'
     details: {
       parent: {
         id: resLandingZonesMg.id
@@ -194,10 +197,10 @@ resource resLandingZonesNonProd 'Microsoft.Management/managementGroups@2023-04-0
 }
 
 // Level 3: Intermediate NonProd MG under Platform
-resource resPlatformNonProd 'Microsoft.Management/managementGroups@2023-04-01' = if (parDeploymentEnvironment == 'NonProduction') {
+resource resPlatformNonProd 'Microsoft.Management/managementGroups@2023-04-01' = if (isNonProduction) {
   name: '${parTopLevelManagementGroupPrefix}-plat-nonprd'
   properties: {
-    displayName: 'Platform - NonProduction'
+    displayName: 'Platform - ${parDeploymentEnvironment}'
     details: {
       parent: {
         id: resPlatformMg.id
@@ -213,7 +216,7 @@ resource resLandingZonesChildMgs 'Microsoft.Management/managementGroups@2023-04-
     displayName: mg.value.displayName
     details: {
       parent: {
-        id: parDeploymentEnvironment == 'NonProduction' ? resLandingZonesNonProd.id : resLandingZonesMg.id
+        id: isNonProduction ? resLandingZonesNonProd.id : resLandingZonesMg.id
       }
     }
   }
@@ -226,7 +229,7 @@ resource resPlatformChildMgs 'Microsoft.Management/managementGroups@2023-04-01' 
     displayName: mg.value.displayName
     details: {
       parent: {
-        id: parDeploymentEnvironment == 'NonProduction' ? resPlatformNonProd.id : resPlatformMg.id
+        id: isNonProduction ? resPlatformNonProd.id : resPlatformMg.id
       }
     }
   }
