@@ -50,9 +50,9 @@ param parPlatformMgChildren object = {}
 
 @sys.description('Set Parameter to true to Opt-out of deployment telemetry.')
 param parTelemetryOptOut bool = false
- 
-var hasLandingZoneChildren = length(parLandingZoneMgChildren) > 0
-var hasPlatformChildren = length(parPlatformMgChildren) > 0
+
+// Determine if the deployment is for NonProduction environment
+var isNonProduction = parDeploymentEnvironment == 'NonProduction'
 
 // Platform and Child Management Groups
 var varPlatformMg = {
@@ -190,8 +190,8 @@ resource resDecommissionedMg 'Microsoft.Management/managementGroups@2023-04-01' 
   }
 }
 
-// Level 3: Intermediate MG under Landing Zones
-resource resLandingZonesIntermediate 'Microsoft.Management/managementGroups@2023-04-01' = if (hasLandingZoneChildren) {
+// Level 3: Intermediate NonProd MG under Landing Zones
+resource resLandingZonesNonProd 'Microsoft.Management/managementGroups@2023-04-01' = if (isNonProduction) {
   name: '${parTopLevelManagementGroupPrefix}-alz-${parDeployEnv}'
   properties: {
     displayName: 'Landing Zones - ${parDeploymentEnvironment}'
@@ -203,8 +203,8 @@ resource resLandingZonesIntermediate 'Microsoft.Management/managementGroups@2023
   }
 }
 
-// Level 3: Intermediate MG under Platform
-resource resPlatformIntermediate 'Microsoft.Management/managementGroups@2023-04-01' = if (hasPlatformChildren) {
+// Level 3: Intermediate NonProd MG under Platform
+resource resPlatformNonProd 'Microsoft.Management/managementGroups@2023-04-01' = if (isNonProduction) {
   name: '${parTopLevelManagementGroupPrefix}-plat-${parDeployEnv}'
   properties: {
     displayName: 'Platform - ${parDeploymentEnvironment}'
@@ -217,34 +217,26 @@ resource resPlatformIntermediate 'Microsoft.Management/managementGroups@2023-04-
 }
 
 // Level 3 - Child Management Groups under Landing Zones MG
-var landingZoneParentId = hasLandingZoneChildren
-  ? resourceId('Microsoft.Management/managementGroups', '${parTopLevelManagementGroupPrefix}-alz-${parDeployEnv}')
-  : resLandingZonesMg.id
-
-resource resLandingZonesChildMgs 'Microsoft.Management/managementGroups@2023-04-01' = [for mg in items(varLandingZoneMgChildrenUnioned): {
+resource resLandingZonesChildMgs 'Microsoft.Management/managementGroups@2023-04-01' = [for mg in items(varLandingZoneMgChildrenUnioned): if (!empty(varLandingZoneMgChildrenUnioned)) {
   name: '${parTopLevelManagementGroupPrefix}-alz-${mg.key}${parTopLevelManagementGroupSuffix}'
   properties: {
     displayName: mg.value.displayName
     details: {
       parent: {
-        id: landingZoneParentId
+        id: isNonProduction ? resLandingZonesNonProd.id : resLandingZonesMg.id
       }
     }
   }
 }]
 
 //Level 3 - Child Management Groups under Platform MG
-var platformParentId = hasPlatformChildren
-  ? resourceId('Microsoft.Management/managementGroups', '${parTopLevelManagementGroupPrefix}-plat-${parDeployEnv}')
-  : resPlatformMg.id
-
-resource resPlatformChildMgs 'Microsoft.Management/managementGroups@2023-04-01' = [for mg in items(varPlatformMgChildrenUnioned): {
+resource resPlatformChildMgs 'Microsoft.Management/managementGroups@2023-04-01' = [for mg in items(varPlatformMgChildrenUnioned): if (!empty(varPlatformMgChildrenUnioned)) {
   name: '${parTopLevelManagementGroupPrefix}-plat-${mg.key}${parTopLevelManagementGroupSuffix}'
   properties: {
     displayName: mg.value.displayName
     details: {
       parent: {
-        id: platformParentId
+        id: isNonProduction ? resPlatformNonProd.id : resPlatformMg.id
       }
     }
   }
