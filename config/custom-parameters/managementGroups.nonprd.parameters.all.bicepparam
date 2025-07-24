@@ -26,9 +26,6 @@ param parLandingZoneMgConfidentialEnable = false
 // Typically blank in default Alz-Bicep deployments
 // Use to specify custom management group names under Landing Zone mg.
 param parLandingZoneMgChildren = {
-  nonprd: {
-    displayName: 'Landing Zones - NonProduction'
-  }
   'nonprd-development': {
     displayName: 'Development'
   }
