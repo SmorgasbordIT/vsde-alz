@@ -5,6 +5,7 @@ param parDeploymentEnvironment = 'Production'
 
 // Parameter to specify the environment type for the Management Group ID.
 param parDeployEnv = 'prd'
+
 param parTopLevelManagementGroupPrefix = readEnvironmentVariable('TOP_LEVEL_MG_PREFIX','azuk-sbit')
 
 // Typically blank in default Alz-Bicep deployments
