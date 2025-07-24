@@ -37,9 +37,6 @@ param parLandingZoneMgChildren = {
 // Typically blank in default Alz-Bicep deployments
 // Use to specify custom management group names under Platform mg.
 param parPlatformMgChildren = {
-  nonprd: {
-    displayName: 'Platform - NonProduction'
-  }
   'nonprd-connectivity': {
     displayName: 'Connectivity'
   }
