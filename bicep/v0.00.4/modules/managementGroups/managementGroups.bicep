@@ -218,7 +218,7 @@ resource resPlatformIntermediate 'Microsoft.Management/managementGroups@2023-04-
 
 // Level 3 - Child Management Groups under Landing Zones MG
 var landingZoneParentId = hasLandingZoneChildren
-  ? resourceId('Microsoft.Management/managementGroups', '${parTopLevelManagementGroupPrefix}-alz-${parDeployEnv}')
+  ? resLandingZonesIntermediate.id
   : resLandingZonesMg.id
 
 resource resLandingZonesChildMgs 'Microsoft.Management/managementGroups@2023-04-01' = [for mg in items(varLandingZoneMgChildrenUnioned): {
@@ -235,7 +235,7 @@ resource resLandingZonesChildMgs 'Microsoft.Management/managementGroups@2023-04-
 
 //Level 3 - Child Management Groups under Platform MG
 var platformParentId = hasPlatformChildren
-  ? resourceId('Microsoft.Management/managementGroups', '${parTopLevelManagementGroupPrefix}-plat-${parDeployEnv}')
+  ? resPlatformIntermediate.id
   : resPlatformMg.id
 
 resource resPlatformChildMgs 'Microsoft.Management/managementGroups@2023-04-01' = [for mg in items(varPlatformMgChildrenUnioned): {
