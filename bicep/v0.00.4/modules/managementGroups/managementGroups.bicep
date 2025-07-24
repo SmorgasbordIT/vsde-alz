@@ -180,6 +180,32 @@ resource resDecommissionedMg 'Microsoft.Management/managementGroups@2023-04-01' 
   }
 }
 
+// Level 3: Intermediate NonProd MG under Landing Zones
+resource resLandingZonesNonProd 'Microsoft.Management/managementGroups@2023-04-01' = if (parDeploymentEnvironment == 'NonProduction') {
+  name: '${parTopLevelManagementGroupPrefix}-alz-nonprd'
+  properties: {
+    displayName: 'Landing Zones - NonProduction'
+    details: {
+      parent: {
+        id: resLandingZonesMg.id
+      }
+    }
+  }
+}
+
+// Level 3: Intermediate NonProd MG under Platform
+resource resPlatformNonProd 'Microsoft.Management/managementGroups@2023-04-01' = if (parDeploymentEnvironment == 'NonProduction') {
+  name: '${parTopLevelManagementGroupPrefix}-plat-nonprd'
+  properties: {
+    displayName: 'Platform - NonProduction'
+    details: {
+      parent: {
+        id: resPlatformMg.id
+      }
+    }
+  }
+}
+
 // Level 3 - Child Management Groups under Landing Zones MG
 resource resLandingZonesChildMgs 'Microsoft.Management/managementGroups@2023-04-01' = [for mg in items(varLandingZoneMgChildrenUnioned): if (!empty(varLandingZoneMgChildrenUnioned)) {
   name: '${parTopLevelManagementGroupPrefix}-alz-${mg.key}${parTopLevelManagementGroupSuffix}'
@@ -187,7 +213,7 @@ resource resLandingZonesChildMgs 'Microsoft.Management/managementGroups@2023-04-
     displayName: mg.value.displayName
     details: {
       parent: {
-        id: resLandingZonesMg.id
+        id: parDeploymentEnvironment == 'NonProduction' ? resLandingZonesNonProd.id : resLandingZonesMg.id
       }
     }
   }
@@ -200,7 +226,7 @@ resource resPlatformChildMgs 'Microsoft.Management/managementGroups@2023-04-01' 
     displayName: mg.value.displayName
     details: {
       parent: {
-        id: resPlatformMg.id
+        id: parDeploymentEnvironment == 'NonProduction' ? resPlatformNonProd.id : resPlatformMg.id
       }
     }
   }
