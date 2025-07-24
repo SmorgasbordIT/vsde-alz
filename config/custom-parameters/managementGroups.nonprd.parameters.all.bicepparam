@@ -3,6 +3,9 @@ using '../../bicep/v0.00.4/modules/managementGroups/managementGroups.bicep'
 // Parameters for NonProduction Management Groups deployment
 param parDeploymentEnvironment = 'NonProduction'
 
+// Parameter to specify the environment type for the Management Group ID.
+param parDeployEnv = 'nonprd' 
+
 param parTopLevelManagementGroupPrefix = readEnvironmentVariable('TOP_LEVEL_MG_PREFIX','azuk-sbit')
 
 // Typically blank in default Alz-Bicep deployments

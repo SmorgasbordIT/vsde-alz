@@ -7,8 +7,15 @@ metadata description = 'ALZ Bicep Module to set up Management Group structure'
   'NonProduction'
   'Production'
 ])
-@sys.description('Environment type for the Management Group hierarchy. This will be used to prefix the Management Group names.' )
+@sys.description('Environment type for the Management Group hierarchy. This will be used to prefix the Management Group names.')
 param parDeploymentEnvironment string
+
+@allowed([
+  'nonprd'
+  'prd'
+])
+@sys.description('Environment type for the Management Group ID. This will be used to prefix the Management Group IDs.')
+param parDeployEnv string
 
 @sys.description('Prefix used for the management group hierarchy. This management group will be created as part of the deployment.')
 @minLength(2)
@@ -185,7 +192,7 @@ resource resDecommissionedMg 'Microsoft.Management/managementGroups@2023-04-01' 
 
 // Level 3: Intermediate NonProd MG under Landing Zones
 resource resLandingZonesNonProd 'Microsoft.Management/managementGroups@2023-04-01' = if (isNonProduction) {
-  name: '${parTopLevelManagementGroupPrefix}-alz-nonprd'
+  name: '${parTopLevelManagementGroupPrefix}-alz-${parDeployEnv}'
   properties: {
     displayName: 'Landing Zones - ${parDeploymentEnvironment}'
     details: {
@@ -198,7 +205,7 @@ resource resLandingZonesNonProd 'Microsoft.Management/managementGroups@2023-04-0
 
 // Level 3: Intermediate NonProd MG under Platform
 resource resPlatformNonProd 'Microsoft.Management/managementGroups@2023-04-01' = if (isNonProduction) {
-  name: '${parTopLevelManagementGroupPrefix}-plat-nonprd'
+  name: '${parTopLevelManagementGroupPrefix}-plat-${parDeployEnv}'
   properties: {
     displayName: 'Platform - ${parDeploymentEnvironment}'
     details: {
