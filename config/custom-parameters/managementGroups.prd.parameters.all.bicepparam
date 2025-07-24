@@ -3,6 +3,8 @@ using '../../bicep/v0.00.4/modules/managementGroups/managementGroups.bicep'
 // Parameters for Production Management Groups deployment
 param parDeploymentEnvironment = 'Production'
 
+// Parameter to specify the environment type for the Management Group ID.
+param parDeployEnv = 'prd'
 param parTopLevelManagementGroupPrefix = readEnvironmentVariable('TOP_LEVEL_MG_PREFIX','azuk-snk')
 
 // Typically blank in default Alz-Bicep deployments
@@ -26,9 +28,6 @@ param parLandingZoneMgConfidentialEnable = false
 // Typically blank in default Alz-Bicep deployments
 // Use to specify custom management group names under Landing Zone mg.
 param parLandingZoneMgChildren = {
-  prd: {
-    displayName: 'Landing Zones - Production'
-  }
   'prd-corp': {
     displayName: 'Prd Corp'
   }
@@ -40,9 +39,6 @@ param parLandingZoneMgChildren = {
 // Typically blank in default Alz-Bicep deployments
 // Use to specify custom management group names under Platform mg.
 param parPlatformMgChildren = {
-  prd: {
-    displayName: 'Platform - Production'
-  }
   'prd-connectivity': {
     displayName: 'Connectivity'
   }
