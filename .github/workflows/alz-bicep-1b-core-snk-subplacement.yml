@@ -98,7 +98,7 @@ jobs:
             .\pipeline-scripts\Deploy-ALZManagementGroups.ps1
           azPSVersion: "latest"
 
-      - name: "Deploy Management Subscription for Platform"
+      - name: "Deploy Subscription Placement"
         uses: azure/powershell@v2
         with:
           inlineScript: |
