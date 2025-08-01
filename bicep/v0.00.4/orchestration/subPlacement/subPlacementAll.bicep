@@ -5,7 +5,7 @@ metadata description = 'Orchestration module that helps to define where all Subs
 
 @sys.description('Prefix used for the management group hierarchy.')
 @minLength(2)
-@maxLength(10)
+@maxLength(15)
 param parTopLevelManagementGroupPrefix string = 'alz'
 
 @sys.description('Optional suffix for the management group hierarchy. This suffix will be appended to management group names/IDs. Include a preceding dash if required. Example: -suffix')
@@ -144,9 +144,9 @@ module modplatformIdentityMgSubPlacement '../../../../upstream-releases/v0.22.0/
 // Custom Children Platform Management Groups
 module modPlatformMgChildrenSubPlacement '../../../../upstream-releases/v0.22.0/infra-as-code/bicep/modules/subscriptionPlacement/subscriptionPlacement.bicep' = [for mg in items(parPlatformMgChildrenSubs): if (!empty(parPlatformMgChildrenSubs)) {
   name: take('modPlatformMgChildrenSubPlacement-${uniqueString(mg.key, string(length(mg.value.subscriptions)), deployment().name)}', 64)
-  scope: managementGroup('${parTopLevelManagementGroupPrefix}-plat-${mg.key}${parTopLevelManagementGroupSuffix}')
+  scope: managementGroup('${parTopLevelManagementGroupPrefix}-${mg.key}${parTopLevelManagementGroupSuffix}')
   params: {
-    parTargetManagementGroupId: '${parTopLevelManagementGroupPrefix}-plat-${mg.key}${parTopLevelManagementGroupSuffix}'
+    parTargetManagementGroupId: '${parTopLevelManagementGroupPrefix}-${mg.key}${parTopLevelManagementGroupSuffix}'
     parSubscriptionIds: mg.value.subscriptions
     parTelemetryOptOut: parTelemetryOptOut
   }

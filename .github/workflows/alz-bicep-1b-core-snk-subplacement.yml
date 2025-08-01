@@ -6,7 +6,7 @@ on:
       - "main"
     paths:
       - "config/custom-parameters/managementGroups.nonprd.parameters.all.bicepparam"
-      - "config/custom-parameters/managementSubscription.parameters.all.bicepparam"
+      - "config/custom-parameters/subPlacement.parameters.all.bicepparam"
       - "config/custom-parameters/resourceGroupLoggingAndSentinel.parameters.all.bicepparam"
       - "config/custom-parameters/logging.parameters.all.bicepparam"
       - "config/custom-parameters/customPolicyDefinitions.parameters.all.bicepparam"
@@ -17,7 +17,7 @@ on:
       - "main"
     paths:
       - "config/custom-parameters/managementGroups.parameters.all.bicepparam"
-      - "config/custom-parameters/managementSubscription.parameters.all.bicepparam"
+      - "config/custom-parameters/subPlacement.parameters.all.bicepparam"
       - "config/custom-parameters/resourceGroupLoggingAndSentinel.parameters.all.bicepparam"
       - "config/custom-parameters/logging.parameters.all.bicepparam"
       - "config/custom-parameters/customPolicyDefinitions.parameters.all.bicepparam"
@@ -98,13 +98,13 @@ jobs:
             .\pipeline-scripts\Deploy-ALZManagementGroups.ps1
           azPSVersion: "latest"
 
-#      - name: "Deploy Management Subscription for Platform"
-#        uses: azure/powershell@v2
-#        with:
-#          inlineScript: |
-#            .\pipeline-scripts\Deploy-ALZSubscriptionPlacement.ps1
-#          azPSVersion: "latest"
-#
+      - name: "Deploy Management Subscription for Platform"
+        uses: azure/powershell@v2
+        with:
+          inlineScript: |
+            .\pipeline-scripts\Deploy-ALZSubscriptionPlacement.ps1
+          azPSVersion: "latest"
+ 
 #      - name: "Logging and Sentinel Resource Group Deployment"
 #        uses: azure/powershell@v2
 #        with:

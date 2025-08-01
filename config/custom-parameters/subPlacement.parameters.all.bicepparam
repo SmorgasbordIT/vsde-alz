@@ -1,6 +1,6 @@
-using '../../upstream-releases/v0.22.0/infra-as-code/bicep/orchestration/subPlacementAll/subPlacementAll.bicep'
+using '../../bicep/v0.00.4/orchestration/subPlacement/subPlacementAll.bicep'
 
-param parTopLevelManagementGroupPrefix = readEnvironmentVariable('TOP_LEVEL_MG_PREFIX','alz')
+param parTopLevelManagementGroupPrefix = readEnvironmentVariable('TOP_LEVEL_MG_PREFIX','azuk-sbit')
 
 param parTopLevelManagementGroupSuffix = ''
 param parIntRootMgSubs = []
@@ -38,7 +38,23 @@ param parLandingZonesConfidentialOnlineMgSubs = !empty(varLzConfidentialOnlineSu
 
 param parLandingZoneMgChildrenSubs = {}
 
-param parPlatformMgChildrenSubs = {}
+param parPlatformMgChildrenSubs = {
+    'plat-nonprd-connectivity': {
+        subscriptions: [
+            varConnectivitySubId
+        ]
+    }
+    'plat-nonprd-identity': {
+        subscriptions: [
+            varIdentitySubId
+        ]
+    }
+    'plat-nonprd-management': {
+        subscriptions: [
+            varManagementSubId
+        ]
+    }
+}
 
 param parDecommissionedMgSubs = []
 
