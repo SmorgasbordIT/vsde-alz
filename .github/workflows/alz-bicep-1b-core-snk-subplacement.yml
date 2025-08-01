@@ -38,6 +38,7 @@ permissions:
 
 env:
   ENV_FILE: ".env"
+  ENV_NONPRODUCTION: ${{ vars.ENV_NONPRODUCTION }}
   UKS_LOCATION: ${{ vars.UKS_LOCATION }}
   ENV_HUB: ${{ vars.ENV_HUB }}
   TOP_LEVEL_MG_PREFIX: ${{ vars.TOP_LEVEL_MG_PREFIX }}

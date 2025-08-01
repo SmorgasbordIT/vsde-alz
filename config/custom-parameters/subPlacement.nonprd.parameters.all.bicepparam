@@ -1,5 +1,8 @@
 using '../../bicep/v0.00.4/orchestration/subPlacement/subPlacementAll.bicep'
 
+var varEnv = readEnvironmentVariable('ENV_NONPRODUCTION','')
+param parEnv = toLower(varEnv) == 'nonprd' ? 'nonprd' : 'prd'
+
 param parTopLevelManagementGroupPrefix = readEnvironmentVariable('TOP_LEVEL_MG_PREFIX','azuk-sbit')
 
 param parTopLevelManagementGroupSuffix = ''
@@ -39,17 +42,17 @@ param parLandingZonesConfidentialOnlineMgSubs = !empty(varLzConfidentialOnlineSu
 param parLandingZoneMgChildrenSubs = {}
 
 param parPlatformMgChildrenSubs = {
-    'plat-nonprd-connectivity': {
+    'plat-${parEnv}-connectivity': {
         subscriptions: [
             varConnectivitySubId
         ]
     }
-    'plat-nonprd-identity': {
+    'plat-${parEnv}-identity': {
         subscriptions: [
             varIdentitySubId
         ]
     }
-    'plat-nonprd-management': {
+    'plat-${parEnv}-management': {
         subscriptions: [
             varManagementSubId
         ]

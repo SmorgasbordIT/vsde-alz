@@ -9,7 +9,7 @@ param (
   [String]$azTemplateFile = "bicep\$($env:MODULES_RELEASE_VERSION)\orchestration\subPlacement\subPlacementAll.bicep",
 
   [Parameter()]
-  [String]$azTemplateParameterFile = "config\custom-parameters\subPlacement.parameters.all.bicepparam",
+  [String]$azTemplateParameterFile = "config\custom-parameters\subPlacement.$($env:ENV_NONPRODUCTION).parameters.all.bicepparam",
 
   [Parameter()]
   [Boolean]$WhatIfEnabled = [System.Convert]::ToBoolean($env:WHAT_IF_ENABLED)

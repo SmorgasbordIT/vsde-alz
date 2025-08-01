@@ -30,10 +30,10 @@ param parLandingZoneMgConfidentialEnable = false
 // Use to specify custom management group names under Landing Zone mg.
 param parLandingZoneMgChildren = {
   'prd-corp': {
-    displayName: 'Prd Corp'
+    displayName: 'Corp'
   }
   'prd-online': {
-    displayName: 'Prd Online'
+    displayName: 'Online'
   }
 }
 
