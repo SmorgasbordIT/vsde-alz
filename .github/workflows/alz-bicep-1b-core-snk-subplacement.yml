@@ -1,4 +1,4 @@
-name: ALZ-Bicep-1-Core
+name: ALZ-Bicep-1b-Core-Subs-Placement
 
 on:
   push:
@@ -55,11 +55,15 @@ env:
   CONN_GRP_NAME: ${{ vars.CONN_GRP_NAME }}
   SHR_GRP_NAME: ${{ vars.SHR_GRP_NAME }}
   LOG_ANALYTICS_ABBR_NAME: ${{ vars.LOG_ANALYTICS_ABBR_NAME }}
+  MANAGEMENT_SUBSCRIPTION_ID: ${{ secrets.MANAGEMENT_SUBSCRIPTION_ID }}
+  CONNECTIVITY_SUBSCRIPTION_ID: ${{ secrets.CONNECTIVITY_SUBSCRIPTION_ID }}
+  IDENTITY_SUBSCRIPTION_ID: ${{ secrets.IDENTITY_SUBSCRIPTION_ID }}
+  SANDBOX_SUBSCRIPTION_IDS: ${{ secrets.SANDBOX_SUBSCRIPTION_IDS }}
   WHAT_IF_ENABLED: ${{ github.event.inputs.what_if_enabled }}
   IS_PULL_REQUEST: "${{ github.event_name == 'pull_request' }}"
 
 jobs:
-  ALZ_Bicep_1_Core:
+  ALZ_Bicep_1b_Core_Subs_Placement:
     runs-on: ubuntu-latest
     environment: SBN-ALZ-Prod
     steps:
@@ -94,45 +98,45 @@ jobs:
             .\pipeline-scripts\Deploy-ALZManagementGroups.ps1
           azPSVersion: "latest"
 
-      - name: "Deploy Management Subscription for Platform"
-        uses: azure/powershell@v2
-        with:
-          inlineScript: |
-            .\pipeline-scripts\Deploy-ALZManagementSubscription.ps1
-          azPSVersion: "latest"
-
-      - name: "Logging and Sentinel Resource Group Deployment"
-        uses: azure/powershell@v2
-        with:
-          inlineScript: |
-            .\pipeline-scripts\Deploy-ALZLoggingAndSentinelResourceGroup.ps1
-          azPSVersion: "latest"
-
-      - name: "Logging and Sentinel Deployment"
-        uses: azure/powershell@v2
-        with:
-          inlineScript: |
-            .\pipeline-scripts\Deploy-ALZLoggingAndSentinel.ps1
-          azPSVersion: "latest"
-
-      - name: "Custom Policy Definitions Deployment"
-        uses: azure/powershell@v2
-        with:
-          inlineScript: |
-            .\pipeline-scripts\Deploy-ALZCustomPolicyDefinitions.ps1
-          azPSVersion: "latest"
-
-      - name: "Custom Role Definitions Deployment"
-        uses: azure/powershell@v2
-        with:
-          inlineScript: |
-            .\pipeline-scripts\Deploy-ALZCustomRoleDefinitions.ps1
-          azPSVersion: "latest"
-
-      - name: "Custom Management Group Diagnostic Settings"
-        uses: azure/powershell@v2
-        with:
-          inlineScript: |
-            .\pipeline-scripts\Deploy-ALZMGDiagnosticSettings.ps1
-          azPSVersion: "latest"
-          
+#      - name: "Deploy Management Subscription for Platform"
+#        uses: azure/powershell@v2
+#        with:
+#          inlineScript: |
+#            .\pipeline-scripts\Deploy-ALZSubscriptionPlacement.ps1
+#          azPSVersion: "latest"
+#
+#      - name: "Logging and Sentinel Resource Group Deployment"
+#        uses: azure/powershell@v2
+#        with:
+#          inlineScript: |
+#            .\pipeline-scripts\Deploy-ALZLoggingAndSentinelResourceGroup.ps1
+#          azPSVersion: "latest"
+#
+#      - name: "Logging and Sentinel Deployment"
+#        uses: azure/powershell@v2
+#        with:
+#          inlineScript: |
+#            .\pipeline-scripts\Deploy-ALZLoggingAndSentinel.ps1
+#          azPSVersion: "latest"
+#
+#      - name: "Custom Policy Definitions Deployment"
+#        uses: azure/powershell@v2
+#        with:
+#          inlineScript: |
+#            .\pipeline-scripts\Deploy-ALZCustomPolicyDefinitions.ps1
+#          azPSVersion: "latest"
+#
+#      - name: "Custom Role Definitions Deployment"
+#        uses: azure/powershell@v2
+#        with:
+#          inlineScript: |
+#            .\pipeline-scripts\Deploy-ALZCustomRoleDefinitions.ps1
+#          azPSVersion: "latest"
+#
+#      - name: "Custom Management Group Diagnostic Settings"
+#        uses: azure/powershell@v2
+#        with:
+#          inlineScript: |
+#            .\pipeline-scripts\Deploy-ALZMGDiagnosticSettings.ps1
+#          azPSVersion: "latest"
+#          

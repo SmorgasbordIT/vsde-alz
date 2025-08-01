@@ -1,4 +1,3 @@
-
 ## This script is derived from the original by Jack Tracey, which you can find here: https://github.com/jtracey93/PublicScripts/blob/master/Azure/PowerShell/Enterprise-scale/Wipe-ESLZAzTenant.ps1
 
 param (
@@ -6,16 +5,6 @@ param (
     [string]$prefix = $env:PREFIX,
     [string]$intermediateRootGroupID = $env:MANAGEMENT_GROUP_ID,
     [string]$tenantRootGroupID = $env:ROOT_PARENT_MANAGEMENT_GROUP_ID,
-    [string]$connectivitySubscriptionId = $env:CONNECTIVITY_SUBSCRIPTION_ID,
-    [string]$identitySubscriptionId = $env:IDENTITY_SUBSCRIPTION_ID,
-    [string]$managementSubscriptionId = $env:MANAGEMENT_SUBSCRIPTION_ID
-)
-
-param (
-    [bool]$whatIfEnabled = $true,
-    [string]$prefix = "azuk-snk",
-    [string]$intermediateRootGroupID = "azuk-snk",
-    [string]$tenantRootGroupID = "ec5f282f-1669-4a4b-b01f-120c7c8e8acf",
     [string]$connectivitySubscriptionId = $env:CONNECTIVITY_SUBSCRIPTION_ID,
     [string]$identitySubscriptionId = $env:IDENTITY_SUBSCRIPTION_ID,
     [string]$managementSubscriptionId = $env:MANAGEMENT_SUBSCRIPTION_ID
