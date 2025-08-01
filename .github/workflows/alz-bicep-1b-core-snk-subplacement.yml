@@ -5,7 +5,7 @@ on:
     branches:
       - "main"
     paths:
-      - "config/custom-parameters/managementGroups.parameters.all.bicepparam"
+      - "config/custom-parameters/managementGroups.nonprd.parameters.all.bicepparam"
       - "config/custom-parameters/managementSubscription.parameters.all.bicepparam"
       - "config/custom-parameters/resourceGroupLoggingAndSentinel.parameters.all.bicepparam"
       - "config/custom-parameters/logging.parameters.all.bicepparam"
