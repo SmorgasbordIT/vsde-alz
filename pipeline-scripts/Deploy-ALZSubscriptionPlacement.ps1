@@ -6,7 +6,7 @@ param (
   [String]$azTopLevelMGPrefix = "$($env:TOP_LEVEL_MG_PREFIX)",
 
   [Parameter()]
-  [String]$azTemplateFile = "bicep\$($env:MODULES_RELEASE_VERSION)\modules\orchestration\subPlacement\subPlacementAll.bicep",
+  [String]$azTemplateFile = "bicep\$($env:MODULES_RELEASE_VERSION)\orchestration\subPlacement\subPlacementAll.bicep",
 
   [Parameter()]
   [String]$azTemplateParameterFile = "config\custom-parameters\subPlacement.parameters.all.bicepparam",
