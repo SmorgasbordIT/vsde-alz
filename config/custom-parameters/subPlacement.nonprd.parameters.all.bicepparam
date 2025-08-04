@@ -18,7 +18,7 @@ var varLzOnlineSubIds = readEnvironmentVariable('LZ_ONLINE_SUBSCRIPTION_IDS','')
 var varLzCorpSubIds = readEnvironmentVariable('LZ_CORP_SUBSCRIPTION_IDS','')
 var varLzConfidentialCorpSubIds = readEnvironmentVariable('LZ_CONF_CORP_SUBSCRIPTION_IDS','')
 var varLzConfidentialOnlineSubIds = readEnvironmentVariable('LZ_CONF_ONLINE_SUBSCRIPTION_IDS','')
-// var varSandboxSubIds = split(readEnvironmentVariable('SANDBOX_SUBSCRIPTION_IDS',''), ',')
+var varSandboxSubIds = readEnvironmentVariable('SANDBOX_SUBSCRIPTION_IDS','')
 
 // If there is no management or identity subscription, then the connectivity subscription is placed at the root of the Platform Management Group. ("Platform only" scenario)
 param parPlatformMgSubs = ((varConnectivitySubId == varIdentitySubId) && (varConnectivitySubId == varManagementSubId)) ? [varConnectivitySubId] : []
@@ -62,9 +62,6 @@ param parPlatformMgChildrenSubs = {
 
 param parDecommissionedMgSubs = []
 
-// param parSandboxMgSubs = !empty(varSandboxSubIds) ? [varSandboxSubIds] : []
-param parSandboxMgSubs = !empty(split(readEnvironmentVariable('SANDBOX_SUBSCRIPTION_IDS', ''), ',')[0]) 
-  ? [for id in split(readEnvironmentVariable('SANDBOX_SUBSCRIPTION_IDS', ''), ','): trim(id)] 
-  : []
+param parSandboxMgSubs = !empty(varSandboxSubIds) ? [varSandboxSubIds] : []
 
 param parTelemetryOptOut = false
