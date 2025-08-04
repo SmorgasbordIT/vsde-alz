@@ -46,8 +46,8 @@ var varMgIds = {
 
 // Used if parLandingZoneMgAlzDefaultsEnable == true
 var varLandingZoneMgChildrenAlzDefault = {
-  landingZonesCorp: '${parTopLevelManagementGroupPrefix}-alz-nonprd-corp${parTopLevelManagementGroupSuffix}'
-  landingZonesOnline: '${parTopLevelManagementGroupPrefix}-alz-nonprd-online${parTopLevelManagementGroupSuffix}'
+  landingZonesCorp: '${parTopLevelManagementGroupPrefix}-alz-nonprd-development${parTopLevelManagementGroupSuffix}'
+  landingZonesOnline: '${parTopLevelManagementGroupPrefix}-alz-nonprd-staging${parTopLevelManagementGroupSuffix}'
 }
 
 // Used if parPlatformMgAlzDefaultsEnable == true
