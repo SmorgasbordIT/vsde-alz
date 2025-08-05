@@ -7,6 +7,16 @@ metadata description = 'Orchestration module that helps to define where all Subs
 @secure()
 param parEnv string = ''
 
+@sys.description('The Landing Zones MG IDs this deployment is for. This is used to determine the child Management Groups that will be created.')
+param parAlzEnv1 string = ''
+param parAlzEnv2 string = ''
+
+@sys.description('The Platform MG IDs this deployment is for. This is used to determine the child Management Groups that will be created.')
+param parPlatHub string = ''
+param parPlatId string = ''
+param parPlatMgt string = ''
+param parPlatShr string = ''
+
 @sys.description('Prefix used for the management group hierarchy.')
 @minLength(2)
 @maxLength(15)

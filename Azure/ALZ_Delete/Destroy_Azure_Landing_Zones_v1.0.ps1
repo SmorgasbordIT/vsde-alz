@@ -33,6 +33,15 @@ param (
     [bool]$WhatIfEnabled = $true
 )
 
+$azTenantRootGroupID = 'ec5f282f-1669-4a4b-b01f-120c7c8e8acf'
+$azIntermediateRootGroupID = 'azuk-sbit'
+$azManagementSubId = 'b0017132-8f81-459f-aead-3171c449866f'
+$azIdentitySubId = '35bc190f-74f7-4adb-aa1e-2bd3b45e9ffb'
+$azConnectivitySubId = '418b1b0c-5109-4c71-b3ec-bb2aede68fb5'
+$azRgNames = "*"
+$azDeploymentNames = "*"
+$whatIfEnabled = $true
+
 if($whatIfEnabled) {
     Write-Warning "⚠️ - Deploy Stage Warning:"
     Write-Warning "This operation will ** permanently delete all components ** of your landing zone."
