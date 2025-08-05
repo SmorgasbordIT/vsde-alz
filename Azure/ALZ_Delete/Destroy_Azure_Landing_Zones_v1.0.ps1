@@ -5,23 +5,23 @@
 param (
     [Parameter(Mandatory = $true, Position = 0, HelpMessage = "Insert the Tenant ID (GUID) of your Microsoft Entra tenant. E.g. 'f73a2b89-6c0e-4382-899f-ea227cd6b68f'")]
     [ValidatePattern('^[0-9a-fA-F\-]{36}$')]
-    [string]$azTenantRootGroupID,
+    [string]$azTenantRootGroupID = 'ec5f282f-1669-4a4b-b01f-120c7c8e8acf',
 
     [Parameter(Mandatory = $true, Position = 1, HelpMessage = "Insert the name of your intermediate root Management Group. E.g. 'AZUK-SBIT'")]
     [ValidateNotNullOrEmpty()]
-    [string]$azIntermediateRootGroupID,
+    [string]$azIntermediateRootGroupID = 'azuk-sbit',
 
     [Parameter(Mandatory = $true, Position = 3, HelpMessage = "Insert the subscription ID for the Management subscription.")]
     [ValidatePattern('^[0-9a-fA-F\-]{36}$')]
-    [string]$azManagementSubId,
+    [string]$azManagementSubId = 'b0017132-8f81-459f-aead-3171c449866f',
 
     [Parameter(Mandatory = $true, Position = 4, HelpMessage = "Insert the subscription ID for the Identity subscription.")]
     [ValidatePattern('^[0-9a-fA-F\-]{36}$')]
-    [string]$azIdentitySubId,
+    [string]$azIdentitySubId = '35bc190f-74f7-4adb-aa1e-2bd3b45e9ffb',
 
     [Parameter(Mandatory = $true, Position = 5, HelpMessage = "Insert the subscription ID for the Connectivity subscription.")]
     [ValidatePattern('^[0-9a-fA-F\-]{36}$')]
-    [string]$azConnectivitySubId,
+    [string]$azConnectivitySubId = '418b1b0c-5109-4c71-b3ec-bb2aede68fb5',
 
     [Parameter(Position = 6, HelpMessage = "Wildcard or specific name(s) of Resource Groups to target. E.g. 'rg-*'")]
     [string]$azRgNames = "*",
