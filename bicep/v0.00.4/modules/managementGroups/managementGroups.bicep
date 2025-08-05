@@ -17,6 +17,16 @@ param parDeploymentEnvironment string
 @sys.description('Environment type for the Management Group ID. This will be used to prefix the Management Group IDs.')
 param parDeployEnv string
 
+@sys.description('The Landing Zones MG IDs this deployment is for. This is used to determine the child Management Groups that will be created.')
+param parAlzEnv1 string = ''
+param parAlzEnv2 string = ''
+
+@sys.description('The Platform MG IDs this deployment is for. This is used to determine the child Management Groups that will be created.')
+param parPlatHub string = ''
+param parPlatId string = ''
+param parPlatMgt string = ''
+param parPlatShr string = ''
+
 @sys.description('Prefix used for the management group hierarchy. This management group will be created as part of the deployment.')
 @minLength(2)
 @maxLength(10)

@@ -5,7 +5,7 @@ on:
     branches:
       - "main"
     paths:
-      - "config/custom-parameters/managementGroups.nonprd.parameters.all.bicepparam"
+      - "config/custom-parameters/managementGroups.parameters.all.bicepparam"
       - "config/custom-parameters/subPlacement.parameters.all.bicepparam"
       - "config/custom-parameters/resourceGroupLoggingAndSentinel.parameters.all.bicepparam"
       - "config/custom-parameters/logging.parameters.all.bicepparam"
@@ -38,7 +38,10 @@ permissions:
 
 env:
   ENV_FILE: ".env"
-  ENV_NONPRODUCTION: ${{ vars.ENV_NONPRODUCTION }}
+  VAR_ENV: ${{ vars.VAR_ENV }}
+  ALZ_ENV1: ${{ vars.ALZ_ENV1 }}
+  ALZ_ENV2: ${{ vars.ALZ_ENV2 }}
+  SNK_WORKLOAD: ${{ vars.SNK_WORKLOAD }}
   UKS_LOCATION: ${{ vars.UKS_LOCATION }}
   ENV_HUB: ${{ vars.ENV_HUB }}
   TOP_LEVEL_MG_PREFIX: ${{ vars.TOP_LEVEL_MG_PREFIX }}

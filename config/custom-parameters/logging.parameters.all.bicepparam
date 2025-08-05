@@ -6,7 +6,7 @@ var varAzUkAbbrName = readEnvironmentVariable('AZUREUK','azuk')
 var varAzUkSouth = readEnvironmentVariable('AZ_UKSOUTH','')
 var varLogAnalyticsAbbrName = readEnvironmentVariable('LOG_ANALYTICS_ABBR_NAME','LAW')
 
-param parLogAnalyticsWorkspaceName = toUpper('${varAzUkAbbrName}${varAzUkSouth}-${varLogAnalyticsAbbrName}-MGT-01')
+param parLogAnalyticsWorkspaceName = toUpper('${varAzUkAbbrName}${varAzUkSouth}-MGT-${varLogAnalyticsAbbrName}-01')
 param parLogAnalyticsWorkspaceLocation = readEnvironmentVariable('UKS_LOCATION','uksouth')
 
 param parAutomationAccountLocation = readEnvironmentVariable('UKS_LOCATION','uksouth')

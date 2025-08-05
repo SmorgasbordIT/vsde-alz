@@ -25,7 +25,8 @@ var varId   = readEnvironmentVariable('ID_GRP_NAME','')
 var varConn = readEnvironmentVariable('CONN_GRP_NAME','')
 var varShr  = readEnvironmentVariable('SHR_GRP_NAME','')
 
-param parSnkWorkload = 'Production'
+var varSnkWorkload = readEnvironmentVariable('SNK_WORKLOAD','Production')
+param parSnkWorkload = varSnkWorkload == 'DevTest' ? 'DevTest' : 'Production'
 
 // Variables & Parameters for Management Group ID
 var varManagementGroupId = '${varAzUk}-${varSnk}-${varPlat}-${varMgmt}'

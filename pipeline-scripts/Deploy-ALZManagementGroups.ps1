@@ -9,7 +9,7 @@ param (
   [String]$azTemplateFile = "bicep\$($env:MODULES_RELEASE_VERSION)\modules\managementGroups\",
 
   [Parameter()]
-  [String]$azTemplateParameterFile = "config\custom-parameters\managementGroups.nonprd.parameters.all.bicepparam",
+  [String]$azTemplateParameterFile = "config\custom-parameters\managementGroups.parameters.all.bicepparam",
 
   [Parameter()]
   [Boolean]$WhatIfEnabled = [System.Convert]::ToBoolean($env:WHAT_IF_ENABLED)

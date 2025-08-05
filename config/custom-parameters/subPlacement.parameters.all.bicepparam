@@ -1,6 +1,6 @@
 using '../../bicep/v0.00.4/orchestration/subPlacement/subPlacementAll.bicep'
 
-var varEnv = readEnvironmentVariable('ENV_NONPRODUCTION','')
+var varEnv = readEnvironmentVariable('VAR_ENV','')
 param parEnv = toLower(varEnv) == 'nonprd' ? 'nonprd' : 'prd'
 
 

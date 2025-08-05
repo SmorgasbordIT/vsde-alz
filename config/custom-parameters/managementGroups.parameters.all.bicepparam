@@ -1,18 +1,30 @@
-/* 
-  managementGroups.parameters.all.bicepparam
-  Author: J Davis
-  Date: 2025-02-17
-  Version: 1.0
-  
-  This file contains the parameters for the managementGroups.bicep file, and replaces the json version
-  used in the original ALZ-Bicep implementation. Commonly used parameters are read from the .env file 
-  which is parsed during pipeline deployment.
-
-*/
-
 using '../../bicep/v0.00.4/modules/managementGroups/managementGroups.bicep'
 
-param parTopLevelManagementGroupPrefix = readEnvironmentVariable('TOP_LEVEL_MG_PREFIX','azuk-snk')
+// Parameters for NonProduction Management Groups deployment
+param parDeploymentEnvironment = 'NonProduction'
+
+// Parameter to specify the environment type for the Management Group ID.
+var varEnv = readEnvironmentVariable('VAR_ENV','')
+param parDeployEnv = toLower(varEnv) == 'nonprd' ? 'nonprd' : 'prd'
+
+var varAlzEnv1 = readEnvironmentVariable('ALZ_ENV1','Corp')
+param parAlzEnv1 = toLower(varAlzEnv1) == 'development' ? 'development' : 'corp'
+var varAlzEnv2 = readEnvironmentVariable('ALZ_ENV2','Online')
+param parAlzEnv2 = toLower(varAlzEnv2) == 'staging' ? 'staging' : 'online'
+
+var varPlatHub = readEnvironmentVariable('CONN_GRP_NAME','Connectivity')
+param parPlatHub = toLower(varPlatHub)
+
+var varPlatId = readEnvironmentVariable('ID_GRP_NAME','Identity')
+param parPlatId = toLower(varPlatId)
+
+var varPlatMgt = readEnvironmentVariable('MAN_GRP_NAME','Management')
+param parPlatMgt = toLower(varPlatMgt)
+
+var varPlatShr = readEnvironmentVariable('SHR_GRP_NAME','Shared')
+param parPlatShr = toLower(varPlatShr)
+
+param parTopLevelManagementGroupPrefix = readEnvironmentVariable('TOP_LEVEL_MG_PREFIX','azuk-sbit')
 
 // Typically blank in default Alz-Bicep deployments
 param parTopLevelManagementGroupSuffix = ''
@@ -23,21 +35,41 @@ param parTopLevelManagementGroupDisplayName = 'AZUK SBIT'
 param parTopLevelManagementGroupParentId = ''
 
 // True for default Alz-Bicep deployments.
-param parLandingZoneMgAlzDefaultsEnable = true
+param parLandingZoneMgAlzDefaultsEnable = false
 
 // True for default Alz-Bicep deployments. 
 // Default is true for Alz-Bicep default deployment, set to false for "Platform only" scenarios. (no separate connectivity, identity, or management subscriptions.)
-param parPlatformMgAlzDefaultsEnable = true
+param parPlatformMgAlzDefaultsEnable = false
 
 // Typically false in default Alz-Bicep deployments.
 param parLandingZoneMgConfidentialEnable = false
 
 // Typically blank in default Alz-Bicep deployments
 // Use to specify custom management group names under Landing Zone mg.
-param parLandingZoneMgChildren = {}
+param parLandingZoneMgChildren = {
+  '${parDeployEnv}-${parAlzEnv1}': {
+    displayName: varAlzEnv1
+  }
+  '${parDeployEnv}-${parAlzEnv2}': {
+    displayName: varAlzEnv2
+  }
+}
 
 // Typically blank in default Alz-Bicep deployments
 // Use to specify custom management group names under Platform mg.
-param parPlatformMgChildren = {}
+param parPlatformMgChildren = {
+  '${parDeployEnv}-${parPlatHub}': {
+    displayName: varPlatHub
+  }
+  '${parDeployEnv}-${parPlatId}': {
+    displayName: varPlatId
+  }
+  '${parDeployEnv}-${parPlatMgt}': {
+    displayName: varPlatMgt
+  }
+  '${parDeployEnv}-${parPlatShr}': {
+    displayName: varPlatShr
+  }
+}
 
 param parTelemetryOptOut = true
