@@ -5,7 +5,7 @@ param parDeploymentEnvironment = 'NonProduction'
 
 // Parameter to specify the environment type for the Management Group ID.
 var varEnv = readEnvironmentVariable('VAR_ENV','')
-param parDeployEnv = toLower(varEnv) == 'nonprd' ? 'nonprd' : 'prd'
+param parEnv = toLower(varEnv) == 'nonprd' ? 'nonprd' : 'prd'
 
 var varAlzEnv1 = readEnvironmentVariable('ALZ_ENV1','Corp')
 param parAlzEnv1 = toLower(varAlzEnv1) == 'development' ? 'development' : 'corp'
@@ -47,10 +47,10 @@ param parLandingZoneMgConfidentialEnable = false
 // Typically blank in default Alz-Bicep deployments
 // Use to specify custom management group names under Landing Zone mg.
 param parLandingZoneMgChildren = {
-  '${parDeployEnv}-${parAlzEnv1}': {
+  '${parEnv}-${parAlzEnv1}': {
     displayName: varAlzEnv1
   }
-  '${parDeployEnv}-${parAlzEnv2}': {
+  '${parEnv}-${parAlzEnv2}': {
     displayName: varAlzEnv2
   }
 }
@@ -58,16 +58,16 @@ param parLandingZoneMgChildren = {
 // Typically blank in default Alz-Bicep deployments
 // Use to specify custom management group names under Platform mg.
 param parPlatformMgChildren = {
-  '${parDeployEnv}-${parPlatHub}': {
+  '${parEnv}-${parPlatHub}': {
     displayName: varPlatHub
   }
-  '${parDeployEnv}-${parPlatId}': {
+  '${parEnv}-${parPlatId}': {
     displayName: varPlatId
   }
-  '${parDeployEnv}-${parPlatMgt}': {
+  '${parEnv}-${parPlatMgt}': {
     displayName: varPlatMgt
   }
-  '${parDeployEnv}-${parPlatShr}': {
+  '${parEnv}-${parPlatShr}': {
     displayName: varPlatShr
   }
 }

@@ -15,7 +15,7 @@ param parDeploymentEnvironment string
   'prd'
 ])
 @sys.description('Environment type for the Management Group ID. This will be used to prefix the Management Group IDs.')
-param parDeployEnv string
+param parEnv string
 
 @sys.description('The Landing Zones MG IDs this deployment is for. This is used to determine the child Management Groups that will be created.')
 param parAlzEnv1 string = ''
@@ -202,7 +202,7 @@ resource resDecommissionedMg 'Microsoft.Management/managementGroups@2023-04-01' 
 
 // Level 3: Intermediate MG under Landing Zones
 resource resLandingZonesIntermediate 'Microsoft.Management/managementGroups@2023-04-01' = if (hasLandingZoneChildren) {
-  name: '${parTopLevelManagementGroupPrefix}-alz-${parDeployEnv}'
+  name: '${parTopLevelManagementGroupPrefix}-alz-${parEnv}'
   properties: {
     displayName: 'Landing Zones - ${parDeploymentEnvironment}'
     details: {
@@ -215,7 +215,7 @@ resource resLandingZonesIntermediate 'Microsoft.Management/managementGroups@2023
 
 // Level 3: Intermediate MG under Platform
 resource resPlatformIntermediate 'Microsoft.Management/managementGroups@2023-04-01' = if (hasPlatformChildren) {
-  name: '${parTopLevelManagementGroupPrefix}-plat-${parDeployEnv}'
+  name: '${parTopLevelManagementGroupPrefix}-plat-${parEnv}'
   properties: {
     displayName: 'Platform - ${parDeploymentEnvironment}'
     details: {
