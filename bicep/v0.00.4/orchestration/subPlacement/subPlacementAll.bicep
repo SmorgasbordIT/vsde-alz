@@ -7,6 +7,16 @@ metadata description = 'Orchestration module that helps to define where all Subs
 @secure()
 param parEnv string = ''
 
+@sys.description('The Landing Zones MG IDs this deployment is for. This is used to determine the child Management Groups that will be created.')
+param parAlzEnv1 string = ''
+param parAlzEnv2 string = ''
+
+@sys.description('The Platform MG IDs this deployment is for. This is used to determine the child Management Groups that will be created.')
+param parPlatHub string = ''
+param parPlatId string = ''
+param parPlatMgt string = ''
+param parPlatShr string = ''
+
 @sys.description('Prefix used for the management group hierarchy.')
 @minLength(2)
 @maxLength(15)
@@ -64,12 +74,12 @@ param parTelemetryOptOut bool = false
 var varMgIds = {
   intRoot: '${parTopLevelManagementGroupPrefix}${parTopLevelManagementGroupSuffix}'
   platform: '${parTopLevelManagementGroupPrefix}-plat${parTopLevelManagementGroupSuffix}'
-  platformManagement: '${parTopLevelManagementGroupPrefix}-plat-${parEnv}-management${parTopLevelManagementGroupSuffix}'
-  platformConnectivity: '${parTopLevelManagementGroupPrefix}-plat-${parEnv}-connectivity${parTopLevelManagementGroupSuffix}'
-  platformIdentity: '${parTopLevelManagementGroupPrefix}-plat-${parEnv}-identity${parTopLevelManagementGroupSuffix}'
+  platformManagement: '${parTopLevelManagementGroupPrefix}-plat-${parEnv}-${parPlatMgt}${parTopLevelManagementGroupSuffix}'
+  platformConnectivity: '${parTopLevelManagementGroupPrefix}-plat-${parEnv}-${parPlatHub}${parTopLevelManagementGroupSuffix}'
+  platformIdentity: '${parTopLevelManagementGroupPrefix}-plat-${parEnv}-${parPlatId}${parTopLevelManagementGroupSuffix}'
   landingZones: '${parTopLevelManagementGroupPrefix}-alz${parTopLevelManagementGroupSuffix}'
-  landingZonesCorp: '${parTopLevelManagementGroupPrefix}-alz-${parEnv}-development${parTopLevelManagementGroupSuffix}'
-  landingZonesOnline: '${parTopLevelManagementGroupPrefix}-alz-${parEnv}-staging${parTopLevelManagementGroupSuffix}'
+  landingZonesCorp: '${parTopLevelManagementGroupPrefix}-alz-${parEnv}-${parAlzEnv1}${parTopLevelManagementGroupSuffix}'
+  landingZonesOnline: '${parTopLevelManagementGroupPrefix}-alz-${parEnv}-${parAlzEnv2}${parTopLevelManagementGroupSuffix}'
   landingZonesConfidentialCorp: '${parTopLevelManagementGroupPrefix}-alz-confidential-corp${parTopLevelManagementGroupSuffix}'
   landingZonesConfidentialOnline: '${parTopLevelManagementGroupPrefix}-alz-confidential-online${parTopLevelManagementGroupSuffix}'
   decommissioned: '${parTopLevelManagementGroupPrefix}-decomm${parTopLevelManagementGroupSuffix}'
@@ -148,9 +158,9 @@ module modplatformIdentityMgSubPlacement '../../../../upstream-releases/v0.22.0/
 // Custom Children Platform Management Groups
 module modPlatformMgChildrenSubPlacement '../../../../upstream-releases/v0.22.0/infra-as-code/bicep/modules/subscriptionPlacement/subscriptionPlacement.bicep' = [for mg in items(parPlatformMgChildrenSubs): if (!empty(parPlatformMgChildrenSubs)) {
   name: take('modPlatformMgChildrenSubPlacement-${uniqueString(mg.key, string(length(mg.value.subscriptions)), deployment().name)}', 64)
-  scope: managementGroup('${parTopLevelManagementGroupPrefix}-${mg.key}${parTopLevelManagementGroupSuffix}')
+  scope: managementGroup('${parTopLevelManagementGroupPrefix}-plat-${mg.key}${parTopLevelManagementGroupSuffix}')
   params: {
-    parTargetManagementGroupId: '${parTopLevelManagementGroupPrefix}-${mg.key}${parTopLevelManagementGroupSuffix}'
+    parTargetManagementGroupId: '${parTopLevelManagementGroupPrefix}-plat-${mg.key}${parTopLevelManagementGroupSuffix}'
     parSubscriptionIds: mg.value.subscriptions
     parTelemetryOptOut: parTelemetryOptOut
   }
