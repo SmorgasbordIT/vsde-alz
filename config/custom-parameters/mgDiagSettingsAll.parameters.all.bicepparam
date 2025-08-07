@@ -3,9 +3,9 @@ using '../../bicep/v0.00.4/orchestration/mgDiagSettingsAll/mgDiagSettingsAll.bic
 var varEnv = readEnvironmentVariable('VAR_ENV','')
 param parEnv = toLower(varEnv) == 'nonprd' ? 'nonprd' : 'prd'
 
-var varAlzEnv1 = readEnvironmentVariable('ALZ_ENV1','corp')
+var varAlzEnv1 = readEnvironmentVariable('ALZ_ENV1','Corp')
 param parAlzEnv1 = toLower(varAlzEnv1) == 'development' ? 'development' : 'corp'
-var varAlzEnv2 = readEnvironmentVariable('ALZ_ENV2','online')
+var varAlzEnv2 = readEnvironmentVariable('ALZ_ENV2','Online')
 param parAlzEnv2 = toLower(varAlzEnv2) == 'staging' ? 'staging' : 'online'
 
 param parTopLevelManagementGroupPrefix = readEnvironmentVariable('TOP_LEVEL_MG_PREFIX','azuk-snk')
