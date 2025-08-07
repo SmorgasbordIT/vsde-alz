@@ -7,6 +7,16 @@ metadata description = 'Orchestration module that helps to define where all Subs
 @secure()
 param parEnv string = ''
 
+@sys.description('The Landing Zones MG IDs this deployment is for. This is used to determine the child Management Groups that will be created.')
+param parAlzEnv1 string = ''
+param parAlzEnv2 string = ''
+
+@sys.description('The Platform MG IDs this deployment is for. This is used to determine the child Management Groups that will be created.')
+param parPlatHub string = ''
+param parPlatId string = ''
+param parPlatMgt string = ''
+param parPlatShr string = ''
+
 @sys.description('Prefix used for the management group hierarchy.')
 @minLength(2)
 @maxLength(15)
@@ -28,11 +38,11 @@ param parPlatformManagementMgSubs array = []
 @sys.description('An array of Subscription IDs to place in the (Platform) Connectivity Management Group. Default: Empty Array')
 param parPlatformConnectivityMgSubs array = []
 
-@sys.description('An array of Subscription IDs to place in the (Platform) Identity Management Group. Default: Empty Array')
-param parPlatformIdentityMgSubs array = []
-
 @sys.description('Dictionary Object to allow additional or different child Management Groups of the Platform Management Group describing the Subscription IDs which each of them contain. Default: Empty Object')
 param parPlatformMgChildrenSubs object = {}
+
+@sys.description('An array of Subscription IDs to place in the (Platform) Identity Management Group. Default: Empty Array')
+param parPlatformIdentityMgSubs array = []
 
 @sys.description('An array of Subscription IDs to place in the Landing Zones Management Group. Default: Empty Array')
 param parLandingZonesMgSubs array = []
@@ -64,12 +74,12 @@ param parTelemetryOptOut bool = false
 var varMgIds = {
   intRoot: '${parTopLevelManagementGroupPrefix}${parTopLevelManagementGroupSuffix}'
   platform: '${parTopLevelManagementGroupPrefix}-plat${parTopLevelManagementGroupSuffix}'
-  platformManagement: '${parTopLevelManagementGroupPrefix}-plat-${parEnv}-management${parTopLevelManagementGroupSuffix}'
-  platformConnectivity: '${parTopLevelManagementGroupPrefix}-plat-${parEnv}-connectivity${parTopLevelManagementGroupSuffix}'
-  platformIdentity: '${parTopLevelManagementGroupPrefix}-plat-${parEnv}-identity${parTopLevelManagementGroupSuffix}'
+  platformManagement: '${parTopLevelManagementGroupPrefix}-plat-${parEnv}-${parPlatMgt}${parTopLevelManagementGroupSuffix}'
+  platformConnectivity: '${parTopLevelManagementGroupPrefix}-plat-${parEnv}-${parPlatHub}${parTopLevelManagementGroupSuffix}'
+  platformIdentity: '${parTopLevelManagementGroupPrefix}-plat-${parEnv}-${parPlatId}${parTopLevelManagementGroupSuffix}'
   landingZones: '${parTopLevelManagementGroupPrefix}-alz${parTopLevelManagementGroupSuffix}'
-  landingZonesCorp: '${parTopLevelManagementGroupPrefix}-alz-${parEnv}-development${parTopLevelManagementGroupSuffix}'
-  landingZonesOnline: '${parTopLevelManagementGroupPrefix}-alz-${parEnv}-staging${parTopLevelManagementGroupSuffix}'
+  landingZonesCorp: '${parTopLevelManagementGroupPrefix}-alz-${parEnv}-${parAlzEnv1}${parTopLevelManagementGroupSuffix}'
+  landingZonesOnline: '${parTopLevelManagementGroupPrefix}-alz-${parEnv}-${parAlzEnv2}${parTopLevelManagementGroupSuffix}'
   landingZonesConfidentialCorp: '${parTopLevelManagementGroupPrefix}-alz-confidential-corp${parTopLevelManagementGroupSuffix}'
   landingZonesConfidentialOnline: '${parTopLevelManagementGroupPrefix}-alz-confidential-online${parTopLevelManagementGroupSuffix}'
   decommissioned: '${parTopLevelManagementGroupPrefix}-decomm${parTopLevelManagementGroupSuffix}'
