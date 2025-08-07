@@ -21,16 +21,16 @@ var varLzConfidentialOnlineSubIds = readEnvironmentVariable('LZ_CONF_ONLINE_SUBS
 var varSandboxSubIds = readEnvironmentVariable('SANDBOX_SUBSCRIPTION_IDS','')
 
 // If there is no management or identity subscription, then the connectivity subscription is placed at the root of the Platform Management Group. ("Platform only" scenario)
-param parPlatformMgSubs = ((varConnectivitySubId == varIdentitySubId) && (varConnectivitySubId == varManagementSubId)) ? [varConnectivitySubId] : []
+param parPlatformMgSubs = []
 
 // If management subscription matches connectivity subscription, we are in an Platform only scenario, and we do not have a management subscription to place.
-param parPlatformManagementMgSubs = contains(varConnectivitySubId,varManagementSubId) ? [] : [varManagementSubId]
+param parPlatformManagementMgSubs = []
 
 // if connectivity subscription id matches management subscription id, then we do not have a connectivity subscription to place.
-param parPlatformConnectivityMgSubs = contains(varConnectivitySubId,varIdentitySubId) ? [] : [varConnectivitySubId] 
+param parPlatformConnectivityMgSubs = []
 
 // if identity subscription id matches connectivity subscription id, then we do not have a identity subscription to place.
-param parPlatformIdentityMgSubs = contains(varConnectivitySubId,varIdentitySubId) ? [] : [varIdentitySubId] 
+param parPlatformIdentityMgSubs = []
 
 param parLandingZonesCorpMgSubs = !empty(varLzCorpSubIds) ? [varLzCorpSubIds] : []
 
