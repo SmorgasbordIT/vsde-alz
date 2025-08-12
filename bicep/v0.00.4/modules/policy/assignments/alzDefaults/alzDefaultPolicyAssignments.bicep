@@ -1,6 +1,14 @@
 metadata name = 'ALZ Bicep - Default Policy Assignments'
 metadata description = 'Assigns ALZ Default Policies to the Management Group hierarchy'
 
+@sys.description('What environment is this deployment for? Default: nonprd')
+@secure()
+param parEnv string = ''
+
+@sys.description('The Landing Zones MG IDs this deployment is for. This is used to determine the child Management Groups that will be created.')
+param parAlzEnv1 string = ''
+param parAlzEnv2 string = ''
+
 @description('Prefix for management group hierarchy.')
 @minLength(2)
 @maxLength(10)
@@ -456,13 +464,13 @@ var varRbacRoleDefinitionIds = {
 // Management Groups Variables - Used For Policy Assignments
 var varManagementGroupIds = {
   intRoot: '${parTopLevelManagementGroupPrefix}${parTopLevelManagementGroupSuffix}'
-  platform: '${parTopLevelManagementGroupPrefix}-plat-nonprd${parTopLevelManagementGroupSuffix}'
-  platformManagement: parPlatformMgAlzDefaultsEnable ? '${parTopLevelManagementGroupPrefix}-plat-nonprd-management${parTopLevelManagementGroupSuffix}' : '${parTopLevelManagementGroupPrefix}-plat${parTopLevelManagementGroupSuffix}'
-  platformConnectivity: parPlatformMgAlzDefaultsEnable ? '${parTopLevelManagementGroupPrefix}-plat-nonprd-connectivity${parTopLevelManagementGroupSuffix}' : '${parTopLevelManagementGroupPrefix}-plat${parTopLevelManagementGroupSuffix}'
-  platformIdentity: parPlatformMgAlzDefaultsEnable ? '${parTopLevelManagementGroupPrefix}-plat-nonprd-identity${parTopLevelManagementGroupSuffix}' : '${parTopLevelManagementGroupPrefix}-plat${parTopLevelManagementGroupSuffix}'
-  landingZones: '${parTopLevelManagementGroupPrefix}-alz-nonprd${parTopLevelManagementGroupSuffix}'
-  landingZonesCorp: '${parTopLevelManagementGroupPrefix}-alz-nonprd-development${parTopLevelManagementGroupSuffix}'
-  landingZonesOnline: '${parTopLevelManagementGroupPrefix}-alz-nonprd-staging${parTopLevelManagementGroupSuffix}'
+  platform: '${parTopLevelManagementGroupPrefix}-plat-${parEnv}${parTopLevelManagementGroupSuffix}'
+  platformManagement: parPlatformMgAlzDefaultsEnable ? '${parTopLevelManagementGroupPrefix}-plat-${parEnv}-management${parTopLevelManagementGroupSuffix}' : '${parTopLevelManagementGroupPrefix}-plat${parTopLevelManagementGroupSuffix}'
+  platformConnectivity: parPlatformMgAlzDefaultsEnable ? '${parTopLevelManagementGroupPrefix}-plat-${parEnv}-connectivity${parTopLevelManagementGroupSuffix}' : '${parTopLevelManagementGroupPrefix}-plat${parTopLevelManagementGroupSuffix}'
+  platformIdentity: parPlatformMgAlzDefaultsEnable ? '${parTopLevelManagementGroupPrefix}-plat-${parEnv}-identity${parTopLevelManagementGroupSuffix}' : '${parTopLevelManagementGroupPrefix}-plat${parTopLevelManagementGroupSuffix}'
+  landingZones: '${parTopLevelManagementGroupPrefix}-alz-${parEnv}${parTopLevelManagementGroupSuffix}'
+  landingZonesCorp: '${parTopLevelManagementGroupPrefix}-alz-${parEnv}-${parAlzEnv1}${parTopLevelManagementGroupSuffix}'
+  landingZonesOnline: '${parTopLevelManagementGroupPrefix}-alz-${parEnv}-${parAlzEnv2}${parTopLevelManagementGroupSuffix}'
   landingZonesConfidentialCorp: '${parTopLevelManagementGroupPrefix}-alz-confidential-corp${parTopLevelManagementGroupSuffix}'
   landingZonesConfidentialOnline: '${parTopLevelManagementGroupPrefix}-alz-confidential-online${parTopLevelManagementGroupSuffix}'
   decommissioned: '${parTopLevelManagementGroupPrefix}-decomm${parTopLevelManagementGroupSuffix}'
