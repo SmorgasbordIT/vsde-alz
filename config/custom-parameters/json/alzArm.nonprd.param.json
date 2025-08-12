@@ -6,19 +6,19 @@
       "value": "azuk-sbit"
     },
     "platformManagementGroup": {
-      "value": "azuk-snk-plat-nonprd"
+      "value": "azuk-sbit-plat-nonprd"
     },
     "IdentityManagementGroup": {
-      "value": "azuk-snk-plat-nonprd-identity"
+      "value": "azuk-sbit-plat-nonprd-identity"
     },
     "managementManagementGroup": {
-      "value": "azuk-snk-plat-nonprd-management"
+      "value": "azuk-sbit-plat-nonprd-management"
     },
     "connectivityManagementGroup": {
-      "value": "azuk-snk-plat-nonprd-connectivity"
+      "value": "azuk-sbit-plat-nonprd-connectivity"
     },
     "LandingZoneManagementGroup": {
-      "value": "azuk-snk-alz-nonprd"
+      "value": "azuk-sbit-alz-nonprd"
     },
     "enableAMBAConnectivity": {
       "value": "Yes"
@@ -88,7 +88,7 @@
         "DeployedBy": "Cloud Tech",
         "CreatedBy": "jonathan.davis@spacenk.com",
         "SvcName": "Infrastructure",
-        "SvcOwner": "azuk-snk-amba@spacenk.com"
+        "SvcOwner": "azuk-sbit-amba@spacenk.com"
       }
     },
     "ALZMonitorDisableTagName": {
@@ -106,7 +106,7 @@
     },
     "ALZMonitorActionGroupEmail": {
       "value": [
-        "azuk.snk.amba@spacenk.com",
+        "azuk.sbit.amba@spacenk.com",
         "jonathan.davis@spacenk.com"
       ]
     },
