@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "enterpriseScaleCompanyPrefix": {
-      "value": "azuk-snk"
+      "value": "azuk-sbit"
     },
     "platformManagementGroup": {
       "value": "azuk-snk-plat-nonprd"
