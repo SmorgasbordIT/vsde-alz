@@ -21,7 +21,7 @@ param (
     [String]$azTemplateUri = "https://raw.githubusercontent.com/Azure/azure-monitor-baseline-alerts/main/patterns/alz/alzArm.json",
 
     [Parameter()]
-    [String]$azTemplateParameterFile = "config\custom-parameters\json\alzArm.param.json",
+    [String]$azTemplateParameterFile = "config\custom-parameters\json\alzArm.$($env:VAR_ENV).param.json",
 
     [Parameter()]
     [Boolean]$WhatIfEnabled = [System.Convert]::ToBoolean($($env:IS_PULL_REQUEST))

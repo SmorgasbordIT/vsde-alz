@@ -6,19 +6,19 @@
       "value": "azuk-snk"
     },
     "platformManagementGroup": {
-      "value": "azuk-snk-plat"
+      "value": "azuk-snk-plat-nonprd"
     },
     "IdentityManagementGroup": {
-      "value": "azuk-snk-plat-identity"
+      "value": "azuk-snk-plat-nonprd-identity"
     },
     "managementManagementGroup": {
-      "value": "azuk-snk-plat-management"
+      "value": "azuk-snk-plat-nonprd-management"
     },
     "connectivityManagementGroup": {
-      "value": "azuk-snk-plat-connectivity"
+      "value": "azuk-snk-plat-nonprd-connectivity"
     },
     "LandingZoneManagementGroup": {
-      "value": "azuk-snk-alz"
+      "value": "azuk-snk-alz-nonprd"
     },
     "enableAMBAConnectivity": {
       "value": "Yes"

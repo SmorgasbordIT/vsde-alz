@@ -25,6 +25,7 @@ permissions:
   pull-requests: write
 
 env:
+  VAR_ENV: ${{ vars.VAR_ENV }} 
   UKS_LOCATION: ${{ vars.UKS_LOCATION }}
   TOP_LEVEL_MG_PREFIX: ${{ vars.TOP_LEVEL_MG_PREFIX }}
   AZUREUK: ${{ vars.AZUREUK }}
