@@ -477,10 +477,19 @@ var varManagementGroupIds = {
   sandbox: '${parTopLevelManagementGroupPrefix}-snd${parTopLevelManagementGroupSuffix}'
 }
 
-var varCorpManagementGroupIds = [
-  varManagementGroupIds.landingZonesCorp
-  varManagementGroupIds.landingZonesConfidentialCorp
-]
+var varCorpManagementGroupIds = parEnv == 'nonprd'
+  ? [
+      // Development
+      '${parTopLevelManagementGroupPrefix}-alz-${parEnv}-${parAlzEnv1}${parTopLevelManagementGroupSuffix}'
+      // Staging
+      '${parTopLevelManagementGroupPrefix}-alz-${parEnv}-${parAlzEnv2}${parTopLevelManagementGroupSuffix}'
+    ]
+  : [
+      // Corp only
+      varManagementGroupIds.landingZonesCorp
+      varManagementGroupIds.landingZonesConfidentialCorp
+    ]
+
 
 var varCorpManagementGroupIdsFiltered = parLandingZoneMgConfidentialEnable ? varCorpManagementGroupIds : filter(varCorpManagementGroupIds, mg => !contains(toLower(mg), 'confidential'))
 
