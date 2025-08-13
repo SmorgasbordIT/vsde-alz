@@ -27,12 +27,13 @@ var varLocationFormatted = toLower(replace(varLocation, ' ', ''))
 
 var varAzUkAbbrName = readEnvironmentVariable('AZUREUK','azuk')
 var varAzUkSouth = readEnvironmentVariable('AZ_UKSOUTH','')
+var varAzEnvHub = readEnvironmentVariable('ENV_HUB','HUB')
 var varLogAnalyticsAbbrName = readEnvironmentVariable('LOG_ANALYTICS_ABBR_NAME','LAW')
 var varLogAnalyticsWorkspaceName = toUpper('${varAzUkAbbrName}${varAzUkSouth}-${varLogAnalyticsAbbrName}-MGT-01')
 
 // Read environment variables for subscription IDs and resource group names
 param parConnectivitySubscriptionId = ''
-var varConnectivityResourceGroupName = toUpper('${varAzUkAbbrName}${varAzUkSouth}-rg-hub-dns-01')
+var varConnectivityResourceGroupName = toUpper('${varAzUkAbbrName}${varAzUkSouth}-rg-${varAzEnvHub}-dns-01')
 param parLoggingSubscriptionId = ''
 var varLoggingResourceGroupName = toUpper('${varAzUkAbbrName}${varAzUkSouth}-rg-mgt-log-01')
 
